@@ -20,7 +20,8 @@ const expressStatusMonitor = require('express-status-monitor');
 const sass = require('node-sass-middleware');
 const multer = require('multer');
 
-const upload = multer({ dest: path.join(__dirname, 'uploads') });
+//const upload = multer({ dest: path.join(__dirname, 'uploads') });
+const upload = multer({ dest: process.env.AA_STORAGE }); 
 
 /**
  * Load environment variables from .env file, where API keys and passwords are configured.
@@ -32,8 +33,10 @@ dotenv.load({ path: '.env.example' });
  */
 const homeController = require('./controllers/home');
 const userController = require('./controllers/user');
+const usersController = require('./controllers/users');
 const apiController = require('./controllers/api');
 const contactController = require('./controllers/contact');
+const docsController = require('./controllers/docs');
 
 /**
  * API keys and Passport configuration.
@@ -135,6 +138,8 @@ app.post('/account/profile', passportConfig.isAuthenticated, userController.post
 app.post('/account/password', passportConfig.isAuthenticated, userController.postUpdatePassword);
 app.post('/account/delete', passportConfig.isAuthenticated, userController.postDeleteAccount);
 app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userController.getOauthUnlink);
+app.get('/users', passportConfig.isAuthenticated, usersController.getUsers);
+app.get('/docs/list', docsController.getListDocs); //passportConfig.isAuthenticated,
 
 /**
  * API examples routes.
