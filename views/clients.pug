@@ -1,0 +1,305 @@
+extends layout
+
+block content
+  .page-header
+    h3 Client Listing
+
+  .row
+    .col-sm-12
+      //#eventsResult.alert.alert-success
+        //| Here is the result of event.
+      //.fixed-table-loading(style='top: 41px; display: none;') Loading, please wait...
+      
+      table#clientsTable.table.table-no-bordered(data-toggle='table', data-pagination='true', data-search='true', data-show-refresh='true', data-show-toggle='true', <='', body='', data-show-columns='true')
+        thead
+          tr
+            //th(data-field='Type') Type
+            th.text-right(data-field='Number') #
+            th(data-field='Address', data-sortable='true') Address
+            th(data-field='City', data-sortable='true') City
+            th(data-field='Client', data-sortable='true') Client
+            th(data-field='Status', data-sortable='true') Status
+            th(data-field='Added', data-sortable='true') Added
+            th.text-center(data-field='Action', data-sortable='true') Action
+        tbody
+          tr.danger
+            //td
+               //i.glyphicon.glyphicon-usd
+            td.text-right 398
+            td S. Halstead Ave
+            td Barstow
+            td Charlie Brown
+            td Active
+            td 2017-10-13
+            td Update
+          tr
+            //td 
+               //i.glyphicon.glyphicon-usd            
+            td.text-right 82
+            td Marcus Welton Ave
+            td Los Angeles
+            td Tom Jones
+            td Non-Active
+            td 2017-10-13
+            td Update
+          tr.success
+            //td 
+               //i.glyphicon.glyphicon-home            
+            td.text-right 3933
+            td East Hampton Drive
+            td Barstow
+            td Elizabeth Harman
+            td Under Contract
+            td 2017-10-13
+            td Update
+          tr.warning
+            //td
+               //i.glyphicon.glyphicon-home
+            td.text-right 112
+            td Hwy East
+            td Sierra Madre
+            td Gary Shelton
+            td Non-Active
+            td 2017-10-13
+            td Update
+          tr.success
+            //td 
+               //i.glyphicon.glyphicon-usd            
+            td.text-right 983
+            td Marcus Welton Ave
+            td Los Angeles
+            td Carla Witherspoon
+            td Under Contract
+            td 2017-10-13
+            td Update
+          tr.success
+            //td 
+               //i.glyphicon.glyphicon-usd            
+            td.text-right 983
+            td Marcus Welton Ave
+            td Los Angeles
+            td Carla Witherspoon
+            td Under Contract
+            td 2017-10-13
+            td Update
+          tr.success
+            //td 
+               //i.glyphicon.glyphicon-usd            
+            td.text-right 983
+            td Marcus Welton Ave
+            td Los Angeles
+            td Carla Witherspoon
+            td Under Contract
+            td 2017-10-13
+            td Update
+          tr.success
+            //td 
+               //i.glyphicon.glyphicon-usd            
+            td.text-right 983
+            td Marcus Welton Ave
+            td Los Angeles
+            td Carla Witherspoon
+            td Under Contract
+            td 2017-10-13
+            td Update
+          tr.success
+            //td 
+               //i.glyphicon.glyphicon-usd            
+            td.text-right 983
+            td Marcus Welton Ave
+            td Los Angeles
+            td Carla Witherspoon
+            td Under Contract
+            td 2017-10-13
+            td Update
+          tr.success
+            //td 
+               //i.glyphicon.glyphicon-usd            
+            td.text-right 983
+            td Marcus Welton Ave
+            td Los Angeles
+            td Carla Witherspoon
+            td Under Contract
+            td 2017-10-13
+            td Update
+          tr.success
+            //td 
+               //i.glyphicon.glyphicon-usd            
+            td.text-right 983
+            td Marcus Welton Ave
+            td Los Angeles
+            td Carla Witherspoon
+            td Under Contract
+            td 2017-10-13
+            td Update
+          tr.success
+            //td 
+               //i.glyphicon.glyphicon-usd            
+            td.text-right 983
+            td Marcus Welton Ave
+            td Los Angeles
+            td Carla Witherspoon
+            td Under Contract
+            td 2017-10-13
+            td Update
+          tr.success
+            //td 
+               //i.glyphicon.glyphicon-usd            
+            td.text-right 983
+            td Marcus Welton Ave
+            td Los Angeles
+            td Carla Witherspoon
+            td Under Contract
+            td 2017-10-13
+            td Update
+          tr.success
+            //td 
+               //i.glyphicon.glyphicon-usd            
+            td.text-right 983
+            td Marcus Welton Ave
+            td Los Angeles
+            td Carla Witherspoon
+            td Under Contract
+            td 2017-10-13
+            td Update
+          tr.success
+            //td 
+               //i.glyphicon.glyphicon-usd            
+            td.text-right 983
+            td Marcus Welton Ave
+            td Los Angeles
+            td Carla Witherspoon
+            td Under Contract
+            td 2017-10-13
+            td Update
+          tr.success
+            //td 
+               //i.glyphicon.glyphicon-usd            
+            td.text-right 983
+            td Marcus Welton Ave
+            td Los Angeles
+            td Carla Witherspoon
+            td Under Contract
+            td 2017-10-13
+            td Update
+          tr.success
+            //td 
+               //i.glyphicon.glyphicon-usd            
+            td.text-right 983
+            td Marcus Welton Ave
+            td Los Angeles
+            td Carla Witherspoon
+            td Under Contract
+            td 2017-10-13
+            td Update
+          tr.success
+            //td 
+               //i.glyphicon.glyphicon-usd            
+            td.text-right 983
+            td Marcus Welton Ave
+            td Los Angeles
+            td Carla Witherspoon
+            td Under Contract
+            td 2017-10-13
+            td Update
+          tr.success
+            //td 
+               //i.glyphicon.glyphicon-usd            
+            td.text-right 983
+            td Marcus Welton Ave
+            td Los Angeles
+            td Carla Witherspoon
+            td Under Contract
+            td 2017-10-13
+            td Update
+          tr.success
+            //td 
+               //i.glyphicon.glyphicon-usd            
+            td.text-right 983
+            td Marcus Welton Ave
+            td Los Angeles
+            td Carla Witherspoon
+            td Under Contract
+            td 2017-10-13
+            td Update
+          tr.success
+            //td 
+               //i.glyphicon.glyphicon-usd            
+            td.text-right 983
+            td Marcus Welton Ave
+            td Los Angeles
+            td Carla Witherspoon
+            td Under Contract
+            td 2017-10-13
+            td Update
+          tr.success
+            //td 
+               //i.glyphicon.glyphicon-usd            
+            td.text-right 983
+            td Marcus Welton Ave
+            td Los Angeles
+            td Carla Witherspoon
+            td Under Contract
+            td 2017-10-13
+            td Update
+          tr.success
+            //td 
+               //i.glyphicon.glyphicon-usd            
+            td.text-right 983
+            td Marcus Welton Ave
+            td Los Angeles
+            td Carla Witherspoon
+            td Under Contract
+            td 2017-10-13
+            td Update
+          tr.success
+            //td 
+               //i.glyphicon.glyphicon-usd            
+            td.text-right 983
+            td Marcus Welton Ave
+            td Los Angeles
+            td Carla Witherspoon
+            td Under Contract
+            td 2017-10-13
+            td Update
+          tr.success
+            //td 
+               //i.glyphicon.glyphicon-usd            
+            td.text-right 983
+            td Marcus Welton Ave
+            td Los Angeles
+            td Carla Witherspoon
+            td Under Contract
+            td 2017-10-13
+            td Update
+          tr.success
+            //td 
+               //i.glyphicon.glyphicon-usd            
+            td.text-right 983
+            td Marcus Welton Ave
+            td Los Angeles
+            td Carla Witherspoon
+            td Under Contract
+            td 2017-10-13
+            td Update
+          tr.success
+            //td 
+               //i.glyphicon.glyphicon-usd            
+            td.text-right 983
+            td Marcus Welton Ave
+            td Los Angeles
+            td Carla Witherspoon
+            td Under Contract
+            td 2017-10-13
+            td Update
+          tr.success
+            //td 
+               //i.glyphicon.glyphicon-usd            
+            td.text-right 983
+            td Marcus Welton Ave
+            td Los Angeles
+            td Carla Witherspoon
+            td Under Contract
+            td 2017-10-13
+            td Update
+            

@@ -3,15 +3,16 @@
  * List all users.
  */
 const Users = require("../models/Users.js");
+ 
+exports.getUsers = function(req, res) {
+  Users.find().exec(function(err, users_list) {
 
-exports.getUsers = (req, res) => {
+    if (err) {
+      console.log("error dude");
+      return next(err);
+    }
 
-  console.log(Users);
-  Users.find((err, docs) => {
-    res.render("users", { users: docs });
+    //if successful
+    res.render("users", { title: "All Users", users: users_list });
   });
-
-  //res.render('users', {
-  //  title: 'Users Management'
-  //});
 };

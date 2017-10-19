@@ -2,8 +2,33 @@ extends layout
 
 block content
   .page-header
-    h3 All Users
+    h3= title
 
-  ul
-    for user in users
-      li= user.name
+    div(class='container')
+    table(class='table table-hover')
+
+      thead
+        tr 
+          th Name
+          th Email
+          th Location
+          th Gender
+          th Website
+          th Created
+          th Updated
+          th 
+      tbody
+        each user in users
+          tr
+              td= user.profile.name
+              td= user.email
+              td= user.profile.location
+              td= user.profile.gender
+              td
+                a(href=user.profile.website)= user.profile.website
+              td #{moment(user.createdAt).format('MM/DD/YYYY')}
+              td #{moment(user.updatedAt).format('MM/DD/YYYY')}
+              td
+                a(href='/users/' + user._id)= post
+                  button(type="button") Edit
+                  

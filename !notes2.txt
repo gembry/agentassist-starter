@@ -1,0 +1,29 @@
+
+
+once listing has a buyer, then it goes to 'under contract'
+
+
+seller future | seller now (active listing on MLS)
+
+buyer future | buyer now (under contract)
+
+Clients
+
+archives (link)
+
+
+dropbox/397 Skyler Street/
+
+active
+> listing docs
+
+Under Contract
+> Pending docs
+> Title Company docs
+> Misc Docs
+
+under contract > is a status and not a navigation link
+
+.env.example
+MONGODB_URI=mongodb://localhost:27017/test
+MONGOLAB_URI=mongodb://localhost:27017/test

@@ -1,19 +1,30 @@
 const mongoose = require("mongoose");
 
-//Define Schema==================================
-var usersSchema = new mongoose.Schema({
-  email: { type: String, unique: true },
-  profile: {
-    name: String,
-    gender: String,
-    location: String,
-    website: String,
-    picture: String
-  }
-});
+const usersSchema = new mongoose.Schema(
+  {
+    email: { type: String, unique: true },
+    password: String,
+    passwordResetToken: String,
+    passwordResetExpires: Date,
+    facebook: String,
+    twitter: String,
+    google: String,
+    github: String,
+    instagram: String,
+    linkedin: String,
+    steam: String,
+    tokens: Array,
+    profile: {
+      name: String,
+      gender: String,
+      location: String,
+      website: String,
+      picture: String
+    }
+  },
+  { timestamps: true }
+);
 
-//Create model===================================
-//var usersSchema = connection.model('Users', usersSchema);
+var Users = mongoose.model("Users", usersSchema);
 
-
-//module.exports = usersSchema;
+module.exports = Users;
