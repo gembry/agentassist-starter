@@ -1,35 +1,58 @@
 .navbar.navbar-default.navbar-fixed-top
-  .container
+  .container-fluid
+    // Brand and toggle get grouped for better mobile display
     .navbar-header
-      button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-collapse')
+      button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1', aria-expanded='false')
         span.sr-only Toggle navigation
+        |         
         span.icon-bar
+        |         
         span.icon-bar
+        |         
         span.icon-bar
-      a(href='/')
-        img(src='/images/otterdocs.png')
-      //a.navbar-brand(href='/')
-        //i.fa.fa-cube
-        //| Agent Assist
-    .collapse.navbar-collapse
+      |
+      a.navbar-brand(href='#')
+        img(src='/images/otterdocs.png', height='25')
+
+    // Collect the nav links, forms, and other content for toggling
+    #bs-example-navbar-collapse-1.collapse.navbar-collapse
       ul.nav.navbar-nav
+
         if !user
           li(class=(title === 'Home') ? 'active' : undefined)
             a(href='/') Home
         else
-          li
-            a(href='/dashboard') Dashboard
-          li
-            a(href='/clients') Clients
-          li
-            a(href='/seller') + Seller
-          //li
-            //a(href='/buyers') Buyers
-          li
-            a(href='/buyer') + Buyer
-          li
-            a(href='/status') Status
-
+          li.active
+            a(href='/dashboard') 
+              | Dashboard 
+              span.fa-dashboard.fa.fa-lg.pull-left.icon-all
+              span.sr-only (current)
+          |         
+          li.dropdown
+            a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
+              | Clients 
+              span.fa-users.fa.fa-lg.pull-left.icon-all
+              span.caret
+            |           
+            ul.dropdown-menu.fa-ul
+              li
+                a(href='/seller') 
+                  | Add a Seller
+                  span.fa-user-plus.fa.fa-lg.pull-left.icon-seller
+              |             
+              li
+                a(href='/buyer') 
+                  | Add a Buyer
+                  span.fa-user-plus.fa.fa-lg.pull-left.icon-buyer
+              |             
+              li.divider(role='separator')
+              |             
+              li
+                a(href='/clients') 
+                  | List All Clients
+                  span.fa-users.fa.fa-lg.pull-left.icon-all
+              |             
+      |       
       ul.nav.navbar-nav.navbar-right
         if !user
           li(class=(title === 'Login') ? 'active' : undefined)
@@ -47,7 +70,23 @@
               i.caret
             ul.dropdown-menu
               li
-                a(href='/account') My Account
+                a(href='/account') 
+                  | My Account
+                  span.fa-edit.fa.fa-lg.pull-left.icon-all
+              li
+                a(href='/status') 
+                  | System Status
+                  span.fa-gears.fa.fa-lg.pull-left.icon-all
               li.divider
               li
-                a(href='/logout') Logout
+                a(href='/logout') 
+                  | Logout
+                  span.fa-sign-out.fa.fa-lg.pull-left.icon-all
+      |
+      form.navbar-form.navbar-right(role='search')
+        .form-group
+          input.form-control(type='text', placeholder='Search')
+        |         
+        button.btn.btn-default(type='submit') Submit
+
+

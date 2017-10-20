@@ -85,7 +85,17 @@ p.sect-sm {
   margin: 10px 0 20px 0;
   font-family: Verdana, Geneva, Tahoma, sans-serif; } 
 
-  .page-header {
-    padding: 0 !important;
-    margin: 0 !important;
-    border-bottom: 0px !important; }
+.page-header {
+  padding: 0 !important;
+  margin: 0 !important;
+  border-bottom: 0px !important; }
+
+.icon-all {
+  vertical-align: middle;
+}
+
+.icon-seller {
+  color: darkred; }
+
+.icon-buyer {
+  color: rgb(22, 46, 122); }
