@@ -12,7 +12,7 @@
         span.icon-bar
       |
       a.navbar-brand(href='#')
-        img(src='/images/otterdocs.png', height='25')
+        img(src='/images/otterdocs3.png', height='25')
 
     // Collect the nav links, forms, and other content for toggling
     #bs-example-navbar-collapse-1.collapse.navbar-collapse
@@ -22,37 +22,47 @@
           li(class=(title === 'Home') ? 'active' : undefined)
             a(href='/') Home
         else
-          li.active
+          li
             a(href='/dashboard') 
               | Dashboard 
-              span.fa-dashboard.fa.fa-lg.pull-left.icon-all
+              span.fa-dashboard.fa.fa-2x.pull-left.icon-all
               span.sr-only (current)
-          |         
-          li.dropdown
-            a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
+
+          //- li.dropdown
+          //-   a.dropdown-toggle(href='/clients', aria-haspopup='true', aria-expanded='false')
+          //-     | Clients 
+          //-     span.fa-users.fa.fa-2x.pull-left.icon-all
+          //-     span.caret
+          //-   |           
+          //-   ul.dropdown-menu.fa-ul
+          //-     li
+          //-       a(href='/seller') 
+          //-         | Add a Seller
+          //-         span.fa-user-plus.fa.fa-lg.pull-left.icon-seller
+          //-     |             
+          //-     li
+          //-       a(href='/buyer') 
+          //-         | Add a Buyer
+          //-         span.fa-user-plus.fa.fa-lg.pull-left.icon-buyer
+          //-     |             
+          //-     li.divider(role='separator')
+          //-     |             
+          //-     li
+          //-       a(href='/clients') 
+          //-         | List All Clients
+          //-         span.fa-users.fa.fa-lg.pull-left.icon-all
+
+          li
+            a(href='/clients') 
               | Clients 
-              span.fa-users.fa.fa-lg.pull-left.icon-all
-              span.caret
-            |           
-            ul.dropdown-menu.fa-ul
-              li
-                a(href='/seller') 
-                  | Add a Seller
-                  span.fa-user-plus.fa.fa-lg.pull-left.icon-seller
-              |             
-              li
-                a(href='/buyer') 
-                  | Add a Buyer
-                  span.fa-user-plus.fa.fa-lg.pull-left.icon-buyer
-              |             
-              li.divider(role='separator')
-              |             
-              li
-                a(href='/clients') 
-                  | List All Clients
-                  span.fa-users.fa.fa-lg.pull-left.icon-all
-              |             
-      |       
+              span.fa-users.fa.fa-2x.pull-left.icon-all
+
+
+          li
+            a(href='/properties') 
+              | Properties 
+              span.fa-home.fa.fa-2x.pull-left.icon-all
+
       ul.nav.navbar-nav.navbar-right
         if !user
           li(class=(title === 'Login') ? 'active' : undefined)
@@ -82,11 +92,11 @@
                 a(href='/logout') 
                   | Logout
                   span.fa-sign-out.fa.fa-lg.pull-left.icon-all
-      |
-      form.navbar-form.navbar-right(role='search')
-        .form-group
-          input.form-control(type='text', placeholder='Search')
-        |         
-        button.btn.btn-default(type='submit') Submit
+      if user      
+        form.navbar-form.navbar-right(role='search')
+          .form-group
+            input.form-control(type='text', placeholder='Search')
+          |         
+          button.btn.btn-default(type='submit') Submit
 
 

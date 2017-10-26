@@ -1,0 +1,133 @@
+extends layout
+
+block content
+  .page-header
+    h3 Property Listing
+
+  .row
+    .col-sm-12
+      //#eventsResult.alert.alert-success
+        //| Here is the result of event.
+      //.fixed-table-loading(style='top: 41px; display: none;') Loading, please wait...
+      
+      table#clientsTable.table.table-no-bordered(data-toggle='table', data-pagination='true', data-search='true', data-show-refresh='true', data-show-toggle='true', <='', body='', data-show-columns='true')
+        thead
+          tr
+            th(data-field='Type', data-sortable='true') Type
+            th(data-field='Lastname', data-sortable='true') Last Name
+            th(data-field='Firstname', data-sortable='true') First Name
+            th.text-right(data-field='Number') #
+            th(data-field='Address', data-sortable='true') Address
+            th(data-field='City', data-sortable='true') City
+            th(data-field='Status', data-sortable='true') Status
+            th(data-field='Added', data-sortable='true') Added
+            th.text-center(data-field='Action', data-sortable='true') Action
+        tbody
+          tr.danger
+            //td
+               //i.glyphicon.glyphicon-usd
+            td LIST
+            td Brown
+            td Charlie 
+            td.text-right 398
+            td S. Halstead Ave
+            td Barstow
+            td Active
+            td 2017-10-13
+            td Update
+          tr
+            //td 
+               //i.glyphicon.glyphicon-usd            
+            td LIST
+            td Jones
+            td Tom 
+            td.text-right 82
+            td Marcus Welton Ave
+            td Los Angeles
+            td Non-Active
+            td 2017-10-13
+            td Update
+          tr.success
+            //td 
+               //i.glyphicon.glyphicon-home            
+            td LIST
+            td Harman
+            td Elizabeth
+            td.text-right 3933
+            td East Hampton Drive
+            td Barstow
+            td Under Contract
+            td 2017-10-13
+            td Update
+          tr.warning
+            //td
+               //i.glyphicon.glyphicon-home
+            td LIST
+            td Shelton
+            td Gary
+            td.text-right 112
+            td Hwy East
+            td Sierra Madre
+            td Non-Active
+            td 2017-10-13
+            td Update
+          tr.success
+            //td 
+               //i.glyphicon.glyphicon-usd            
+            td LIST
+            td Witherspoon
+            td Carla 
+            td.text-right 983
+            td Marcus Welton Ave
+            td Los Angeles
+            td Under Contract
+            td 2017-10-13
+            td Update
+          tr.success
+            //td 
+               //i.glyphicon.glyphicon-usd            
+            td LIST
+            td Brown
+            td Charlie
+            td.text-right 983
+            td Marcus Welton Ave
+            td Los Angeles
+            td Under Contract
+            td 2017-10-13
+            td Update
+          tr.success
+            //td 
+               //i.glyphicon.glyphicon-usd            
+            td LIST
+            td Witherspoon
+            td Carla
+            td.text-right 983
+            td Marcus Welton Ave
+            td Los Angeles
+            td Under Contract
+            td 2017-10-13
+            td Update
+          tr.success
+            //td 
+               //i.glyphicon.glyphicon-usd            
+            td LIST
+            td Witherspoon
+            td Carla
+            td.text-right 983
+            td Marcus Welton Ave
+            td Los Angeles
+            td Under Contract
+            td 2017-10-13
+            td Update
+          tr.success
+            //td 
+               //i.glyphicon.glyphicon-usd            
+            td SALE
+            td Brown
+            td Charlie
+            td.text-right 983
+            td Marcus Welton Ave
+            td Los Angeles
+            td Under Contract
+            td 2017-10-13
+            td Update

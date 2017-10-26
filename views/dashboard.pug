@@ -2,11 +2,60 @@ extends layout
 
 block content
   .page-header
-    h3 Dashboard
+    h3 Hometown Realty & Property Services Dashboard
 
     .row
-      .col-sm-3      
       .col-sm-6
         p
         #calendar.calendar.col-md-12
+
+      .col-sm-3      
+
       .col-sm-3
+        p.sect-sm 
+          | Add Client
+        .row
+          .col-sm-6
+            label.lb-sm(for='client_firstname') First Name
+            input#client_firstname.form-control.input-sm(name='client_firstname', type='text', required, value='Charlie')
+          .col-sm-6
+            label.lb-sm(for='client_lastname') Last Name
+            input#client_lastname.form-control.input-sm(name='client_lastname', type='text', required, value='Brown')
+        .row
+          .col-sm-6
+            label.lb-sm(for='client_cellphone') Cell #
+            input#client_cellphone.form-control.input-sm(name='client_cellphone', type='tel', required, value='406-555-1212')
+          .col-sm-6
+            label.lb-sm(for='client_homephone') Home #
+            input#client_homephone.form-control.input-sm(name='client_homephone', type='tel', value='406-555-1212')
+        .row
+          .col-sm-12
+            label.lb-sm(for='client_email') Email
+            input#client_email.form-control.input-sm(type='client_email', name='email', value='gembry@gmail.com')
+        .row
+          .col-sm-12
+            p &nbsp;
+        .row
+          .col-sm-12
+            label.lb-sm(for='client_address') Address
+            input#client_address.form-control.input-sm(name='client_address', type='text', placeholder='123 Sample Street, Unit B', required, value='999 Halstead Avenue')
+        .row
+          .col-sm-12
+            label.lb-sm(for='client_city') City
+            input#client_city.form-control.input-sm(name='client_city', type='text', required, value='Barstow')
+        .row
+          .col-sm-8
+            label.lb-sm(for='client_state') State
+            select#client_state.form-control.input-sm(name='client_state]')
+              //option(hidden='true') 
+              option(value=1) Montana
+              option(value=2) Colorado
+          .col-sm-4
+            label.lb-sm(for='client_zip') ZIP Code
+            input#client_zip.form-control.input-sm(name='client_zip', type='text', required, value='59901')
+        .row
+          .col-sm-12
+            p
+        .row
+          .col-sm-12
+            button.btn.btn-primary(type='submit', form='clientform') Submit  

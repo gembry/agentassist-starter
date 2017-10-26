@@ -40,32 +40,6 @@ block content
 
           .tab-content
             #sellerTabInformation.tab-pane.fade.active.in
-              .row
-                .col-sm-12
-                  p.sect-sm 
-                    | Basic Information
-              .row
-                .col-sm-6
-                  label.lb-sm(for='seller_firstname') First Name
-                  input#seller_firstname.form-control.input-sm(name='seller_firstname', type='text', required, value='Charlie')
-                .col-sm-6
-                  label.lb-sm(for='seller_lastname') Last Name
-                  input#seller_lastname.form-control.input-sm(name='seller_lastname', type='text', required, value='Brown')
-              .row
-                .col-sm-6
-                  label.lb-sm(for='seller_cellphone') Cell #
-                  input#seller_cellphone.form-control.input-sm(name='seller_cellphone', type='tel', required, value='406-555-1212')
-                .col-sm-6
-                  label.lb-sm(for='seller_homephone') Home #
-                  input#seller_homephone.form-control.input-sm(name='seller_homephone', type='tel', value='406-555-1212')
-              .row
-                .col-sm-12
-                  label.lb-sm(for='seller_email') Email
-                  input#seller_email.form-control.input-sm(type='seller_email', name='email', value='gembry@gmail.com')
-
-              .row
-                .col-sm-12
-                  p &nbsp;
 
               .row
                 .col-sm-12
@@ -85,6 +59,25 @@ block content
                 .col-sm-4
                   label.lb-sm(for='seller_zip') ZIP Code
                   input#seller_zip.form-control.input-sm(name='seller_zip', type='text', required, value='59901')
+
+              .row
+                .col-sm-12
+                  p &nbsp;
+
+              .row
+                .col-sm-12
+                  p.sect-sm 
+                    | Seller Information
+              .row
+                .col-sm-12
+                  | Primary: Brown, Charlie - 406-555-1212 (p) | Edit - Remove
+              .row
+                .col-sm-12
+                  | Seconday: Brown, Marry - 406-555-1212 (p) | Edit - Remove
+              .row
+                .col-sm-12
+                  | *Add Seller*<br>*Add Property*
+
 
             #sellerTabAdditional.tab-pane.fade
               .row
@@ -262,7 +255,7 @@ block content
             p
             #calendar.calendar
 
-          #doctab1.tab-pane.fade.active.in
+          #doctab1.tab-pane.fade
             table.table.table-striped
               thead
                 tr

@@ -40,6 +40,7 @@ const contactController = require('./controllers/contact');
 /* Agent Assist Paths */
 const dashboardController = require('./controllers/dashboard');
 const clientsController = require('./controllers/clients');
+const propertiesController = require('./controllers/properties');
 const sellerController = require('./controllers/seller');
 const buyerController = require('./controllers/buyer');
 
@@ -152,6 +153,7 @@ app.get('/users', passportConfig.isAuthenticated, usersController.getUsers);
 /* Agent Assist Paths */
 app.get('/dashboard',passportConfig.isAuthenticated, dashboardController.getDashboard);
 app.get('/clients', passportConfig.isAuthenticated, clientsController.getClients);
+app.get('/properties', passportConfig.isAuthenticated, propertiesController.getProperties);
 app.get('/seller', passportConfig.isAuthenticated, sellerController.getSeller);
 app.post('/seller', passportConfig.isAuthenticated, sellerController.postSeller);
 app.get('/buyer', passportConfig.isAuthenticated, buyerController.getBuyer);
