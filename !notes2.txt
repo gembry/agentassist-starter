@@ -3,7 +3,7 @@
 once listing has a buyer, then it goes to 'under contract'
 
 
-seller future | seller now (active listing on MLS)
+client future | client now (active listing on MLS)
 
 buyer future | buyer now (under contract)
 

@@ -1,0 +1,61 @@
+form(method='POST')
+    input(type='hidden', name='_csrf')
+    .form-group
+        // First Name
+        label.lb-sm.control-label(for='client_firstname') First Name
+        input#client_firstname.form-control(name='client_firstname', type='text', required='required', value='Charlie', autofocus='autofocus')
+    .form-group
+        // Last Name
+        label.lb-sm.control-label(for='client_lastname') Last Name
+        input#client_lastname.form-control(name='client_lastname', type='text', required='required', value='Brown')
+    .form-group
+        // Cell Phone
+        label.lb-sm.control-label(for='client_cellphone') Cell Phone #
+        .input-group
+            span.input-group-addon
+                i.fa.fa-phone.fa(aria-hidden='true')
+            input#client_cellphone.form-control(name='client_cellphone', type='tel', required='required', value='406-555-1212')
+    .form-group
+        // Home Phone
+        label.lb-sm.control-label(for='client_homephone') Home Phone #
+        .input-group
+            span.input-group-addon
+                i.fa.fa-phone.fa(aria-hidden='true')
+            input#client_homephone.form-control(name='client_homephone', type='tel', value='406-555-1212')
+    .form-group
+        // Email address
+        label.lb-sm.control-label(for='client_email') Email
+        .input-group
+            span.input-group-addon
+                i.fa.fa-envelope.fa(aria-hidden='true')
+            input#client_email.form-control(type='client_email', name='email', value='gembry@gmail.com')
+    .form-group
+        // Address
+        label.lb-sm.control-label(for='client_address') Address
+        input#client_address.form-control(name='client_address', type='text', placeholder='123 Sample Street, Unit B', required='required', value='999 Halstead Avenue')
+    .form-group
+        // City
+        label.lb-sm.control-label(for='client_city') City
+        input#client_city.form-control(name='client_city', type='text', required='required', value='Barstow')
+    .form-group
+        // State
+        label.lb-sm.control-label(for='client_state') State
+        select#client_state.form-control(name='client_state]')
+            // option(hidden='true')
+            option(value='1') Montana
+            option(value='2') Colorado
+    .form-group
+        // ZIP Code
+        label.lb-sm.control-label(for='client_zip') ZIP Code
+        input#client_zip.form-control(name='client_zip', type='text', required='required', value='59901')
+    .form-group
+        // Terms Checkbox !
+        .checkbox
+            label
+            input(type='checkbox', name='client_notifications', value='true')
+            |  Yes, send Email Notifications.
+    .form-group
+        // Submit button !
+        button.btn.btn-primary(name='submit', type='submit', form='clientform', data-transition='fade')
+            i.fa.fa-hand-pointer-o
+            | Submit

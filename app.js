@@ -37,12 +37,12 @@ const usersController = require('./controllers/users');
 const apiController = require('./controllers/api');
 const contactController = require('./controllers/contact');
 
-/* Agent Assist Paths */
+/* OtterDocs Paths */
 const dashboardController = require('./controllers/dashboard');
+const clientController = require('./controllers/client');
 const clientsController = require('./controllers/clients');
+const propertyController = require('./controllers/property');
 const propertiesController = require('./controllers/properties');
-const sellerController = require('./controllers/seller');
-const buyerController = require('./controllers/buyer');
 
 /**
  * API keys and Passport configuration.
@@ -150,14 +150,19 @@ app.post('/account/delete', passportConfig.isAuthenticated, userController.postD
 app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userController.getOauthUnlink);
 app.get('/users', passportConfig.isAuthenticated, usersController.getUsers);
 
-/* Agent Assist Paths */
-app.get('/dashboard',passportConfig.isAuthenticated, dashboardController.getDashboard);
+/* OtterDocs Paths */
+app.get('/client', passportConfig.isAuthenticated, clientController.getClient);
+app.post('/client', passportConfig.isAuthenticated, clientController.postClient, function(req,res) {
+  console.log(req.body);
+}); 
+
 app.get('/clients', passportConfig.isAuthenticated, clientsController.getClients);
+
+app.get('/dashboard', passportConfig.isAuthenticated, dashboardController.getDashboard);
+
+app.get('/property', passportConfig.isAuthenticated, propertyController.getProperty);
+app.post('/property', passportConfig.isAuthenticated, propertyController.postProperty);
 app.get('/properties', passportConfig.isAuthenticated, propertiesController.getProperties);
-app.get('/seller', passportConfig.isAuthenticated, sellerController.getSeller);
-app.post('/seller', passportConfig.isAuthenticated, sellerController.postSeller);
-app.get('/buyer', passportConfig.isAuthenticated, buyerController.getBuyer);
-app.post('/buyer', passportConfig.isAuthenticated, buyerController.postBuyer);
 
 /**
  * API examples routes.

@@ -2,12 +2,18 @@
  * GET /clients
  * Clients Listing
  */
-exports.getProperties = (req, res) => {
-    res.render("properties", {
-      title: "Properties"
+exports.getProperty = (req, res) => {
+    res.render("property", {
+      title: "Property"
     });
   };
 
+exports.postProperty = (req, res) => {
+res.render("property", {
+    title: "Property"
+});
+};
+  
   /**
    * GET /clients
    * List all clients.

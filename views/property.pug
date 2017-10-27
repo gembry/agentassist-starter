@@ -2,7 +2,7 @@ extends layout
 
 block content
   .page-header
-    h3 Add Seller
+    h3 Add/Edit Property
 
   .col-md-4
     .row
@@ -11,54 +11,54 @@ block content
           ul#tabgroup1.nav.nav-tabs
             .liner
             li.active
-              a(href='#sellerTabInformation', data-toggle='tab', title='Basic Information')
+              a(href='#clientTabInformation', data-toggle='tab', title='Basic Information')
                 span.round-tabs.one
                   i.glyphicon.glyphicon-user
             li
-              a(href='#sellerTabAdditional', data-toggle='tab', title='Additional Information')
+              a(href='#clientTabAdditional', data-toggle='tab', title='Additional Information')
                 span.round-tabs.two
                   i.glyphicon.glyphicon-plus
             li
-              a(href='#sellerTabDatesDeadlines', data-toggle='tab', title='Dates & Deadlines')
+              a(href='#clientTabDatesDeadlines', data-toggle='tab', title='Dates & Deadlines')
                 span.round-tabs.four
                   i.glyphicon.glyphicon-calendar
             li
-              a(href='#sellerTabNotes', data-toggle='tab', title='Seller Notes')
+              a(href='#clientTabNotes', data-toggle='tab', title='Client Notes')
                 span.round-tabs.five
                   i.glyphicon.glyphicon-comment
             li
-              a(href='#sellerTabEmail', data-toggle='tab', title='Email')
+              a(href='#clientTabEmail', data-toggle='tab', title='Email')
                 span.round-tabs.six
                   i.glyphicon.glyphicon-envelope
             li
-              a(href='#sellerTabPhotos', data-toggle='tab', title='Photos')
+              a(href='#clientTabPhotos', data-toggle='tab', title='Photos')
                 span.round-tabs.six
                   i.glyphicon.glyphicon-picture
 
-        form.form-horizontal(action='/seller', method='POST', id='sellerform')
+        form.form-horizontal(action='/client', method='POST', id='clientform')
           input(type='hidden', name='_csrf', value=_csrf)
 
           .tab-content
-            #sellerTabInformation.tab-pane.fade.active.in
+            #clientTabInformation.tab-pane.fade.active.in
 
               .row
                 .col-sm-12
-                  label.lb-sm(for='seller_address') Address
-                  input#seller_address.form-control.input-sm(name='seller_address', type='text', placeholder='123 Sample Street, Unit B', required, value='999 Halstead Avenue')
+                  label.lb-sm(for='client_address') Address
+                  input#client_address.form-control.input-sm(name='client_address', type='text', placeholder='123 Sample Street, Unit B', required, value='999 Halstead Avenue')
               .row
                 .col-sm-12
-                  label.lb-sm(for='seller_city') City
-                  input#seller_city.form-control.input-sm(name='seller_city', type='text', required, value='Barstow')
+                  label.lb-sm(for='client_city') City
+                  input#client_city.form-control.input-sm(name='client_city', type='text', required, value='Barstow')
               .row
                 .col-sm-8
-                  label.lb-sm(for='seller_state') State
-                  select#seller_state.form-control.input-sm(name='seller_state]')
+                  label.lb-sm(for='client_state') State
+                  select#client_state.form-control.input-sm(name='client_state]')
                     //option(hidden='true') 
                     option(value=1) Montana
                     option(value=2) Colorado
                 .col-sm-4
-                  label.lb-sm(for='seller_zip') ZIP Code
-                  input#seller_zip.form-control.input-sm(name='seller_zip', type='text', required, value='59901')
+                  label.lb-sm(for='client_zip') ZIP Code
+                  input#client_zip.form-control.input-sm(name='client_zip', type='text', required, value='59901')
 
               .row
                 .col-sm-12
@@ -67,7 +67,7 @@ block content
               .row
                 .col-sm-12
                   p.sect-sm 
-                    | Seller Information
+                    | Client Information
               .row
                 .col-sm-12
                   | Primary: Brown, Charlie - 406-555-1212 (p) | Edit - Remove
@@ -76,10 +76,10 @@ block content
                   | Seconday: Brown, Marry - 406-555-1212 (p) | Edit - Remove
               .row
                 .col-sm-12
-                  | *Add Seller*<br>*Add Property*
+                  | *Add Client*<br>*Add Property*
 
 
-            #sellerTabAdditional.tab-pane.fade
+            #clientTabAdditional.tab-pane.fade
               .row
                 .col-sm-12
                   p.sect-sm 
@@ -87,48 +87,48 @@ block content
 
               .row
                 .col-sm-12
-                  label.lb-sm(for='seller_purchaseprice') Purchase Price
+                  label.lb-sm(for='client_purchaseprice') Purchase Price
                   .input-group.mb-2.mr-sm-2.mb-sm-0
                     .input-group-addon $
-                    input#seller_purchaseprice.form-control.input-sm(name='purchaseprice', type='text', pattern='[0-9]')
+                    input#client_purchaseprice.form-control.input-sm(name='purchaseprice', type='text', pattern='[0-9]')
               .row
                 .col-sm-12
-                  label.lb-sm(for='seller_earnestprice') Earnest Price
+                  label.lb-sm(for='client_earnestprice') Earnest Price
                   .input-group.mb-2.mr-sm-2.mb-sm-0
                     .input-group-addon $
-                    input#seller_earnestprice.form-control.input-sm(name='earnestprice', type='text', pattern='[0-9]')
+                    input#client_earnestprice.form-control.input-sm(name='earnestprice', type='text', pattern='[0-9]')
               .row
                 .col-sm-12
-                  label.lb-sm(for='seller_sellerconcession') Seller Concession
+                  label.lb-sm(for='client_clientconcession') Client Concession
                   .input-group.mb-2.mr-sm-2.mb-sm-0
                     .input-group-addon $
-                    input#seller_sellerconcession.form-control.input-sm(name='sellerconcession', type='text', pattern='[0-9]')
+                    input#client_clientconcession.form-control.input-sm(name='clientconcession', type='text', pattern='[0-9]')
               .row
                 .col-sm-12
                   p &nbsp;
               .row
                 .col-sm-12
-                  label.lb-sm(for='seller_titlecompany') Title Company --- add Mortgage Lender
-                  select#seller_titlecompany.form-control.input-sm(name='titlecompany]')
+                  label.lb-sm(for='client_titlecompany') Title Company --- add Mortgage Lender
+                  select#client_titlecompany.form-control.input-sm(name='titlecompany]')
                     //option(hidden='true') 
                     option(value=1) Adv. Title Company
                     option(value=2) Some Other Title Company
               .row
                 .col-sm-12
-                  label.lb-sm(for='seller_sellingagent') Selling Agent
-                  select#seller_sellingagent.form-control.input-sm(name='sellingagent]')
+                  label.lb-sm(for='client_sellingagent') Selling Agent
+                  select#client_sellingagent.form-control.input-sm(name='sellingagent]')
                     //option(hidden='true') 
                     option(value=1) Dave Kimbrough
                     option(value=2) Marky Mark
               .row
                 .col-sm-12
-                  label.lb-sm(for='seller_salestype') Sales Type
-                  select#seller_salestype.form-control.input-sm(name='salestype]')
+                  label.lb-sm(for='client_salestype') Sales Type
+                  select#client_salestype.form-control.input-sm(name='salestype]')
                     //option(hidden='true') 
                     option(value='HUD') HUD
                     option(value='REO') REO
 
-            #sellerTabDatesDeadlines.tab-pane.fade
+            #clientTabDatesDeadlines.tab-pane.fade
               .row
                 .col-sm-12
                   p.sect-sm 
@@ -140,24 +140,24 @@ block content
 
               .row
                 .col-sm-6
-                  label.lb-sm(for='seller_listdate') List Date
-                  input#seller_listdate.form-control.input-sm(name='listdate', type='date')
+                  label.lb-sm(for='client_listdate') List Date
+                  input#client_listdate.form-control.input-sm(name='listdate', type='date')
                 .col-sm-6
               .row
                 .col-sm-6
-                  label.lb-sm(for='seller_expirationdate') Expiration Date
-                  input#seller_expirationdate.form-control.input-sm(name='expirationdate', type='date')
+                  label.lb-sm(for='client_expirationdate') Expiration Date
+                  input#client_expirationdate.form-control.input-sm(name='expirationdate', type='date')
                 .col-sm-6
               .row
                 .col-sm-6
-                  label.lb-sm(for='seller_expirationdate') Closing Date (under contract)
-                  input#seller_closingdate.form-control.input-sm(name='closingdate', type='date')
+                  label.lb-sm(for='client_expirationdate') Closing Date (under contract)
+                  input#client_closingdate.form-control.input-sm(name='closingdate', type='date')
                 .col-sm-6
 
                 //Alternative Earnest Money Deadline
                 //Record Title Deadline
 
-            #sellerTabNotes.tab-pane.fade
+            #clientTabNotes.tab-pane.fade
               .row
                 .col-sm-12
                   table.table.table-striped
@@ -178,7 +178,7 @@ block content
                         td 
                           a(href='#') Edit
 
-            #sellerTabEmail.tab-pane.fade
+            #clientTabEmail.tab-pane.fade
               .row
                 .col-sm-12
                   table.table.table-striped
@@ -191,12 +191,12 @@ block content
                         td 
                           | Message sent to Adv. Title Company w/ the following attachments.<br>
                           img(src='https://www.santacruzpl.org/media/img/site/icons/sm_pdf.png')
-                          |  Seller's Settlement Statement<br>
+                          |  Client's Settlement Statement<br>
                           img(src='https://www.santacruzpl.org/media/img/site/icons/sm_pdf.png') 
                           |  Four Column Summary
                         td 10/17/2017
 
-            #sellerTabPhotos.tab-pane.fade
+            #clientTabPhotos.tab-pane.fade
               .row
                 .col-sm-12
                   img(src='https://photos.zillowstatic.com/p_f/ISivbtc4083o491000000000.jpg', style='padding:10px; width:50%;')
@@ -216,7 +216,7 @@ block content
               p
           .row
             .col-sm-12
-              button.btn.btn-primary(type='submit', form='sellerform') Submit  
+              button.btn.btn-primary(type='submit', form='clientform') Submit  
   .col-md-1
   .col-md-7
     .row
@@ -445,7 +445,7 @@ block content
                   th.lb-sm Action
               tbody
                 tr
-                  td Seller's Settlement Statement
+                  td Client's Settlement Statement
                   td 10/15/2017
                   td 
                     img(src='https://www.santacruzpl.org/media/img/site/icons/sm_pdf.png')
