@@ -152,9 +152,7 @@ app.get('/users', passportConfig.isAuthenticated, usersController.getUsers);
 
 /* OtterDocs Paths */
 app.get('/client', passportConfig.isAuthenticated, clientController.getClient);
-app.post('/client', passportConfig.isAuthenticated, clientController.postClient, function(req,res) {
-  console.log(req.body);
-}); 
+app.post('/client', passportConfig.isAuthenticated, clientController.postClient); 
 
 app.get('/clients', passportConfig.isAuthenticated, clientsController.getClients);
 

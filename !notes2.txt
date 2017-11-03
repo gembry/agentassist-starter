@@ -31,3 +31,5 @@ MONGOLAB_URI=mongodb://localhost:27017/test
 
 to generate bootstrap color menu
 https://work.smarchal.com/twbscolor/css/e74c3cc0392becf0f1ffbbbc0
+
+https://bootsnipp.com/snippets/featured/advanced-dropdown-search

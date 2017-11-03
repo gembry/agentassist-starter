@@ -1,3 +1,4 @@
+// Mongoose schema for Users
 const mongoose = require("mongoose");
 
 const usersSchema = new mongoose.Schema(
@@ -26,5 +27,4 @@ const usersSchema = new mongoose.Schema(
 );
 
 var Users = mongoose.model("Users", usersSchema);
-
 module.exports = Users;

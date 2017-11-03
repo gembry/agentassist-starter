@@ -15,11 +15,9 @@ exports.getClient = (req, res) => {
  */
 exports.postClient = (req, res) => {
 
-  console.log('submit it');
-
   req.assert("client_firstname", "First name cannot be blank").notEmpty();
   req.assert("client_lastname", "Last name cannot be blank").notEmpty();
-  /*req.assert("client_email", "Email is not valid").isEmail();*/
+  // req.assert("client_email", "Email is not valid").isEmail();
 
   const errors = req.validationErrors();
 
@@ -38,17 +36,15 @@ exports.postClient = (req, res) => {
     client_city: req.body.client_city,
     client_state: req.body.client_state,
     client_zip: req.body.client_zip,
-    client_notifications: req.body.client_notifications
+    client_notifications: req.body.client_notifications ? true : false
   });
 
   client.save(err => {
 
-    console.log("yahoo");
-
     if (err) {
       console.log(err);
     }
-
+    console.log(res);
     
     res.redirect("/client");
   });

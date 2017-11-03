@@ -2,47 +2,37 @@ extends layout
 
 block content
   .page-header
-    h3 Client Listing
+    h3= title
 
-  .row
-    .col-sm-12
-      //#eventsResult.alert.alert-success
-        //| Here is the result of event.
-      //.fixed-table-loading(style='top: 41px; display: none;') Loading, please wait...
-      
-      table#clientsTable.table.table-no-bordered(data-toggle='table', data-pagination='true', data-search='true', data-show-refresh='true', data-show-toggle='true', <='', body='', data-show-columns='true')
-        thead
-          tr
-            //th(data-field='Type') Type
-            th(data-field='Lastname', data-sortable='true') Last Name
-            th(data-field='Firstname', data-sortable='true') First Name
-            th(data-field='Added', data-sortable='true') Added
-            th.text-center(data-field='Action', data-sortable='true') Action
-        tbody
-          tr.danger
-            td Brown
-            td Charlie
-            td 2017-10-13
-            td Update Client | Address | List | Sale
-          tr
-            td Jones
-            td Thomas
-            td 2017-10-13
-            td Update Client | Address | List | Sale
-          tr.success
-            td Harman
-            td Elizabeth
-            td 2017-10-13
-            td Update Client | Address | List | Sale
-          tr.warning
-            td Shelton
-            td Gary
-            td 2017-10-13
-            td Update Client | Address | List | Sale
-          tr.success
-            td Witherspoon
-            td Carla
-            td 2017-10-13
-            td Update Client | Address | List | Sale
+    div(class='container')
+    table#clientsTable.table.table-striped.table-no-bordered(data-toggle='table', data-pagination='true', data-search='true', data-show-refresh='true', data-show-toggle='true', <='', body='', data-show-columns='true')
+      thead
+        tr 
+          th(data-field='client_firstname', data-sortable='true') Full Name
+          th(data-field='client_email', data-sortable='false') Email
+          th(data-field='client_homephone', data-sortable='false') Home Phone
+          th(data-field='client_cellphone', data-sortable='false') Cell Phone
+          th(data-field='client_address', data-sortable='false') Address  
+          //- th(data-field='createdAt', data-sortable='true') Created
+          th(data-field='updatedAt', data-sortable='true') Updated
+          th.text-center(data-field='Action', data-sortable='false') Action
 
-            
+      tbody
+        each client in clients
+          if client.client_notifications == true
+            tr.success
+          else
+            tr.small
+              td= client.client_lastname + ', ' + client.client_firstname
+              td
+                a(href=client.client_email)= client.client_email
+              td= client.client_homephone
+              td= client.client_cellphone
+              td= client.client_address + ', ' + client.client_city + ', ' + client.client_state + ' ' + client.client_zip
+              //- td #{moment(client.createdAt).format('MM/DD/YYYY')}
+              td #{moment(client.updatedAt).format('MM/DD/YYYY')}
+              td
+                a(href='/clients/' + client._id)= post
+                  button(type="button") Edit
+                a(href='/clients/' + client._id)= post
+                  button(type="button") Archive

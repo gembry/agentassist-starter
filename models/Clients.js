@@ -1,7 +1,7 @@
-// Mongoose schema for Client
+// Mongoose schema for Clients
 const mongoose = require("mongoose");
 
-const clientSchema = new mongoose.Schema(
+const clientsSchema = new mongoose.Schema(
   {
     client_firstname: String,
     client_lastname: String,
@@ -17,6 +17,5 @@ const clientSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const Client = mongoose.model("Client", clientSchema);
-
-module.exports = Client;
+var Clients = mongoose.model("Clients", clientsSchema);
+module.exports = Clients;

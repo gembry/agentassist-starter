@@ -1,9 +1,18 @@
 /**
- * GET /client
- * Clients form page.
+ * GET /clients
+ * List all clients.
  */
-exports.getClients = (req, res) => {
-  res.render("clients", {
-    title: "Clients"
-  });
+const Clients = require("../models/Clients.js");
+
+exports.getClients = function(req, res) {
+ Clients.find().exec(function(err, clients_list) {
+
+   if (err) {
+     console.log("error dude");
+     return next(err);
+   }
+
+   //if successful
+   res.render("clients", { title: "All Clients", clients: clients_list });
+ });
 };
