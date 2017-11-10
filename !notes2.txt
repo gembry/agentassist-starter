@@ -33,3 +33,6 @@ to generate bootstrap color menu
 https://work.smarchal.com/twbscolor/css/e74c3cc0392becf0f1ffbbbc0
 
 https://bootsnipp.com/snippets/featured/advanced-dropdown-search
+
+
+https://igorescobar.github.io/jQuery-Mask-Plugin/docs.html

@@ -2,12 +2,45 @@ const Client = require("../models/Client");
 
 /**
  * GET /client
- * Client form page.
  */
 exports.getClient = (req, res) => {
-  res.render("client", {
-    title: "Client"
-  });
+
+  if (req.params.client) {
+    // find & update existing client
+
+    Client.findOne({ _id: req.params.client }, (err, existingClient) => {
+
+      
+      //console.log(existingClient);    
+      res.render("client", {
+        title: "Get Client UPDATE",
+        client: existingClient
+        // , user: req.user
+      });  
+  
+      //if (err) { return next(err); }
+        //if (existingClient) {
+          //req.flash('errors', { msg: 'Account with that email address already exists.' });
+          //return res.redirect('/signup');
+      //}
+      
+      //client.save((err) => {
+        //if (err) { return next(err); }
+          //req.logIn(user, (err) => {
+            //if (err) {
+              //return next(err);
+            //}
+        //res.redirect('/');
+      //});
+    });
+
+  } else {
+    // create new client
+    res.render("client", {
+        title: "Get Client INSERT"
+    });  
+  }  
+
 };
 
 /**
@@ -17,7 +50,7 @@ exports.postClient = (req, res) => {
 
   req.assert("client_firstname", "First name cannot be blank").notEmpty();
   req.assert("client_lastname", "Last name cannot be blank").notEmpty();
-  // req.assert("client_email", "Email is not valid").isEmail();
+  req.assert("client_email", "Email is not valid").isEmail();
 
   const errors = req.validationErrors();
 
@@ -47,5 +80,24 @@ exports.postClient = (req, res) => {
     console.log(res);
     
     res.redirect("/client");
+  });
+};
+
+/**
+ * PUT /client
+ */
+exports.putClient = (req, res) => {
+  res.render("client", {
+    title: "Put Client"
+  });
+};
+
+/**
+ * DELETE (aka archive) /client
+ * Not really going to delete anything
+ */
+exports.deleteClient = (req, res) => {
+  res.render("client", {
+    title: "Delete Client"
   });
 };

@@ -2,38 +2,17 @@ block content
 
 form(method="post")
     input(type='hidden', name='_csrf', value=_csrf)
+
     .row
         .form-group-sm.col-md-6
             // First Name
             label.lb-sm.control-label(for='client_firstname') First Name *
-            input#client_firstname.form-control(name='client_firstname', type='text', required='required', autofocus='autofocus')
+            input#client_firstname.form-control(name='client_firstname', type='text', required='required', autofocus='autofocus', value=client.client_firstname)
         .form-group-sm.col-md-6
             // Last Name
             label.lb-sm.control-label(for='client_lastname') Last Name *
-            input#client_lastname.form-control(name='client_lastname', type='text', required='required')
-    .row
-        .form-group-sm.col-md-12
-            // Email address
-            label.lb-sm.control-label(for='client_email') Email
-            .input-group
-                span.input-group-addon
-                    i.fa.fa-envelope.fa
-                input#client_email.form-control(name='client_email', type='email', value='gembry@gmail.com')
-    .row
-        .form-group-sm.col-md-6
-            // Cell Phone
-            label.lb-sm.control-label(for='client_cellphone') Cell Phone #
-            .input-group
-                span.input-group-addon
-                    i.fa.fa-phone.fa
-                input#client_cellphone.form-control(name='client_cellphone', type='tel', value='406-555-1212')
-        .form-group-sm.col-md-6
-            // Home Phone
-            label.lb-sm.control-label(for='client_homephone') Home Phone #
-            .input-group
-                span.input-group-addon
-                    i.fa.fa-phone.fa
-                input#client_homephone.form-control(name='client_homephone', type='tel', value='406-555-1212')
+            input#client_lastname.form-control(name='client_lastname', type='text', required='required', value=client.client_lastname)
+
     .row
         .form-group-sm.col-md-12
             // Address
@@ -107,12 +86,42 @@ form(method="post")
             label.lb-sm.control-label(for='client_zip') ZIP Code *
             input#client_zip.form-control(name='client_zip', type='text', required='required', value='59901')
     .row
+        .form-group-sm.col-md-6
+            // Cell Phone
+            label.lb-sm.control-label(for='client_cellphone') Cell Phone #
+            .input-group
+                span.input-group-addon
+                    i.fa.fa-phone.fa
+                input#client_cellphone.form-control(name='client_cellphone', type='tel', placeholder='(XXX) XXX-XXXX')
+                
+        .form-group-sm.col-md-6
+            // Home Phone
+            label.lb-sm.control-label(for='client_homephone') Home Phone #
+            .input-group
+                span.input-group-addon
+                    i.fa.fa-phone.fa
+                input#client_homephone.form-control(name='client_homephone', type='tel', placeholder='(XXX) XXX-XXXX')
+    .row
+        .form-group-sm.col-md-12
+            // Email address
+            label.lb-sm.control-label(for='client_email') Email
+            .input-group
+                span.input-group-addon
+                    i.fa.fa-envelope.fa
+                input#client_email.form-control(name='client_email', type='email', value='gembry@gmail.com')
+
+    .row
         .form-group-sm.col-md-12
             // Terms Checkbox
             .checkbox
                 label
                 input(name='client_notifications', type='checkbox', value='true')
                 |  Yes, send Email Notifications.
+
+    .row
+        .col-md-12
+            br
+
     .row
         .form-group-sm.col-md-12
             // Submit button

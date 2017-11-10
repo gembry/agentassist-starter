@@ -41,4 +41,12 @@ $(document).ready(function() {
 
   $(".fc-next-button").click({});
 
+  $('#confirm-delete').on('show.bs.modal', function(e) {
+    $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+  });
+
+  // All Input Masks
+  $("input#client_cellphone, input#client_homephone").inputmask('(999) 999-9999');
+  $("input#client_zip").inputmask("99999[-9999]", { greedy: false });
+
 });

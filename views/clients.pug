@@ -32,7 +32,18 @@ block content
               //- td #{moment(client.createdAt).format('MM/DD/YYYY')}
               td #{moment(client.updatedAt).format('MM/DD/YYYY')}
               td
-                a(href='/clients/' + client._id)= post
+                a(href='/client/' + client._id)= post
                   button(type="button") Edit
-                a(href='/clients/' + client._id)= post
-                  button(type="button") Archive
+                button(type="button", data-href='/clients/' + client._id, data-toggle='modal', data-target='#confirm-delete') Archive
+
+      #confirm-delete.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+        .modal-dialog
+          .modal-content
+            .modal-header.h4
+              | Are you sure?
+            .modal-body
+              | You are about to archive this record.
+            .modal-footer
+              button.btn.btn-default(type='button', data-dismiss='modal') Cancel
+              a.btn.btn-danger.btn-ok Delete
+

@@ -12,7 +12,8 @@ const clientsSchema = new mongoose.Schema(
     client_city: String,
     client_state: String,
     client_zip: String,
-    client_notifications: String
+    client_notifications: String,
+    client_archive: Boolean
   },
   { timestamps: true }
 );

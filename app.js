@@ -151,8 +151,14 @@ app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userControl
 app.get('/users', passportConfig.isAuthenticated, usersController.getUsers);
 
 /* OtterDocs Paths */
-app.get('/client', passportConfig.isAuthenticated, clientController.getClient);
-app.post('/client', passportConfig.isAuthenticated, clientController.postClient); 
+app.get('/client', passportConfig.isAuthenticated, clientController.getClient);         // GET
+app.post('/client', passportConfig.isAuthenticated, clientController.postClient);       // POST
+app.get('/client/:client', passportConfig.isAuthenticated, clientController.getClient); // GET w/ ID
+app.put('/client/:client', passportConfig.isAuthenticated, clientController.putClient); // PUT w/ ID
+
+//app.get('/account', passportConfig.isAuthenticated, userController.getAccount);
+//app.post('/account/profile', passportConfig.isAuthenticated, userController.postUpdateProfile);
+
 
 app.get('/clients', passportConfig.isAuthenticated, clientsController.getClients);
 
