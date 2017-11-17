@@ -36,3 +36,6 @@ https://bootsnipp.com/snippets/featured/advanced-dropdown-search
 
 
 https://igorescobar.github.io/jQuery-Mask-Plugin/docs.html
+
+
+taskkill /f /im node.exe

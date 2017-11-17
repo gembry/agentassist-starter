@@ -50,3 +50,15 @@ $(document).ready(function() {
   $("input#client_zip").inputmask("99999[-9999]", { greedy: false });
 
 });
+
+
+// LOOK INTO THIS -- ADDED TO Package.json
+// function cleanStackTrace(reason) {
+//   return require('callsite-record')({
+//       forError: reason
+//   }).renderSync({
+//       stackFilter(frame) {
+//           return !frame.getFileName().includes('node_modules');
+//       }
+//   });
+// }

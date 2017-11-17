@@ -5,6 +5,7 @@ const express = require('express');
 const compression = require('compression');
 const session = require('express-session');
 const bodyParser = require('body-parser');
+const methodOverride = require('method-override');
 const logger = require('morgan');
 const chalk = require('chalk');
 const errorHandler = require('errorhandler');
@@ -83,6 +84,8 @@ app.use(sass({
   dest: path.join(__dirname, 'public')
 }));
 app.use(logger('dev'));
+app.use(methodOverride('X-HTTP-Method-Override'));
+app.use(methodOverride('_method'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(expressValidator());
@@ -128,6 +131,15 @@ app.use((req, res, next) => {
 });
 app.use(express.static(path.join(__dirname, 'public'), { maxAge: 31557600000 }));
 
+app.use(methodOverride(function (req, res) {
+  if (req.body && typeof req.body === 'object' && '_method' in req.body) {
+    var method = req.body._method;
+    delete req.body._method;
+    console.log(method);
+    return method;
+  }
+}));
+
 /**
  * Primary app routes.
  */
@@ -150,20 +162,20 @@ app.post('/account/delete', passportConfig.isAuthenticated, userController.postD
 app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userController.getOauthUnlink);
 app.get('/users', passportConfig.isAuthenticated, usersController.getUsers);
 
-/* OtterDocs Paths */
-app.get('/client', passportConfig.isAuthenticated, clientController.getClient);         // GET
-app.post('/client', passportConfig.isAuthenticated, clientController.postClient);       // POST
-app.get('/client/:client', passportConfig.isAuthenticated, clientController.getClient); // GET w/ ID
-app.put('/client/:client', passportConfig.isAuthenticated, clientController.putClient); // PUT w/ ID
+// Client related routes
+app.get('/client', passportConfig.isAuthenticated, clientController.getClient)
+   .get('/client/:client', passportConfig.isAuthenticated, clientController.getClient)
+   .post('/client', passportConfig.isAuthenticated, clientController.postClient)
+   .put('/client/:client', passportConfig.isAuthenticated, clientController.putClient);
+
+// Client(s) related routes
+app.get('/clients', passportConfig.isAuthenticated, clientsController.getClients)
+   .get('/clients/:client', passportConfig.isAuthenticated, clientsController.deleteClient);
 
 //app.get('/account', passportConfig.isAuthenticated, userController.getAccount);
 //app.post('/account/profile', passportConfig.isAuthenticated, userController.postUpdateProfile);
 
-
-app.get('/clients', passportConfig.isAuthenticated, clientsController.getClients);
-
 app.get('/dashboard', passportConfig.isAuthenticated, dashboardController.getDashboard);
-
 app.get('/property', passportConfig.isAuthenticated, propertyController.getProperty);
 app.post('/property', passportConfig.isAuthenticated, propertyController.postProperty);
 app.get('/properties', passportConfig.isAuthenticated, propertiesController.getProperties);
