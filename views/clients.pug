@@ -34,15 +34,15 @@ block content
               td
                 a(href='/client/' + client._id)= post
                   button(type="button") Edit
-                button(type="button", data-href='/clients/' + client._id, data-toggle='modal', data-target='#confirm-delete') Archive
+                button(type="button", data-href='/clients/' + client._id, data-toggle='modal', data-target='#confirm-delete') Delete
 
       #confirm-delete.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
         .modal-dialog
           .modal-content
             .modal-header.h4
-              | Are you sure?
+              | Please confirm!
             .modal-body
-              | You are about to archive this record.
+              | You are about to delete this client record.
             .modal-footer
               button.btn.btn-default(type='button', data-dismiss='modal') Cancel
               a.btn.btn-danger.btn-ok Delete

@@ -2,7 +2,10 @@ extends layout
 
 block content
   .page-header
-    h3 Property Listing
+    h3 Buy & Sell Properties
+
+    //- Exclusive Right to Sell - Listing Contract (sell side - listing - to sell a house)
+    //- Contract to buy/sell Real Estate (buy side - handling a contract)
 
   .row
     .col-sm-12
@@ -13,9 +16,9 @@ block content
       table#clientsTable.table.table-no-bordered(data-toggle='table', data-pagination='true', data-search='true', data-show-refresh='true', data-show-toggle='true', <='', body='', data-show-columns='true')
         thead
           tr
-            th(data-field='Type', data-sortable='true') Type
             th(data-field='Lastname', data-sortable='true') Last Name
             th(data-field='Firstname', data-sortable='true') First Name
+            th(data-field='Type', data-sortable='true') Type
             th.text-right(data-field='Number') #
             th(data-field='Address', data-sortable='true') Address
             th(data-field='City', data-sortable='true') City
@@ -26,33 +29,33 @@ block content
           tr.danger
             //td
                //i.glyphicon.glyphicon-usd
-            td LIST
             td Brown
             td Charlie 
+            td SELLER
             td.text-right 398
             td S. Halstead Ave
             td Barstow
-            td Active
+            td Active Listing
             td 2017-10-13
             td Update
           tr
             //td 
                //i.glyphicon.glyphicon-usd            
-            td LIST
             td Jones
             td Tom 
+            td SELLER
             td.text-right 82
             td Marcus Welton Ave
             td Los Angeles
-            td Non-Active
+            td Non-Active Listing
             td 2017-10-13
             td Update
           tr.success
             //td 
                //i.glyphicon.glyphicon-home            
-            td LIST
             td Harman
             td Elizabeth
+            td SELLER
             td.text-right 3933
             td East Hampton Drive
             td Barstow
@@ -62,21 +65,21 @@ block content
           tr.warning
             //td
                //i.glyphicon.glyphicon-home
-            td LIST
             td Shelton
             td Gary
+            td SELLER
             td.text-right 112
             td Hwy East
             td Sierra Madre
-            td Non-Active
+            td Non-Active Listing
             td 2017-10-13
             td Update
           tr.success
             //td 
                //i.glyphicon.glyphicon-usd            
-            td LIST
             td Witherspoon
             td Carla 
+            td SELLER
             td.text-right 983
             td Marcus Welton Ave
             td Los Angeles
@@ -86,9 +89,9 @@ block content
           tr.success
             //td 
                //i.glyphicon.glyphicon-usd            
-            td LIST
             td Brown
             td Charlie
+            td SELLER
             td.text-right 983
             td Marcus Welton Ave
             td Los Angeles
@@ -98,9 +101,9 @@ block content
           tr.success
             //td 
                //i.glyphicon.glyphicon-usd            
-            td LIST
             td Witherspoon
             td Carla
+            td SELLER
             td.text-right 983
             td Marcus Welton Ave
             td Los Angeles
@@ -110,9 +113,9 @@ block content
           tr.success
             //td 
                //i.glyphicon.glyphicon-usd            
-            td LIST
             td Witherspoon
             td Carla
+            td SELLER
             td.text-right 983
             td Marcus Welton Ave
             td Los Angeles
@@ -122,9 +125,9 @@ block content
           tr.success
             //td 
                //i.glyphicon.glyphicon-usd            
-            td SALE
             td Brown
             td Charlie
+            td BUYER
             td.text-right 983
             td Marcus Welton Ave
             td Los Angeles

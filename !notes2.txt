@@ -39,3 +39,16 @@ https://igorescobar.github.io/jQuery-Mask-Plugin/docs.html
 
 
 taskkill /f /im node.exe
+
+
+11/21/2017 talk
+---------------
+
+Add DOB and Anniversary to client/contact form
+
+Add sort by lastname to buy & sell properties
+
+Calendar - do we want a master calendar or not???   
+
+https://datatables.net/examples/api/row_details.html (sub rows of datatables
+)

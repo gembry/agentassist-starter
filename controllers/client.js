@@ -3,6 +3,213 @@
  */
 const Client = require("../models/Client");
 
+const states_object = [
+  {
+    option: "AL",
+    value: "Alabama"
+  },
+  {
+    option: "AK",
+    value: "Alaska"
+  },
+  {
+    option: "AZ",
+    value: "Arizona"
+  },
+  {
+    option: "AR",
+    value: "Arkansas"
+  },
+  {
+    option: "CA",
+    value: "California"
+  },
+  {
+    option: "CO",
+    value: "Colorado"
+  },
+  {
+    option: "CT",
+    value: "Connecticut"
+  },
+  {
+    option: "DE",
+    value: "Delaware"
+  },
+  {
+    option: "DC",
+    value: "District Of Columbia"
+  },
+  {
+    option: "FL",
+    value: "Florida"
+  },
+  {
+    option: "GA",
+    value: "Georgia"
+  },
+  {
+    option: "HI",
+    value: "Hawaii"
+  },
+  {
+    option: "ID",
+    value: "Idaho"
+  },
+  {
+    option: "IL",
+    value: "Illinois"
+  },
+  {
+    option: "IN",
+    value: "Indiana"
+  },
+  {
+    option: "IA",
+    value: "Iowa"
+  },
+  {
+    option: "KS",
+    value: "Kansas"
+  },
+  {
+    option: "KY",
+    value: "Kentucky"
+  },
+  {
+    option: "LA",
+    value: "Louisiana"
+  },
+  {
+    option: "ME",
+    value: "Maine"
+  },
+  {
+    option: "MD",
+    value: "Maryland"
+  },
+  {
+    option: "MA",
+    value: "Massachusetts"
+  },
+  {
+    option: "MI",
+    value: "Michigan"
+  },
+  {
+    option: "MN",
+    value: "Minnesota"
+  },
+  {
+    option: "MS",
+    value: "Mississippi"
+  },
+  {
+    option: "MO",
+    value: "Missouri"
+  },
+  {
+    option: "MT",
+    value: "Montana"
+  },
+  {
+    option: "NE",
+    value: "Nebraska"
+  },
+  {
+    option: "NV",
+    value: "Nevada"
+  },
+  {
+    option: "NH",
+    value: "New Hampshire"
+  },
+  {
+    option: "NJ",
+    value: "New Jersey"
+  },
+  {
+    option: "NM",
+    value: "New Mexico"
+  },
+  {
+    option: "NY",
+    value: "New York"
+  },
+  {
+    option: "NC",
+    value: "North Carolina"
+  },
+  {
+    option: "ND",
+    value: "North Dakota"
+  },
+  {
+    option: "OH",
+    value: "Ohio"
+  },
+  {
+    option: "OK",
+    value: "Oklahoma"
+  },
+  {
+    option: "OR",
+    value: "Oregon"
+  },
+  {
+    option: "PA",
+    value: "Pennsylvania"
+  },
+  {
+    option: "RI",
+    value: "Rhode Island"
+  },
+  {
+    option: "SC",
+    value: "South Carolina"
+  },
+  {
+    option: "SD",
+    value: "South Dakota"
+  },
+  {
+    option: "TN",
+    value: "Tennessee"
+  },
+  {
+    option: "TX",
+    value: "Texas"
+  },
+  {
+    option: "UT",
+    value: "Utah"
+  },
+  {
+    option: "VT",
+    value: "Vermont"
+  },
+  {
+    option: "VA",
+    value: "Virginia"
+  },
+  {
+    option: "WA",
+    value: "Washington"
+  },
+  {
+    option: "WV",
+    value: "West Virginia"
+  },
+  {
+    option: "WI",
+    value: "Wisconsin"
+  },
+  {
+    option: "WY",
+    value: "Wyoming"
+  }
+];
+
 // Setup empty client object
 // Use this in the future to setup form defaults (just an idea)
 const defaultClient = new Client({
@@ -33,7 +240,8 @@ exports.getClient = (req, res) => {
       res.render("client", {
         title: "Update Client",
         client: updateClient,
-        method: "PUT"
+        method: "PUT",
+        states: states_object
       });
     });
   } else {
@@ -41,7 +249,8 @@ exports.getClient = (req, res) => {
     res.render("client", {
       title: "Add Client",
       client: defaultClient,
-      method: "POST"
+      method: "POST",
+      states: states_object
     });
   }
 };

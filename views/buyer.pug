@@ -2,7 +2,7 @@ extends layout
 
 block content
   .page-header
-    h3 Seller Listing Contract Info
+    h3 Buyer Contract Information
 
   .col-md-4
     .row
@@ -82,16 +82,10 @@ block content
               .row
                 .col-sm-12
                   p.sect-sm 
-                    h3 Terminated Contracts
+                    h3 Terminated Contract
               .row
                 .col-sm-12
                   | 11/02/2017 - View Pending Documents (only)
-              .row
-                .col-sm-12
-                  | 11/12/2017 - View Pending Documents (only)
-              .row
-                .col-sm-12
-                  | 11/22/2017 - View Pending Documents (only)
 
 
             #clientTabAdditional.tab-pane.fade
@@ -102,14 +96,10 @@ block content
 
               .row
                 .col-sm-12
-                  label.lb-sm(for='client_purchaseprice') List Price
+                  label.lb-sm(for='client_purchaseprice') Purchase Price
                   .input-group.mb-2.mr-sm-2.mb-sm-0
                     .input-group-addon $
                     input#client_purchaseprice.form-control.input-sm(name='purchaseprice', type='text', pattern='[0-9]')
-              .row
-                .col-sm-12
-                  p &nbsp;
-
               .row
                 .col-sm-12
                   label.lb-sm(for='client_earnestprice') Earnest Money
@@ -118,12 +108,10 @@ block content
                     input#client_earnestprice.form-control.input-sm(name='earnestprice', type='text', pattern='[0-9]')
               .row
                 .col-sm-12
-                  label.lb-sm(for='client_sellingagent') Earnest Money held by
-                  select#client_sellingagent.form-control.input-sm(name='sellingagent]')
-                    option(hidden='true') 
-                    option(value=1) Dave Kimbrough
-                    option(value=2) Marky Mark
-
+                  label.lb-sm(for='client_clientconcession') Seller Concession
+                  .input-group.mb-2.mr-sm-2.mb-sm-0
+                    .input-group-addon $
+                    input#client_clientconcession.form-control.input-sm(name='clientconcession', type='text', pattern='[0-9]')
               .row
                 .col-sm-12
                   p &nbsp;
@@ -131,7 +119,7 @@ block content
                 .col-sm-12
                   label.lb-sm(for='client_titlecompany') Title Company
                   select#client_titlecompany.form-control.input-sm(name='titlecompany]')
-                    option(hidden='true') 
+                    //option(hidden='true') 
                     option(value=1) Other Title Company
                     option(value=2) Land Title Company
                     option(value=3) Abstract Title Company
@@ -139,36 +127,31 @@ block content
 
               .row
                 .col-sm-12
-                  p &nbsp;
-              .row
-                .col-sm-12
-                  label.lb-sm(for='client_titlecompany') HOA
+                  label.lb-sm(for='client_titlecompany') Mortgage Lender
                   select#client_titlecompany.form-control.input-sm(name='titlecompany]')
-                    option(hidden='true') 
-                    option(value=1) YES
-                    option(value=2) NO
-
-              .row
-                .col-sm-12
-                  p &nbsp;
-
-              .row
-                .col-sm-12
-                  label.lb-sm(for='client_titlecompany') Mortgage Holder
-                  select#client_titlecompany.form-control.input-sm(name='titlecompany]')
-                    option(hidden='true') 
+                    //option(hidden='true') 
                     option(value=1) Other Mortgage Lender
                     option(value=2) Land Title Company
                     option(value=3) Abstract Title Company
                     option(value=4) Advanced Title Company
+
               .row
                 .col-sm-12
-                  label.lb-sm(for='client_city') Loan #
-                  input#client_city.form-control.input-sm(name='client_city', type='text', required, value='')
-              //- .row
-              //-   .col-sm-12
-              //-     label.lb-sm(for='client_city') SSN
-              //-     input#client_city.form-control.input-sm(name='client_city', type='text', required, value='')
+                  label.lb-sm(for='client_sellingagent') Selling Agent
+                  select#client_sellingagent.form-control.input-sm(name='sellingagent]')
+                    //option(hidden='true') 
+                    option(value=1) Dave Kimbrough
+                    option(value=2) Marky Mark
+              .row
+                .col-sm-12
+                  label.lb-sm(for='client_salestype') Sales Type
+                  select#client_salestype.form-control.input-sm(name='salestype]')
+                    //option(hidden='true')
+                    // DEFAULT TO N/A 
+                    option(value='N/A') N/A
+                    option(value='HUD') HUD
+                    option(value='REO') REO
+                    option(value='SHORT') SHORT SALE
 
             #clientTabDatesDeadlines.tab-pane.fade
               .row
@@ -180,18 +163,71 @@ block content
                   input#checkBox(type='checkbox')
                   | Send deadline notifications to me. (agent only)
 
-              //- No other dates are needed for the seller
               .row
                 .col-sm-6
-                  label.lb-sm(for='client_listdate') Listing Period (start)
+                  label.lb-sm(for='client_listdate') Contract Date
                   input#client_listdate.form-control.input-sm(name='listdate', type='date')
                 .col-sm-6
+              //- .row
+              //-   .col-sm-6
+              //-     label.lb-sm(for='client_expirationdate') Expiration Date
+              //-     input#client_expirationdate.form-control.input-sm(name='expirationdate', type='date')
+              //-   .col-sm-6
+
+
+
+              //- Alternative Earnest Money Deadline
+
+              //- Title
+              //-   Record Title Deadline
+              //-   Record Title Objection Deadline
+              //-   Off-Record Title Deadline
+              //-   Off-Record Title Objection Deadline
+              //-   Title Resolution Deadline
+              //-   Right of First Refusal Deadline
+
+              //- Owners' Association
+              //-   Association Documents Deadline
+              //-   Association Documents Objection Deadline
+
+              //- Seller's Property Disclosure
+              //-   Seller's Property Disclosure Deadline
+
+              //- Loan
+              //-   Loan Application Deadline
+              //-   Loan Objection Deadline
+
+              //- Appraisal
+              //-   Appraisal Deadline
+              //-   Appraisal Objection Deadline
+              //-   Appraisal Resolution Deadline
+
+              //- Survey
+              //-   New ILC or New Survey Deadline
+              //-   New ILC or New Survey Objection Deadline
+              //-   New ILC or New Survey Resolution Deadline
+
+              //- Inspection and Due Diligence
+              //-   Inspection Objection Deadline
+              //-   Inspection Resolution Deadline
+              //-   Property Insurance Objection Deadline
+              //-   Due Diligence Documents Delivery Deadline
+              //-   Due Diligence Documents Objection Deadline
+              //-   Due Diligence Documents Resolution Deadline
+              //-   Conditional Sale Deadline
+
+              //- Closing and Possession
+              //-   Closing Date
+              //-   Possession Date
 
               .row
                 .col-sm-6
-                  label.lb-sm(for='client_expirationdate') Listing Period (end)
+                  label.lb-sm(for='client_expirationdate') Closing Date
                   input#client_closingdate.form-control.input-sm(name='closingdate', type='date')
                 .col-sm-6
+
+                //Alternative Earnest Money Deadline
+                //Record Title Deadline
 
             #clientTabNotes.tab-pane.fade
               .row
@@ -265,22 +301,14 @@ block content
                 span.round-tabs.zero
                   | Calendar 
             li
-              a(href='#doctab1', data-toggle='tab', title='doctab1')
-                span.round-tabs.one
-                  | Listing  
-                  //- Listing is always here
-                  //- span.label.label-success 100%
-            li
               a(href='#doctab2', data-toggle='tab', title='doctab2')
                 span.round-tabs.two
                   | Pending 
-                  //- When Sales Contract is uploaded, that's when it is now UNDER CONTRACT
                   //- span.label.label-primary 25%
             li
               a(href='#doctab3', data-toggle='tab', title='doctab3')
                 span.round-tabs.three
-                  | Closing Docs 
-                  //- Only applies when property is sold
+                  | Title Company 
                   //- span.label.label-primary 65%
             li
               a(href='#doctab4', data-toggle='tab', title='doctab4')
@@ -294,117 +322,6 @@ block content
             p
             #calendar.calendar
 
-          #doctab1.tab-pane.fade
-            table.table.table-striped
-              thead
-                tr
-                  th.lb-sm Documents
-                  th.lb-sm Uploaded On
-                  th.lb-sm Attachments
-                  th.lb-sm Action
-              tbody
-                tr
-                  td Definition of Working Relationship
-                  td 10/15/2017
-                  td 
-                    img(src='https://www.santacruzpl.org/media/img/site/icons/sm_pdf.png')
-                  td 
-                    a(href='#') Upload
-                tr
-                  td Exclusive Right to Sell Listing Contract
-                  td 10/15/2017
-                  td 
-                    img(src='https://www.santacruzpl.org/media/img/site/icons/sm_pdf.png')
-                  td 
-                    a(href='#') Upload
-                tr
-                  td Transaction Broker BD 24-5-09
-                  td 
-                  td 
-                  td 
-                    a(href='#') Upload
-                tr
-                  td MLS Detailed Report
-                  td 
-                  td 
-                  td 
-                    a(href='#') Upload
-                tr
-                  td Closing Instructions
-                  td 
-                  td 
-                  td 
-                    a(href='#') Upload
-                tr
-                  td Square Footage Disclosure
-                  td 10/15/2017
-                  td 
-                    img(src='https://www.santacruzpl.org/media/img/site/icons/sm_pdf.png')
-                  td 
-                    a(href='#') Upload
-                tr
-                  td Sellers Property Disclosure
-                  td 10/15/2017
-                  td 
-                    img(src='https://www.santacruzpl.org/media/img/site/icons/sm_pdf.png')
-                    img(src='https://www.santacruzpl.org/media/img/site/icons/sm_pdf.png')                     
-                  td 
-                    a(href='#') Upload
-                tr
-                  td Lead Based Paint (Obligations) (pre 1978)
-                  td 
-                  td 
-                  td 
-                    a(href='#') Upload
-                tr
-                  td Lead Base Paint (Sales)
-                  td 
-                  td 
-                  td 
-                    a(href='#') Upload
-                tr
-                  td Source of Water Addendum (unless on SPD)
-                  td 
-                  td 
-                  td 
-                    a(href='#') Upload
-                tr
-                  td Short Sale Addendum
-                  td 
-                  td 
-                  td 
-                    a(href='#') Upload
-                tr
-                  td Change of Status
-                  td 
-                  td 
-                  td 
-                    a(href='#') Upload
-                tr
-                  td Amend with Broker
-                  td 10/15/2017
-                     br
-                     | 10/17/2017
-                     br
-                     | 10/25/2017
-                  td 
-                    img(src='https://www.santacruzpl.org/media/img/site/icons/sm_pdf.png')
-                    | Extend_Listing.pdf
-                    br
-                    img(src='https://www.santacruzpl.org/media/img/site/icons/sm_pdf.png')                     
-                    | PriceChange_1_ ... pdf
-                    br
-                    img(src='https://www.santacruzpl.org/media/img/site/icons/sm_pdf.png')
-                    | Price_Change_2_332_syler_st next door.pdf
-                  td 
-                    a(href='#') Upload
-                tr
-                  td Other Document
-                  td 
-                  td 
-                  td 
-                    a(href='#') Upload
-
           #doctab2.tab-pane.fade
             table.table.table-striped
               thead
@@ -416,7 +333,7 @@ block content
               tbody
                 tr
                   td Sales Contract
-                  td ** primary keyoff **
+                  td 
                   td 
                   td 
                     a(href='#') Upload
@@ -498,12 +415,11 @@ block content
                   td 
                     a(href='#') Upload
                 tr
-                  td Other Document
+                  td Other Documents
                   td 
                   td 
                   td 
                     a(href='#') Upload
-
             button.btn.btn-danger.btn-cons(type='button') Terminate Current Contract
 
           #doctab3.tab-pane.fade
@@ -613,13 +529,7 @@ block content
                   td 
                     a(href='#') Upload
                 tr
-                  td FHA Amendatory Clause
-                  td 
-                  td 
-                  td 
-                    a(href='#') Upload
-                tr
-                  td Other Document
+                  td Other Documents
                   td 
                   td 
                   td 
@@ -659,6 +569,12 @@ block content
                   td 
                     a(href='#') Upload
                 tr
+                  td FHA Amendatory Clause
+                  td 
+                  td 
+                  td 
+                    a(href='#') Upload
+                tr
                   td Occupancy Rental Agreement
                   td 
                   td 
@@ -671,7 +587,7 @@ block content
                   td 
                     a(href='#') Upload
                 tr
-                  td Other Document
+                  td Other Documents
                   td 
                   td 
                   td 
