@@ -102,3 +102,17 @@ p.sect-sm {
 
 .dropdown:hover .dropdown-menu {
     display: block; }
+
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:hover,
+.nav-tabs > li.active > a:focus {
+  color: white;
+  background-color: #7DCEA0; } 
+
+input#clients_search-flexdatalist {
+  width: 97%;
+}
+
+li.input-container.flexdatalist-multiple-value {
+  width: 100%;
+}

@@ -2,7 +2,8 @@ extends layout
 
 block content
   .page-header
-    h3 Seller Listing Contract Info
+    h2 Seller Listing Contract Info
+    br
 
   .col-md-4
     .row
@@ -11,27 +12,27 @@ block content
           ul#tabgroup1.nav.nav-tabs
             .liner
             li.active
-              a(href='#clientTabInformation', data-toggle='tab', title='Basic Information')
+              a(href='#tabInformation', data-toggle='tab', title='Basic Information')
                 span.round-tabs.one
                   i.glyphicon.glyphicon-home
             li
-              a(href='#clientTabAdditional', data-toggle='tab', title='Additional Information')
+              a(href='#tabAdditional', data-toggle='tab', title='Additional Information')
                 span.round-tabs.two
                   i.glyphicon.glyphicon-plus
             li
-              a(href='#clientTabDatesDeadlines', data-toggle='tab', title='Dates & Deadlines')
+              a(href='#tabDatesDeadlines', data-toggle='tab', title='Dates & Deadlines')
                 span.round-tabs.four
                   i.glyphicon.glyphicon-calendar
             li
-              a(href='#clientTabNotes', data-toggle='tab', title='Client Notes')
+              a(href='#tabNotes', data-toggle='tab', title='Client Notes')
                 span.round-tabs.five
                   i.glyphicon.glyphicon-comment
             //- li
-            //-   a(href='#clientTabEmail', data-toggle='tab', title='Email')
+            //-   a(href='#tabEmail', data-toggle='tab', title='Email')
             //-     span.round-tabs.six
             //-       i.glyphicon.glyphicon-envelope
             //- li
-            //-   a(href='#clientTabPhotos', data-toggle='tab', title='Photos')
+            //-   a(href='#tabPhotos', data-toggle='tab', title='Photos')
             //-     span.round-tabs.six
             //-       i.glyphicon.glyphicon-picture
 
@@ -39,11 +40,11 @@ block content
           input(type='hidden', name='_csrf', value=_csrf)
 
           .tab-content
-            #clientTabInformation.tab-pane.fade.active.in
+            #tabInformation.tab-pane.fade.active.in
 
               .row
                 .col-sm-12
-                  label.lb-sm(for='client_address') Address
+                  label.lb-sm(for='client_address') Listing Address 
                   input#client_address.form-control.input-sm(name='client_address', type='text', placeholder='123 Sample Street, Unit B', required, value='999 Halstead Avenue')
               .row
                 .col-sm-12
@@ -94,7 +95,7 @@ block content
                   | 11/22/2017 - View Pending Documents (only)
 
 
-            #clientTabAdditional.tab-pane.fade
+            #tabAdditional.tab-pane.fade
               .row
                 .col-sm-12
                   p.sect-sm 
@@ -170,7 +171,7 @@ block content
               //-     label.lb-sm(for='client_city') SSN
               //-     input#client_city.form-control.input-sm(name='client_city', type='text', required, value='')
 
-            #clientTabDatesDeadlines.tab-pane.fade
+            #tabDatesDeadlines.tab-pane.fade
               .row
                 .col-sm-12
                   p.sect-sm 
@@ -193,7 +194,7 @@ block content
                   input#client_closingdate.form-control.input-sm(name='closingdate', type='date')
                 .col-sm-6
 
-            #clientTabNotes.tab-pane.fade
+            #tabNotes.tab-pane.fade
               .row
                 .col-sm-12
                   table.table.table-striped
@@ -214,7 +215,7 @@ block content
                         td 
                           a(href='#') Edit
 
-            //- #clientTabEmail.tab-pane.fade
+            //- #tabEmail.tab-pane.fade
             //-   .row
             //-     .col-sm-12
             //-       table.table.table-striped
@@ -232,7 +233,7 @@ block content
             //-               |  Four Column Summary
             //-             td 10/17/2017
 
-            //- #clientTabPhotos.tab-pane.fade
+            //- #tabPhotos.tab-pane.fade
             //-   .row
             //-     .col-sm-12
             //-       img(src='https://photos.zillowstatic.com/p_f/ISivbtc4083o491000000000.jpg', style='padding:10px; width:50%;')

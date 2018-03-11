@@ -38,7 +38,8 @@ https://bootsnipp.com/snippets/featured/advanced-dropdown-search
 https://igorescobar.github.io/jQuery-Mask-Plugin/docs.html
 
 
-taskkill /f /im node.exe
+dtraggable
+http://jsfiddle.net/rniemeyer/QWgRF/
 
 
 11/21/2017 talk
@@ -52,3 +53,6 @@ Calendar - do we want a master calendar or not???
 
 https://datatables.net/examples/api/row_details.html (sub rows of datatables
 )
+
+remote Data Example:
+http://jsfiddle.net/marcrazyness/XMAq2/

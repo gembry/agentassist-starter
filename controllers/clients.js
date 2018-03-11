@@ -19,6 +19,27 @@ exports.getClients = function(req, res) {
   });
 };
 
+exports.getClientsJSON = (req, res) => {
+  var keyword = req.query.keyword; // URL 
+
+  Clients.find({
+    $or: [
+      { client_firstname: {$regex: new RegExp(keyword, "i")} },
+      { client_lastname:  {$regex: new RegExp(keyword, "i")} }
+    ]    
+  }).exec(function(err, clients_list) {
+    if (err) {
+      console.log("error dude");
+      return next(err);
+    }
+
+    //if successful
+    res.json(clients_list);
+  });
+
+  // res.json({});
+};
+
 /**
  * DELETE client
  */

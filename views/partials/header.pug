@@ -62,17 +62,18 @@
               | Properties 
               span.fa-home.fa.fa-2x.pull-left.icon-all
               span.caret
-            |           
-            ul.dropdown-menu.fa-ul
+            |
+            ul.dropdown-menu(style='width: auto;').fa-ul
               li
-                a(href='/property') 
-                  | Add Buyer
-                  span.fa-home.fa.fa-lg.pull-left.icon-all
-
+                a(href='/buyer')
+                  | Add Buyer Property
+                  //- span.fa-home.fa.fa-lg.pull-left.icon-all
               li
-                a(href='/property') 
-                  | Add Seller
-                  span.fa-home.fa.fa-lg.pull-left.icon-all
+                a(href='/seller')
+                  | Add Seller Property
+                  //- br
+                  //- span.bg-success explain it
+                  //- span.fa-home.fa.fa-lg.pull-left.icon-all
 
           //- li
           //-   a(href='/properties') 

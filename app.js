@@ -42,8 +42,9 @@ const contactController = require('./controllers/contact');
 const dashboardController = require('./controllers/dashboard');
 const clientController = require('./controllers/client');
 const clientsController = require('./controllers/clients');
-const propertyController = require('./controllers/property');
 const propertiesController = require('./controllers/properties');
+const propertyBuyerController = require('./controllers/propertyBuyer');
+const propertySellerController = require('./controllers/propertySeller');
 
 /**
  * API keys and Passport configuration.
@@ -170,15 +171,20 @@ app.get('/client', passportConfig.isAuthenticated, clientController.getClient)
 
 // Client(s) related routes
 app.get('/clients', passportConfig.isAuthenticated, clientsController.getClients)
+   .get('/clients.json/', passportConfig.isAuthenticated, clientsController.getClientsJSON)
    .get('/clients/:client', passportConfig.isAuthenticated, clientsController.deleteClient);
+   // .get('/clients.json/:search', passportConfig.isAuthenticated, clientsController.getClientsJSON)
 
 //app.get('/account', passportConfig.isAuthenticated, userController.getAccount);
 //app.post('/account/profile', passportConfig.isAuthenticated, userController.postUpdateProfile);
 
 app.get('/dashboard', passportConfig.isAuthenticated, dashboardController.getDashboard);
-app.get('/property', passportConfig.isAuthenticated, propertyController.getProperty);
-app.post('/property', passportConfig.isAuthenticated, propertyController.postProperty);
 app.get('/properties', passportConfig.isAuthenticated, propertiesController.getProperties);
+app.get('/propertyBuyer', passportConfig.isAuthenticated, propertyBuyerController.getPropertyBuyer);
+app.post('/propertyBuyer', passportConfig.isAuthenticated, propertyBuyerController.postPropertyBuyer);
+app.get('/propertySeller', passportConfig.isAuthenticated, propertySellerController.getPropertySeller);
+app.post('/propertySeller', passportConfig.isAuthenticated, propertySellerController.postPropertySeller);
+
 
 /**
  * API examples routes.
