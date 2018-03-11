@@ -119,8 +119,8 @@ $(document).ready(function() {
   });
   
   // Buyer Contract
-  var $input = $('input#clients_search');
-  var $result = $('input#clients_result');
+  var $input = $('input#buyer_search');
+  var $result = $('input#buyer_IDs');
   var updateValue = function ($target) {
       $target.each(function () {
           $result.val($input.val());

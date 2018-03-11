@@ -40,16 +40,14 @@ block content
             //-     span.round-tabs.six
             //-       i.glyphicon.glyphicon-picture
 
-        form.form-horizontal(action='/buyer', method='POST', id='buyerform')
+        form.form-horizontal(method='post', id='buyerform')        
           input(type='hidden', name='_csrf', value=_csrf)
+          input(type='hidden', name='_method', value=method)
 
           .text-right(style='padding-top: 5px;') 
-            //button.btn.btn-primary.btn-cons(type='button') Save Buyer Record
-            // Submit button
             button.btn.btn-primary(name='buyer_submit', type='submit')
                 i.fa.fa-hand-pointer-o
                 | Save Buyer Record
-
 
           .tab-content
             #tabInformation.tab-pane.fade.active.in
@@ -78,21 +76,21 @@ block content
               .row
                 .col-sm-12
 
-                  input#buyers_search.flexdatalist(type='text', 
-                                                    name='buyers_multiple',
+                  input#buyer_search.flexdatalist(type='text', 
+                                                    name='buyer_search',
                                                     placeholder='Search by first/last name or city...', 
-                                                    multiple='multiple', 
-                                                    data-data='buyers.json', 
-                                                    data-search-in='["buyer_firstname","buyer_lastname", "buyer_city"]', 
-                                                    data-visible-properties='["buyer_firstname", "buyer_lastname", "buyer_city"]', 
+                                                    multiple='true', 
+                                                    data-data='clients.json', 
+                                                    data-search-in='["client_firstname","client_lastname", "client_city"]', 
+                                                    data-visible-properties='["client_firstname", "client_lastname", "client_city"]', 
                                                     data-selection-required='true', 
                                                     data-value-property='_id', 
-                                                    data-text-property='{buyer_firstname} {buyer_lastname} - {buyer_city}', 
+                                                    data-text-property='{client_firstname} {client_lastname} - {client_city}', 
                                                     data-min-length='1', 
                                                     data-remove-on-backspace='false',
                                                     data-focus-first-result='true',
                                                     style='width: 100%; border: 0px !important;')
-                  input#buyers_result(type='hidden')
+                  input#buyer_IDs(type='hidden')
 
             #tabAdditional.tab-pane.fade
 
@@ -129,7 +127,7 @@ block content
 
               .row
                 .col-sm-12
-                  label.lb-sm(for='buyer_titlecompany') Mortgage Lender
+                  label.lb-sm(for='buyer_mortgagelender') Mortgage Lender
                   select#buyer_titlecompany.form-control.input-sm(name='titlecompany]')
                     //option(hidden='true') 
                     option(value=1) Other Mortgage Lender
@@ -160,7 +158,7 @@ block content
               .row
                 .col-sm-12
                   input#checkBox(type='checkbox')
-                  | Send deadline notifications to me. (agent only)
+                  |  Send deadline notifications to me. (agent only)
 
               .row
                 .col-sm-6

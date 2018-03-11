@@ -43,8 +43,8 @@ const dashboardController = require('./controllers/dashboard');
 const clientController = require('./controllers/client');
 const clientsController = require('./controllers/clients');
 const propertiesController = require('./controllers/properties');
-const propertyBuyerController = require('./controllers/propertyBuyer');
-const propertySellerController = require('./controllers/propertySeller');
+const buyerController = require('./controllers/buyer');
+const sellerController = require('./controllers/seller');
 
 /**
  * API keys and Passport configuration.
@@ -180,10 +180,10 @@ app.get('/clients', passportConfig.isAuthenticated, clientsController.getClients
 
 app.get('/dashboard', passportConfig.isAuthenticated, dashboardController.getDashboard);
 app.get('/properties', passportConfig.isAuthenticated, propertiesController.getProperties);
-app.get('/propertyBuyer', passportConfig.isAuthenticated, propertyBuyerController.getPropertyBuyer);
-app.post('/propertyBuyer', passportConfig.isAuthenticated, propertyBuyerController.postPropertyBuyer);
-app.get('/propertySeller', passportConfig.isAuthenticated, propertySellerController.getPropertySeller);
-app.post('/propertySeller', passportConfig.isAuthenticated, propertySellerController.postPropertySeller);
+app.get('/buyer', passportConfig.isAuthenticated, buyerController.getBuyer);
+app.post('/buyer', passportConfig.isAuthenticated, buyerController.postBuyer);
+app.get('/seller', passportConfig.isAuthenticated, sellerController.getSeller);
+app.post('/seller', passportConfig.isAuthenticated, sellerController.postSeller);
 
 
 /**

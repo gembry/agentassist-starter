@@ -2,14 +2,14 @@
  * GET /clients
  * Clients Listing
  */
-exports.getPropertySeller = (req, res) => {
-    res.render("propertySeller", {
+exports.getSeller = (req, res) => {
+    res.render("seller", {
       title: "Add Property Seller"
     });
   };
 
-exports.postPropertySeller = (req, res) => {
-res.render("propertySeller", {
+exports.postSeller = (req, res) => {
+res.render("seller", {
     title: "Update Property Seller"
 });
 };
