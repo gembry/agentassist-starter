@@ -52,18 +52,18 @@ block content
           .tab-content
             #tabInformation.tab-pane.fade.active.in
 
-              .row
+              .form-row
                 .col-sm-12
                   label.lb-sm(for='buyer_address') Address
                   input#buyer_address.form-control.input-sm(name='buyer_address', type='text', placeholder='123 Sample Street, Unit B', required, value='999 Halstead Avenue')
-              .row
+              .form-row
                 .col-sm-12
                   label.lb-sm(for='buyer_city') City
                   input#buyer_city.form-control.input-sm(name='buyer_city', type='text', required, value='Barstow')
-              .row
+              .form-row
                 .col-sm-8
                   label.lb-sm(for='buyer_state') State
-                  select#buyer_state.form-control.input-sm(name='buyer_state]')
+                  select#buyer_state.form-control.input-sm(name='buyer_state')
                     //option(hidden='true') 
                     option(value=1) Montana
                     option(value=2) Colorado
@@ -73,11 +73,10 @@ block content
 
             #tabBuyer.tab-pane.fade
 
-              .row
+              .form-row
                 .col-sm-12
-
-                  input#buyer_search.flexdatalist(type='text', 
-                                                    name='buyer_search',
+                  input#buyer_clientIDs.flexdatalist(type='text', 
+                                                    name='buyer_clientIDs',
                                                     placeholder='Search by first/last name or city...', 
                                                     multiple='true', 
                                                     data-data='clients.json', 
@@ -90,62 +89,60 @@ block content
                                                     data-remove-on-backspace='false',
                                                     data-focus-first-result='true',
                                                     style='width: 100%; border: 0px !important;')
-                  input#buyer_IDs(type='hidden')
 
             #tabAdditional.tab-pane.fade
 
-              .row
+              .form-row
                 .col-sm-12
                   label.lb-sm(for='buyer_purchaseprice') Purchase Price
                   .input-group.mb-2.mr-sm-2.mb-sm-0
                     .input-group-addon $
-                    input#buyer_purchaseprice.form-control.input-sm(name='purchaseprice', type='text', pattern='[0-9]')
-              .row
+                    input#buyer_purchaseprice.form-control.currency(name='buyer_purchaseprice', type='text')
+              .form-row
                 .col-sm-12
                   label.lb-sm(for='buyer_earnestprice') Earnest Money
                   .input-group.mb-2.mr-sm-2.mb-sm-0
                     .input-group-addon $
-                    input#buyer_earnestprice.form-control.input-sm(name='earnestprice', type='text', pattern='[0-9]')
-              .row
+                    input#buyer_earnestprice.form-control.currency(name='buyer_earnestprice', type='text')
+              .form-row
                 .col-sm-12
-                  label.lb-sm(for='buyer_buyerconcession') Seller Concession
+                  label.lb-sm(for='buyer_concession') Buyer Concession (seller?)
                   .input-group.mb-2.mr-sm-2.mb-sm-0
                     .input-group-addon $
-                    input#buyer_buyerconcession.form-control.input-sm(name='buyerconcession', type='text', pattern='[0-9]')
+                    input#buyer_concession.form-control.currency(name='buyer_concession', type='text')
               .row
                 .col-sm-12
                   p &nbsp;
-              .row
+
+              .form-row
                 .col-sm-12
                   label.lb-sm(for='buyer_titlecompany') Title Company
-                  select#buyer_titlecompany.form-control.input-sm(name='titlecompany]')
+                  select#buyer_titlecompany.form-control.input-sm(name='buyer_titlecompany')
                     //option(hidden='true') 
                     option(value=1) Other Title Company
                     option(value=2) Land Title Company
                     option(value=3) Abstract Title Company
                     option(value=4) Advanced Title Company
-
-              .row
+              .form-row
                 .col-sm-12
                   label.lb-sm(for='buyer_mortgagelender') Mortgage Lender
-                  select#buyer_titlecompany.form-control.input-sm(name='titlecompany]')
+                  select#buyer_titlecompany.form-control.input-sm(name='buyer_mortgagelender')
                     //option(hidden='true') 
                     option(value=1) Other Mortgage Lender
                     option(value=2) Land Title Company
                     option(value=3) Abstract Title Company
                     option(value=4) Advanced Title Company
-
-              .row
+              .form-row
                 .col-sm-12
                   label.lb-sm(for='buyer_sellingagent') Selling Agent
-                  select#buyer_sellingagent.form-control.input-sm(name='sellingagent]')
+                  select#buyer_sellingagent.form-control.input-sm(name='buyer_sellingagent')
                     //option(hidden='true') 
                     option(value=1) Dave Kimbrough
                     option(value=2) Marky Mark
-              .row
+              .form-row
                 .col-sm-12
                   label.lb-sm(for='buyer_salestype') Sales Type
-                  select#buyer_salestype.form-control.input-sm(name='salestype]')
+                  select#buyer_salestype.form-control.input-sm(name='buyer_salestype')
                     //option(hidden='true')
                     // DEFAULT TO N/A 
                     option(value='N/A') N/A
@@ -155,76 +152,66 @@ block content
 
             #tabDatesDeadlines.tab-pane.fade
 
-              .row
+              .form-row
                 .col-sm-12
-                  input#checkBox(type='checkbox')
+                  input#buyer_notifications(name='buyer_notifications', type='checkbox')
                   |  Send deadline notifications to me. (agent only)
 
-              .row
+              .form-row
                 .col-sm-6
-                  label.lb-sm(for='buyer_listdate') Contract Date
-                  input#buyer_listdate.form-control.input-sm(name='listdate', type='date')
+                  label.lb-sm(for='buyer_contractdate') Contract Date
+                  input#buyer_contractdate.form-control.input-sm(name='buyer_contractdate', type='date')
+
+                //- Alternative Earnest Money Deadline
+
+                //- Title
+                //-   Record Title Deadline
+                //-   Record Title Objection Deadline
+                //-   Off-Record Title Deadline
+                //-   Off-Record Title Objection Deadline
+                //-   Title Resolution Deadline
+                //-   Right of First Refusal Deadline
+
+                //- Owners' Association
+                //-   Association Documents Deadline
+                //-   Association Documents Objection Deadline
+
+                //- Seller's Property Disclosure
+                //-   Seller's Property Disclosure Deadline
+
+                //- Loan
+                //-   Loan Application Deadline
+                //-   Loan Objection Deadline
+
+                //- Appraisal
+                //-   Appraisal Deadline
+                //-   Appraisal Objection Deadline
+                //-   Appraisal Resolution Deadline
+
+                //- Survey
+                //-   New ILC or New Survey Deadline
+                //-   New ILC or New Survey Objection Deadline
+                //-   New ILC or New Survey Resolution Deadline
+
+                //- Inspection and Due Diligence
+                //-   Inspection Objection Deadline
+                //-   Inspection Resolution Deadline
+                //-   Property Insurance Objection Deadline
+                //-   Due Diligence Documents Delivery Deadline
+                //-   Due Diligence Documents Objection Deadline
+                //-   Due Diligence Documents Resolution Deadline
+                //-   Conditional Sale Deadline
+
+                //- Closing and Possession
+                //-   Closing Date
+                //-   Possession Date
+
                 .col-sm-6
-              //- .row
-              //-   .col-sm-6
-              //-     label.lb-sm(for='buyer_expirationdate') Expiration Date
-              //-     input#buyer_expirationdate.form-control.input-sm(name='expirationdate', type='date')
-              //-   .col-sm-6
+                  label.lb-sm(for='buyer_closingdate') Closing Date
+                  input#buyer_closingdate.form-control.input-sm(name='buyer_closingdate', type='date')
 
-
-
-              //- Alternative Earnest Money Deadline
-
-              //- Title
-              //-   Record Title Deadline
-              //-   Record Title Objection Deadline
-              //-   Off-Record Title Deadline
-              //-   Off-Record Title Objection Deadline
-              //-   Title Resolution Deadline
-              //-   Right of First Refusal Deadline
-
-              //- Owners' Association
-              //-   Association Documents Deadline
-              //-   Association Documents Objection Deadline
-
-              //- Seller's Property Disclosure
-              //-   Seller's Property Disclosure Deadline
-
-              //- Loan
-              //-   Loan Application Deadline
-              //-   Loan Objection Deadline
-
-              //- Appraisal
-              //-   Appraisal Deadline
-              //-   Appraisal Objection Deadline
-              //-   Appraisal Resolution Deadline
-
-              //- Survey
-              //-   New ILC or New Survey Deadline
-              //-   New ILC or New Survey Objection Deadline
-              //-   New ILC or New Survey Resolution Deadline
-
-              //- Inspection and Due Diligence
-              //-   Inspection Objection Deadline
-              //-   Inspection Resolution Deadline
-              //-   Property Insurance Objection Deadline
-              //-   Due Diligence Documents Delivery Deadline
-              //-   Due Diligence Documents Objection Deadline
-              //-   Due Diligence Documents Resolution Deadline
-              //-   Conditional Sale Deadline
-
-              //- Closing and Possession
-              //-   Closing Date
-              //-   Possession Date
-
-              .row
-                .col-sm-6
-                  label.lb-sm(for='buyer_expirationdate') Closing Date
-                  input#buyer_closingdate.form-control.input-sm(name='closingdate', type='date')
-                .col-sm-6
-
-                //Alternative Earnest Money Deadline
-                //Record Title Deadline
+                //- Alternative Earnest Money Deadline
+                //- Record Title Deadline
 
             //- #tabNotes.tab-pane.fade
             //-   .row
@@ -249,8 +236,10 @@ block content
 
         .row
           .text-center
+            br
+            br
             h3
-              span.label.label-danger Contract terminated on 11/02/2017
+              span.label.label-danger Contract terminated on 11/02/2018
 
   .col-md-1
   .col-md-7
@@ -284,7 +273,7 @@ block content
           #doctab0.tab-pane.fade.active.in
             p
             #calendar.calendar
-
+          //- NOTE - use table like used with clients listing 
           #doctab2.tab-pane.fade
             table.table.table-striped
               thead

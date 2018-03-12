@@ -28,22 +28,26 @@ exports.postBuyer = (req, res) => {
   //   return res.redirect("/client");
   // }
 
+ 
+
   const insertBuyer = new Buyer({
     buyer_address: req.body.buyer_address,
     buyer_city: req.body.buyer_city,
     buyer_state: req.body.buyer_state,
     buyer_zip: req.body.buyer_zip,
-    buyer_IDs: req.body.buyer_IDs,
-    buyer_purchaseprice: req.body.buyer_purchaseprice,
-    buyer_earnestprice: req.body.buyer_earnestprice,
-    buyer_buyerconcession: req.body.buyer_buyerconcession,
+    buyer_clientIDs: req.body.buyer_clientIDs,
+    buyer_purchaseprice: req.body.buyer_purchaseprice.split(',').join(''),
+    buyer_earnestprice: req.body.buyer_earnestprice.split(',').join(''),
+    buyer_concession: req.body.buyer_concession.split(',').join(''),
     buyer_titlecompany: req.body.buyer_titlecompany,
     buyer_mortgagelender: req.body.buyer_mortgagelender,
     buyer_sellingagent: req.body.buyer_sellingagent,
     buyer_salestype: req.body.buyer_salestype,
-    buyer_listdate: req.body.buyer_listdate,
-    buyer_closingdate: req.body.buyer_closingdate
+    buyer_contractdate: req.body.buyer_contractdate,
+    buyer_closingdate: req.body.buyer_closingdate,
+    buyer_notifications: req.body.buyer_notifications ? true : false
   });
+  console.log(insertBuyer);
 
   insertBuyer.save(err => {
     if (err) {
@@ -51,7 +55,7 @@ exports.postBuyer = (req, res) => {
     }
 
     req.flash("success", { msg: "Buyer information has been added." });
-    res.redirect("/properties");
+    res.redirect("/buyer");
   });
 };
 

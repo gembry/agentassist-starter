@@ -7,19 +7,22 @@ const buyerSchema = new mongoose.Schema(
     buyer_city: String,
     buyer_state: String,
     buyer_zip: Number,
-    buyer_IDs: String,
+    buyer_clientIDs: String,
     buyer_purchaseprice: Number,
     buyer_earnestprice: Number,
-    buyer_buyerconcession: Number,
-    buyer_titlecompany: Number,
-    buyer_mortgagelender: Number,
-    buyer_sellingagent: Number,
-    buyer_salestype: Number,
-    buyer_listdate: Date,
-    buyer_closingdate: Date
+    buyer_concession: Number,
+    buyer_titlecompany: String,
+    buyer_mortgagelender: String,
+    buyer_sellingagent: String,
+    buyer_salestype: String,
+    buyer_contractdate: Date,
+    buyer_closingdate: Date,
+    buyer_notifications: Boolean
   },
   { timestamps: true }
 );
+
+// Use _id for dropdown values
 
 const Buyer = mongoose.model("Buyer", buyerSchema);
 module.exports = Buyer;

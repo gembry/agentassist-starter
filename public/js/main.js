@@ -88,12 +88,12 @@ $(document).ready(function() {
   });
 
   // All Input Masks
-  $("input#client_cellphone, input#client_homephone").inputmask(
-    "(999) 999-9999"
-  );
+  $("input#client_cellphone, input#client_homephone").inputmask( "(999) 999-9999" );
   $("input#client_zip").inputmask("99999[-9999]", { greedy: false });
+  $('input#buyer_purchaseprice, input#buyer_earnestprice, input#buyer_concession')
+    .maskMoney({precision: 0, allowEmpty: true, allowNegative: false, thousands:','});
 
-  // may not even need this.. keep for now
+// may not even need this.. keep for now
   // come up w/ better naming so you don't have to use NOT on other class
   $('[id^=tab]:not(.nav.nav-tabs)').click(function(e){
     var clickedTab = $('a', this).attr('href');
@@ -118,24 +118,6 @@ $(document).ready(function() {
     }
   });
   
-  // Buyer Contract
-  var $input = $('input#buyer_search');
-  var $result = $('input#buyer_IDs');
-  var updateValue = function ($target) {
-      $target.each(function () {
-          $result.val($input.val());
-      });
-  };
-  updateValue($input);
-  $input
-      .on('select:flexdatalist', function () {
-          // console.log('Value selected!');
-      })
-      .on('change:flexdatalist', function (e, set) {
-          // console.log('Set value: ' + set.value);
-          // console.log('Set text: ' + set.text);
-          updateValue($(this));
-      });
 
 });
 

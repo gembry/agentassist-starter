@@ -27,7 +27,7 @@ const upload = multer({ dest: process.env.AA_STORAGE });
 /**
  * Load environment variables from .env file, where API keys and passwords are configured.
  */
-dotenv.load({ path: '.env.example' });
+dotenv.load({ path: '.env.production' });
 
 /**
  * Controllers (route handlers).
