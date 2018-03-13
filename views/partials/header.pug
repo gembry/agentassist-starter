@@ -58,7 +58,7 @@
           //-     span.fa-users.fa.fa-2x.pull-left.icon-all
 
           li.dropdown
-            a.dropdown-toggle(href='/properties', aria-haspopup='true', aria-expanded='false')
+            a.dropdown-toggle(href='', aria-haspopup='true', aria-expanded='false')
               | Properties 
               span.fa-home.fa.fa-2x.pull-left.icon-all
               span.caret
@@ -66,19 +66,21 @@
             ul.dropdown-menu(style='width: auto;').fa-ul
               li
                 a(href='/buyer')
-                  | Add Buyer Property
+                  | Add Buyer Offer
                   //- span.fa-home.fa.fa-lg.pull-left.icon-all
               li
+                a(href='/buyers')
+                  | Show ALL Buyer Offers
+                  //- span.fa-home.fa.fa-lg.pull-left.icon-all
+              li.divider
+              li
                 a(href='/seller')
-                  | Add Seller Property
-                  //- br
+                  | Add Seller Listing
+              li
+                a(href='/sellers')
+                  | Show ALL Seller Listings
                   //- span.bg-success explain it
                   //- span.fa-home.fa.fa-lg.pull-left.icon-all
-
-          //- li
-          //-   a(href='/properties') 
-          //-     | Properties 
-          //-     span.fa-home.fa.fa-2x.pull-left.icon-all
 
       ul.nav.navbar-nav.navbar-right
         if !user

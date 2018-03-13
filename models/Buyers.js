@@ -1,7 +1,7 @@
-// Mongoose schema for Buyer
+// Mongoose schema for Buyers
 const mongoose = require("mongoose");
 
-const buyerSchema = new mongoose.Schema(
+const buyersSchema = new mongoose.Schema(
   {
     buyer_address: String,
     buyer_city: String,
@@ -22,5 +22,5 @@ const buyerSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const Buyer = mongoose.model("Buyer", buyerSchema);
-module.exports = Buyer;
+const Buyers = mongoose.model("Buyers", buyersSchema);
+module.exports = Buyers;

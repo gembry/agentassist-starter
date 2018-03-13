@@ -1,0 +1,45 @@
+extends layout
+
+block content
+  .page-header
+    h3= title
+
+    div(class='container')
+    table#buyersTable.table.table-striped.table-no-bordered(data-toggle='table', data-pagination='true', data-search='true', data-show-refresh='true', data-show-toggle='true', <='', body='', data-show-columns='true')
+      thead
+        tr 
+          th(data-field='buyer_address', data-sortable='true') Address
+          th(data-field='buyer_city', data-sortable='false') City
+          th(data-field='buyer_state', data-sortable='false') State
+          th(data-field='buyer_zip', data-sortable='false') ZIP Code
+          th(data-field='updatedAt', data-sortable='true') Updated
+          th.text-center(data-field='Action', data-sortable='false') Action
+
+      tbody
+        each buyer in buyers
+          if buyer.buyer_notifications == true
+            tr.success
+          else
+            tr.small
+              td= buyer.buyer_address
+              td= buyer.buyer_city
+              td= buyer.buyer_state
+              td= buyer.buyer_zip
+              //- td= buyer.buyer_address + ', ' + buyer.buyer_city + ', ' + buyer.buyer_state + ' ' + buyer.buyer_zip
+              td #{moment(buyer.updatedAt).format('MM/DD/YYYY')}
+              td
+                a(href='/buyer/' + buyer._id)= post
+                  button(type="button") Edit
+                button(type="button", data-href='/buyers/' + buyer._id, data-toggle='modal', data-target='#confirm-delete') Delete
+
+      #confirm-delete.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+        .modal-dialog
+          .modal-content
+            .modal-header.h4
+              | Please confirm!
+            .modal-body
+              | You are about to delete this buyer record.
+            .modal-footer
+              button.btn.btn-default(type='button', data-dismiss='modal') Cancel
+              a.btn.btn-danger.btn-ok Delete
+

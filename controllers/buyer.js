@@ -28,8 +28,9 @@ exports.postBuyer = (req, res) => {
   //   return res.redirect("/client");
   // }
 
+  // smaller data will compare faster than larger data
+  // Use ids (numeric) for drop-downs ???
  
-
   const insertBuyer = new Buyer({
     buyer_address: req.body.buyer_address,
     buyer_city: req.body.buyer_city,
@@ -47,7 +48,7 @@ exports.postBuyer = (req, res) => {
     buyer_closingdate: req.body.buyer_closingdate,
     buyer_notifications: req.body.buyer_notifications ? true : false
   });
-  console.log(insertBuyer);
+  //console.log(insertBuyer);
 
   insertBuyer.save(err => {
     if (err) {
@@ -55,7 +56,7 @@ exports.postBuyer = (req, res) => {
     }
 
     req.flash("success", { msg: "Buyer information has been added." });
-    res.redirect("/buyer");
+    res.redirect("/buyers");
   });
 };
 
