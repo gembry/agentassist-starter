@@ -17,7 +17,7 @@ exports.getBuyers = function(req, res) {
 
     //if successful
     res.render("buyers", {
-      title: "All Buyers",
+      title: "All Buyer Offers",
       buyers: buyers_list
     });
   });

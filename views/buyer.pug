@@ -2,160 +2,151 @@ extends layout
 
 block content
   .page-header
-    h2 Buyer Contract Information
+    h2 Add Buyer Offer
     br
 
   .col-md-4
-    .row
-      .board
-        .board-inner
-          ul#tabgroup1.nav.nav-tabs
-            .liner
-            li#tabInformationPanel.active
-              a(href='#tabInformation', data-toggle='tab', title='Contract Address')
-                span.round-tabs.one
-                  i.glyphicon.glyphicon-home
-            li#tabdditionalPanel
-              a(href='#tabAdditional', data-toggle='tab', title='Additional Information')
-                span.round-tabs.two
-                  i.glyphicon.glyphicon-plus
-            //- li#tabNotesPanel
-            //-   a(href='#tabNotes', data-toggle='tab', title='Buyer Notes')
-            //-     span.round-tabs.five
-            //-       i.glyphicon.glyphicon-comment
-            //- li
-            //-   a(href='#tabEmail', data-toggle='tab', title='Email')
-            //-     span.round-tabs.six
-            //-       i.glyphicon.glyphicon-envelope
-            //- li
-            //-   a(href='#tabPhotos', data-toggle='tab', title='Photos')
-            //-     span.round-tabs.six
-            //-       i.glyphicon.glyphicon-picture
 
-        form.form-horizontal(method='post', id='buyerform')        
-          input(type='hidden', name='_csrf', value=_csrf)
-          input(type='hidden', name='_method', value=method)
+    form.form-horizontal(method='post', id='buyerform', onkeypress='return event.keyCode != 13;')
+      input(type='hidden', name='_csrf', value=_csrf)
+      input(type='hidden', name='_method', value=method)
 
-          .text-right(style='padding-top: 5px;') 
-            button.btn.btn-primary(name='buyer_submit', type='submit')
-                i.fa.fa-hand-pointer-o
-                | Save Buyer Record
+      .row
+        .board
+          .board-inner
 
-          .tab-content
-            #tabInformation.tab-pane.fade.active.in
-              .form-row.col-sm-12
-                  br
-              .form-row
-                .col-sm-12
-                  label.lb-sm(for='buyer_clientIDs') Clients [search by first/last name or city]
-                  input#buyer_clientIDs.flexdatalist(type='text', 
-                                                    name='buyer_clientIDs',
-                                                    multiple='true', 
-                                                    data-data='clients.json', 
-                                                    data-search-in='["client_firstname","client_lastname", "client_city"]', 
-                                                    data-visible-properties='["client_firstname", "client_lastname", "client_city"]', 
-                                                    data-selection-required='true', 
-                                                    data-value-property='_id', 
-                                                    data-text-property='{client_firstname} {client_lastname} - {client_city}', 
-                                                    data-min-length='1', 
-                                                    data-remove-on-backspace='false',
-                                                    data-focus-first-result='true')
-                                                    //- style='width: 100%; border: 0px !important;'
-              .form-row.col-sm-12
-                  br
-              .form-row
-                .col-sm-12
-                  label.lb-sm(for='buyer_address') Address
-                  input#buyer_address.form-control.input-sm(name='buyer_address', type='text', placeholder='123 Sample Street, Unit B', required, value='999 Halstead Avenue')
-              .form-row
-                .col-sm-12
-                  label.lb-sm(for='buyer_city') City
-                  input#buyer_city.form-control.input-sm(name='buyer_city', type='text', required, value='Barstow')
-              .form-row
-                .col-sm-8
-                  label.lb-sm(for='buyer_state') State
-                  select#buyer_state.form-control.input-sm(name='buyer_state')
-                    //option(hidden='true') 
-                    option(value=1) Montana
-                    option(value=2) Colorado
-                .col-sm-4
-                  label.lb-sm(for='buyer_zip') ZIP Code
-                  input#buyer_zip.form-control.input-sm(name='buyer_zip', type='text', required, value='59901')
-              .form-row.col-sm-12
-                  br
-              .form-row
-                .col-sm-6
-                  label.lb-sm(for='buyer_contractdate') Contract Date
-                  input#buyer_contractdate.form-control.input-sm(name='buyer_contractdate', type='date')
-                .col-sm-6
-                  label.lb-sm(for='buyer_closingdate') Closing Date
-                  input#buyer_closingdate.form-control.input-sm(name='buyer_closingdate', type='date')
-              .form-row.col-sm-12
-                  br
-              .form-row
-                .col-sm-12
-                  input#buyer_notifications(name='buyer_notifications', type='checkbox')
-                  |  Send deadline notifications to me. (agent only)
+            ul#tabgroup1.nav.nav-tabs
+              .liner
+              li#tabInformationPanel.active
+                a(href='#tabInformation', data-toggle='tab', title='Contract Address')
+                  span.round-tabs.one
+                    i.glyphicon.glyphicon-home
+              li#tabdditionalPanel
+                a(href='#tabAdditional', data-toggle='tab', title='Additional Information')
+                  span.round-tabs.two
+                    i.glyphicon.glyphicon-plus
 
-            #tabAdditional.tab-pane.fade
+              li(style='float:right;')
+                button.btn.btn-primary(name='buyer_submit', type='submit')
+                    i.fa.fa-hand-pointer-o
+                    | Save Buyer Record
 
-              .form-row
-                .col-sm-12
-                  label.lb-sm(for='buyer_purchaseprice') Purchase Price
-                  .input-group.mb-2.mr-sm-2.mb-sm-0
-                    .input-group-addon $
-                    input#buyer_purchaseprice.form-control.currency(name='buyer_purchaseprice', type='text')
-              .form-row
-                .col-sm-12
-                  label.lb-sm(for='buyer_earnestprice') Earnest Money
-                  .input-group.mb-2.mr-sm-2.mb-sm-0
-                    .input-group-addon $
-                    input#buyer_earnestprice.form-control.currency(name='buyer_earnestprice', type='text')
-              .form-row
-                .col-sm-12
-                  label.lb-sm(for='buyer_concession') Buyer Concession (seller?)
-                  .input-group.mb-2.mr-sm-2.mb-sm-0
-                    .input-group-addon $
-                    input#buyer_concession.form-control.currency(name='buyer_concession', type='text')
-              .row
-                .col-sm-12
-                  p &nbsp;
+            .tab-content
+              #tabInformation.tab-pane.fade.active.in
+                .form-row.col-sm-12
+                    br
+                .form-row
+                  .col-sm-12
+                    label.lb-sm(for='buyer_clientIDs') Clients [search by first/last name or city]
+                    input#buyer_clientIDs.flexdatalist(type='text', 
+                                                      name='buyer_clientIDs',
+                                                      multiple='true', 
+                                                      data-data='clients.json', 
+                                                      data-search-in='["client_firstname","client_lastname", "client_city"]', 
+                                                      data-visible-properties='["client_firstname", "client_lastname", "client_city"]', 
+                                                      data-selection-required='true', 
+                                                      data-value-property='_id', 
+                                                      data-text-property='{client_firstname} {client_lastname} - {client_city}', 
+                                                      data-min-length='1', 
+                                                      data-remove-on-backspace='false',
+                                                      data-focus-first-result='true')
+                                                      //- style='width: 100%; border: 0px !important;'
+                .form-row.col-sm-12
+                    br
+                .form-row
+                  .col-sm-12
+                    label.lb-sm(for='buyer_address') Address
+                    input#buyer_address.form-control.input-sm(name='buyer_address', type='text', placeholder='123 Sample Street, Unit B', required, value='999 Halstead Avenue')
+                .form-row
+                  .col-sm-12
+                    label.lb-sm(for='buyer_city') City
+                    input#buyer_city.form-control.input-sm(name='buyer_city', type='text', required, value='Barstow')
+                .form-row
+                  .col-sm-8
+                    label.lb-sm(for='buyer_state') State
+                    select#buyer_state.form-control.input-sm(name='buyer_state')
+                      //option(hidden='true') 
+                      option(value=1) Montana
+                      option(value=2) Colorado
+                  .col-sm-4
+                    label.lb-sm(for='buyer_zip') ZIP Code
+                    input#buyer_zip.form-control.input-sm(name='buyer_zip', type='text', required, value='59901')
+                .form-row.col-sm-12
+                    br
+                .form-row
+                  .col-sm-6
+                    label.lb-sm(for='buyer_contractdate') Contract Date
+                    input#buyer_contractdate.form-control.input-sm(name='buyer_contractdate', type='date')
+                  .col-sm-6
+                    label.lb-sm(for='buyer_closingdate') Closing Date
+                    input#buyer_closingdate.form-control.input-sm(name='buyer_closingdate', type='date')
+                .form-row.col-sm-12
+                    br
+                .form-row
+                  .col-sm-12
+                    input#buyer_notifications(name='buyer_notifications', type='checkbox')
+                    |  Send deadline notifications to me. (agent only)
 
-              .form-row
-                .col-sm-12
-                  label.lb-sm(for='buyer_titlecompany') Title Company
-                  select#buyer_titlecompany.form-control.input-sm(name='buyer_titlecompany')
-                    //option(hidden='true') 
-                    option(value=1) Other Title Company
-                    option(value=2) Land Title Company
-                    option(value=3) Abstract Title Company
-                    option(value=4) Advanced Title Company
-              .form-row
-                .col-sm-12
-                  label.lb-sm(for='buyer_mortgagelender') Mortgage Lender
-                  select#buyer_titlecompany.form-control.input-sm(name='buyer_mortgagelender')
-                    //option(hidden='true') 
-                    option(value=1) Other Mortgage Lender
-                    option(value=2) Land Title Company
-                    option(value=3) Abstract Title Company
-                    option(value=4) Advanced Title Company
-              .form-row
-                .col-sm-12
-                  label.lb-sm(for='buyer_sellingagent') Selling Agent
-                  select#buyer_sellingagent.form-control.input-sm(name='buyer_sellingagent')
-                    //option(hidden='true') 
-                    option(value=1) Dave Kimbrough
-                    option(value=2) Marky Mark
-              .form-row
-                .col-sm-12
-                  label.lb-sm(for='buyer_salestype') Sales Type
-                  select#buyer_salestype.form-control.input-sm(name='buyer_salestype')
-                    //option(hidden='true')
-                    // DEFAULT TO N/A 
-                    option(value='N/A') N/A
-                    option(value='HUD') HUD
-                    option(value='REO') REO
-                    option(value='SHORT') SHORT SALE
+              #tabAdditional.tab-pane.fade
+                .form-row.col-sm-12
+                    br
+                .form-row
+                  .col-sm-12
+                    label.lb-sm(for='buyer_purchaseprice') Purchase Price
+                    .input-group.mb-2.mr-sm-2.mb-sm-0
+                      .input-group-addon $
+                      input#buyer_purchaseprice.form-control.currency(name='buyer_purchaseprice', type='text')
+                .form-row
+                  .col-sm-12
+                    label.lb-sm(for='buyer_earnestprice') Earnest Money
+                    .input-group.mb-2.mr-sm-2.mb-sm-0
+                      .input-group-addon $
+                      input#buyer_earnestprice.form-control.currency(name='buyer_earnestprice', type='text')
+                .form-row
+                  .col-sm-12
+                    label.lb-sm(for='buyer_concession') Buyer Concession (seller?)
+                    .input-group.mb-2.mr-sm-2.mb-sm-0
+                      .input-group-addon $
+                      input#buyer_concession.form-control.currency(name='buyer_concession', type='text')
+                .row
+                  .col-sm-12
+                    p &nbsp;
+
+                .form-row
+                  .col-sm-12
+                    label.lb-sm(for='buyer_titlecompany') Title Company
+                    select#buyer_titlecompany.form-control.input-sm(name='buyer_titlecompany')
+                      //option(hidden='true') 
+                      option(value=1) Other Title Company
+                      option(value=2) Land Title Company
+                      option(value=3) Abstract Title Company
+                      option(value=4) Advanced Title Company
+                .form-row
+                  .col-sm-12
+                    label.lb-sm(for='buyer_mortgagelender') Mortgage Lender
+                    select#buyer_titlecompany.form-control.input-sm(name='buyer_mortgagelender')
+                      //option(hidden='true') 
+                      option(value=1) Other Mortgage Lender
+                      option(value=2) Land Title Company
+                      option(value=3) Abstract Title Company
+                      option(value=4) Advanced Title Company
+                .form-row
+                  .col-sm-12
+                    label.lb-sm(for='buyer_sellingagent') Selling Agent
+                    select#buyer_sellingagent.form-control.input-sm(name='buyer_sellingagent')
+                      //option(hidden='true') 
+                      option(value=1) Dave Kimbrough
+                      option(value=2) Marky Mark
+                .form-row
+                  .col-sm-12
+                    label.lb-sm(for='buyer_salestype') Sales Type
+                    select#buyer_salestype.form-control.input-sm(name='buyer_salestype')
+                      //option(hidden='true')
+                      // DEFAULT TO N/A 
+                      option(value='N/A') N/A
+                      option(value='HUD') HUD
+                      option(value='REO') REO
+                      option(value='SHORT') SHORT SALE
 
                 //- Alternative Earnest Money Deadline
 
