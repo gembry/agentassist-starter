@@ -15,18 +15,10 @@ block content
               a(href='#tabInformation', data-toggle='tab', title='Contract Address')
                 span.round-tabs.one
                   i.glyphicon.glyphicon-home
-            li#tabBuyerPanel
-              a(href='#tabBuyer', data-toggle='tab', title='Assigned Buyer')
-                span.round-tabs.one
-                  i.glyphicon.glyphicon-user
             li#tabdditionalPanel
               a(href='#tabAdditional', data-toggle='tab', title='Additional Information')
                 span.round-tabs.two
                   i.glyphicon.glyphicon-plus
-            li#tabDatesDeadlinesPanel
-              a(href='#tabDatesDeadlines', data-toggle='tab', title='Dates & Deadlines')
-                span.round-tabs.four
-                  i.glyphicon.glyphicon-calendar
             //- li#tabNotesPanel
             //-   a(href='#tabNotes', data-toggle='tab', title='Buyer Notes')
             //-     span.round-tabs.five
@@ -51,7 +43,26 @@ block content
 
           .tab-content
             #tabInformation.tab-pane.fade.active.in
-
+              .form-row.col-sm-12
+                  br
+              .form-row
+                .col-sm-12
+                  label.lb-sm(for='buyer_clientIDs') Clients [search by first/last name or city]
+                  input#buyer_clientIDs.flexdatalist(type='text', 
+                                                    name='buyer_clientIDs',
+                                                    multiple='true', 
+                                                    data-data='clients.json', 
+                                                    data-search-in='["client_firstname","client_lastname", "client_city"]', 
+                                                    data-visible-properties='["client_firstname", "client_lastname", "client_city"]', 
+                                                    data-selection-required='true', 
+                                                    data-value-property='_id', 
+                                                    data-text-property='{client_firstname} {client_lastname} - {client_city}', 
+                                                    data-min-length='1', 
+                                                    data-remove-on-backspace='false',
+                                                    data-focus-first-result='true')
+                                                    //- style='width: 100%; border: 0px !important;'
+              .form-row.col-sm-12
+                  br
               .form-row
                 .col-sm-12
                   label.lb-sm(for='buyer_address') Address
@@ -70,25 +81,21 @@ block content
                 .col-sm-4
                   label.lb-sm(for='buyer_zip') ZIP Code
                   input#buyer_zip.form-control.input-sm(name='buyer_zip', type='text', required, value='59901')
-
-            #tabBuyer.tab-pane.fade
-
+              .form-row.col-sm-12
+                  br
+              .form-row
+                .col-sm-6
+                  label.lb-sm(for='buyer_contractdate') Contract Date
+                  input#buyer_contractdate.form-control.input-sm(name='buyer_contractdate', type='date')
+                .col-sm-6
+                  label.lb-sm(for='buyer_closingdate') Closing Date
+                  input#buyer_closingdate.form-control.input-sm(name='buyer_closingdate', type='date')
+              .form-row.col-sm-12
+                  br
               .form-row
                 .col-sm-12
-                  input#buyer_clientIDs.flexdatalist(type='text', 
-                                                    name='buyer_clientIDs',
-                                                    placeholder='Search by first/last name or city...', 
-                                                    multiple='true', 
-                                                    data-data='clients.json', 
-                                                    data-search-in='["client_firstname","client_lastname", "client_city"]', 
-                                                    data-visible-properties='["client_firstname", "client_lastname", "client_city"]', 
-                                                    data-selection-required='true', 
-                                                    data-value-property='_id', 
-                                                    data-text-property='{client_firstname} {client_lastname} - {client_city}', 
-                                                    data-min-length='1', 
-                                                    data-remove-on-backspace='false',
-                                                    data-focus-first-result='true',
-                                                    style='width: 100%; border: 0px !important;')
+                  input#buyer_notifications(name='buyer_notifications', type='checkbox')
+                  |  Send deadline notifications to me. (agent only)
 
             #tabAdditional.tab-pane.fade
 
@@ -150,18 +157,6 @@ block content
                     option(value='REO') REO
                     option(value='SHORT') SHORT SALE
 
-            #tabDatesDeadlines.tab-pane.fade
-
-              .form-row
-                .col-sm-12
-                  input#buyer_notifications(name='buyer_notifications', type='checkbox')
-                  |  Send deadline notifications to me. (agent only)
-
-              .form-row
-                .col-sm-6
-                  label.lb-sm(for='buyer_contractdate') Contract Date
-                  input#buyer_contractdate.form-control.input-sm(name='buyer_contractdate', type='date')
-
                 //- Alternative Earnest Money Deadline
 
                 //- Title
@@ -205,10 +200,6 @@ block content
                 //- Closing and Possession
                 //-   Closing Date
                 //-   Possession Date
-
-                .col-sm-6
-                  label.lb-sm(for='buyer_closingdate') Closing Date
-                  input#buyer_closingdate.form-control.input-sm(name='buyer_closingdate', type='date')
 
                 //- Alternative Earnest Money Deadline
                 //- Record Title Deadline
