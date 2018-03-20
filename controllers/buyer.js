@@ -1,45 +1,292 @@
 /**
- * GET /client model
+ * GET model
  */
 const Buyer = require("../models/Buyer");
 
+const states_object = [
+  {
+    option: "AL",
+    value: "Alabama"
+  },
+  {
+    option: "AK",
+    value: "Alaska"
+  },
+  {
+    option: "AZ",
+    value: "Arizona"
+  },
+  {
+    option: "AR",
+    value: "Arkansas"
+  },
+  {
+    option: "CA",
+    value: "California"
+  },
+  {
+    option: "CO",
+    value: "Colorado"
+  },
+  {
+    option: "CT",
+    value: "Connecticut"
+  },
+  {
+    option: "DE",
+    value: "Delaware"
+  },
+  {
+    option: "DC",
+    value: "District Of Columbia"
+  },
+  {
+    option: "FL",
+    value: "Florida"
+  },
+  {
+    option: "GA",
+    value: "Georgia"
+  },
+  {
+    option: "HI",
+    value: "Hawaii"
+  },
+  {
+    option: "ID",
+    value: "Idaho"
+  },
+  {
+    option: "IL",
+    value: "Illinois"
+  },
+  {
+    option: "IN",
+    value: "Indiana"
+  },
+  {
+    option: "IA",
+    value: "Iowa"
+  },
+  {
+    option: "KS",
+    value: "Kansas"
+  },
+  {
+    option: "KY",
+    value: "Kentucky"
+  },
+  {
+    option: "LA",
+    value: "Louisiana"
+  },
+  {
+    option: "ME",
+    value: "Maine"
+  },
+  {
+    option: "MD",
+    value: "Maryland"
+  },
+  {
+    option: "MA",
+    value: "Massachusetts"
+  },
+  {
+    option: "MI",
+    value: "Michigan"
+  },
+  {
+    option: "MN",
+    value: "Minnesota"
+  },
+  {
+    option: "MS",
+    value: "Mississippi"
+  },
+  {
+    option: "MO",
+    value: "Missouri"
+  },
+  {
+    option: "MT",
+    value: "Montana"
+  },
+  {
+    option: "NE",
+    value: "Nebraska"
+  },
+  {
+    option: "NV",
+    value: "Nevada"
+  },
+  {
+    option: "NH",
+    value: "New Hampshire"
+  },
+  {
+    option: "NJ",
+    value: "New Jersey"
+  },
+  {
+    option: "NM",
+    value: "New Mexico"
+  },
+  {
+    option: "NY",
+    value: "New York"
+  },
+  {
+    option: "NC",
+    value: "North Carolina"
+  },
+  {
+    option: "ND",
+    value: "North Dakota"
+  },
+  {
+    option: "OH",
+    value: "Ohio"
+  },
+  {
+    option: "OK",
+    value: "Oklahoma"
+  },
+  {
+    option: "OR",
+    value: "Oregon"
+  },
+  {
+    option: "PA",
+    value: "Pennsylvania"
+  },
+  {
+    option: "RI",
+    value: "Rhode Island"
+  },
+  {
+    option: "SC",
+    value: "South Carolina"
+  },
+  {
+    option: "SD",
+    value: "South Dakota"
+  },
+  {
+    option: "TN",
+    value: "Tennessee"
+  },
+  {
+    option: "TX",
+    value: "Texas"
+  },
+  {
+    option: "UT",
+    value: "Utah"
+  },
+  {
+    option: "VT",
+    value: "Vermont"
+  },
+  {
+    option: "VA",
+    value: "Virginia"
+  },
+  {
+    option: "WA",
+    value: "Washington"
+  },
+  {
+    option: "WV",
+    value: "West Virginia"
+  },
+  {
+    option: "WI",
+    value: "Wisconsin"
+  },
+  {
+    option: "WY",
+    value: "Wyoming"
+  }
+];
+
+// Setup empty object
+const defaultBuyer = new Buyer({
+  buyer_address: null,
+  buyer_city: null,
+  buyer_state: null,
+  buyer_zip: null,
+  buyer_clientIDs: null,
+  buyer_purchaseprice: null,
+  buyer_earnestprice: null,
+  buyer_concession: null,
+  buyer_titlecompany: null,
+  buyer_mortgagelender: null,
+  buyer_sellingagent: null,
+  buyer_salestype: null,
+  buyer_contractdate: null,
+  buyer_closingdate: null,
+  buyer_notifications: false
+});
+
 /**
- * GET /clients
- * Buyers Listing
+ * GET buyer form ready for insert or update
  */
 exports.getBuyer = (req, res) => {
-  res.render("buyer", {
-    title: "Add Property Buyer"
-  });
+  if (req.params.buyer) {
+    // find existing buyer
+    Buyer.findOne({ _id: req.params.buyer }, (err, updateBuyer) => {
+      if (err) {
+        console.log(err);
+        //return next(err);
+      }
+
+      // Render to the pug view - ready for PUT
+      res.render("buyer", {
+        title: "Update Buyer Offer",
+        buyer: updateBuyer,
+        method: "PUT",
+        states: states_object
+      });
+    });
+  } else {
+    // Render to the pug view - ready for POST
+    res.render("buyer", {
+      title: "Add Buyer Offer",
+      buyer: defaultBuyer,
+      method: "POST",
+      states: states_object
+    });
+  }
 };
 
 /**
- * POST/INSERT client form data
+ * POST/INSERT form data
  */
 exports.postBuyer = (req, res) => {
-  console.log('post buyer');
-  // req.assert("client_firstname", "First name cannot be blank").notEmpty();
-  // req.assert("client_lastname", "Last name cannot be blank").notEmpty();
-  // req.assert("client_email", "Email is not valid").isEmail();
+  console.log("post buyer");
+  // req.assert("buyer_firstname", "First name cannot be blank").notEmpty();
+  // req.assert("buyer_lastname", "Last name cannot be blank").notEmpty();
+  // req.assert("buyer_email", "Email is not valid").isEmail();
   // const errors = req.validationErrors();
 
   // if (errors) {
   //   req.flash("errors", errors);
-  //   return res.redirect("/client");
+  //   return res.redirect("/buyer");
   // }
 
   // smaller data will compare faster than larger data
   // Use ids (numeric) for drop-downs ???
- 
+
   const insertBuyer = new Buyer({
     buyer_address: req.body.buyer_address,
     buyer_city: req.body.buyer_city,
     buyer_state: req.body.buyer_state,
     buyer_zip: req.body.buyer_zip,
     buyer_clientIDs: req.body.buyer_clientIDs,
-    buyer_purchaseprice: req.body.buyer_purchaseprice.split(',').join(''),
-    buyer_earnestprice: req.body.buyer_earnestprice.split(',').join(''),
-    buyer_concession: req.body.buyer_concession.split(',').join(''),
+    buyer_purchaseprice: req.body.buyer_purchaseprice.split(",").join(""),
+    buyer_earnestprice: req.body.buyer_earnestprice.split(",").join(""),
+    buyer_concession: req.body.buyer_concession.split(",").join(""),
     buyer_titlecompany: req.body.buyer_titlecompany,
     buyer_mortgagelender: req.body.buyer_mortgagelender,
     buyer_sellingagent: req.body.buyer_sellingagent,
@@ -60,24 +307,53 @@ exports.postBuyer = (req, res) => {
   });
 };
 
-
 /**
-   * GET /clients
-   * List all clients.
-   */
-/*
-   const Buyers = require("../models/Buyers.js");
-  
-  exports.getBuyers = function(req, res) {
-   Buyers.find().exec(function(err, clients_list) {
-  
-     if (err) {
-       console.log("error dude");
-       return next(err);
-     }
-  
-     //if successful
-     res.render("clients", { title: "All Buyers", clients: clients_list });
-   });
-  };
-  */
+ * PUT/UPDATE form data
+ */
+exports.putBuyer = (req, res) => {
+  // req.assert("buyer_firstname", "First name cannot be blank").notEmpty();
+  // req.assert("buyer_lastname", "Last name cannot be blank").notEmpty();
+  // req.assert("buyer_email", "Email is not valid").isEmail();
+
+  // const errors = req.validationErrors();
+
+  // if (errors) {
+  //   req.flash("errors", errors);
+  //   return res.redirect("/buyer");
+  // }
+
+  Buyer.findById(req.params.buyer, (err, updateBuyer) => {
+    if (err) {
+      console.log(err);
+      //return next(err);
+    }
+
+    updateBuyer.buyer_address = req.body.buyer_address,
+    updateBuyer.buyer_city = req.body.buyer_city,
+    updateBuyer.buyer_state = req.body.buyer_state,
+    updateBuyer.buyer_zip = req.body.buyer_zip,
+    updateBuyer.buyer_clientIDs = req.body.buyer_clientIDs,
+    updateBuyer.buyer_purchaseprice = req.body.buyer_purchaseprice.split(",").join(""),
+    updateBuyer.buyer_earnestprice = req.body.buyer_earnestprice.split(",").join(""),
+    updateBuyer.buyer_concession = req.body.buyer_concession.split(",").join(""),
+    updateBuyer.buyer_titlecompany = req.body.buyer_titlecompany,
+    updateBuyer.buyer_mortgagelender = req.body.buyer_mortgagelender,
+    updateBuyer.buyer_sellingagent = req.body.buyer_sellingagent,
+    updateBuyer.buyer_salestype = req.body.buyer_salestype,
+    updateBuyer.buyer_contractdate = req.body.buyer_contractdate,
+    updateBuyer.buyer_closingdate = req.body.buyer_closingdate,
+    updateBuyer.buyer_notifications = req.body.buyer_notifications ? true : false;
+
+    updateBuyer.save(err => {
+      // if (err) {
+      //   if (err.code === 11000) {
+      //     req.flash('errors', { msg: 'The email address you have entered is already associated with an account.' });
+      //     return res.redirect('/buyers');
+      //   }
+      //   return next(err);
+      // }
+      req.flash("success", { msg: "Buyer information has been updated." });
+      res.redirect("/buyers");
+    });
+  });
+};

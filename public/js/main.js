@@ -101,23 +101,13 @@ $(document).ready(function() {
       case '#tabInformation': 
         console.log('tabInformation');
         break;
-      case '#tabClient': 
-        console.log('tabClient');
-        break;
       case '#tabAdditional': 
         console.log('tabAdditional');
         break;		
-      case '#tabDatesDeadlines': 
-        console.log('tabDatesDeadlines');
-        break;
-      case '#tabNotes': 
-        console.log('tabNotes');
-        break;
       default:
         console.log('default.');
     }
-  });
-  
+  });  
 
 });
 

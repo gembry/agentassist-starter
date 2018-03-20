@@ -27,7 +27,8 @@ const upload = multer({ dest: process.env.AA_STORAGE });
 /**
  * Load environment variables from .env file, where API keys and passwords are configured.
  */
-dotenv.load({ path: '.env.develop' });
+dotenv.load({ path: '.env.localhost' });
+// dotenv.load({ path: '.env.develop' });
 
 /**
  * Controllers (route handlers).
@@ -173,12 +174,12 @@ app.get('/client', passportConfig.isAuthenticated, clientController.getClient)
 app.get('/clients', passportConfig.isAuthenticated, clientsController.getClients)
    .get('/clients.json/', passportConfig.isAuthenticated, clientsController.getClientsJSON)
    .get('/clients/:client', passportConfig.isAuthenticated, clientsController.deleteClient);
-   // .get('/clients.json/:search', passportConfig.isAuthenticated, clientsController.getClientsJSON)
 
 // Buyer(s) related routes
 app.get('/buyer', passportConfig.isAuthenticated, buyerController.getBuyer)
    .get('/buyer/:buyer', passportConfig.isAuthenticated, buyerController.getBuyer)
-   .post('/buyer', passportConfig.isAuthenticated, buyerController.postBuyer);
+   .post('/buyer', passportConfig.isAuthenticated, buyerController.postBuyer)
+   .put('/buyer/:buyer', passportConfig.isAuthenticated, buyerController.putBuyer)
 app.get('/buyers', passportConfig.isAuthenticated, buyersController.getBuyers)
    .get('/buyers/:buyer', passportConfig.isAuthenticated, buyersController.deleteBuyer);
 

@@ -17,20 +17,21 @@ block content
 
       tbody
         each buyer in buyers
-          if buyer.buyer_notifications == true
-            tr.success
-          else
-            tr.small
-              td= buyer.buyer_address
-              td= buyer.buyer_city
-              td= buyer.buyer_state
-              td= buyer.buyer_zip
-              //- td= buyer.buyer_address + ', ' + buyer.buyer_city + ', ' + buyer.buyer_state + ' ' + buyer.buyer_zip
-              td #{moment(buyer.updatedAt).format('MM/DD/YYYY')}
-              td
-                a(href='/buyer/' + buyer._id)= post
-                  button(type="button") Edit
-                button(type="button", data-href='/buyers/' + buyer._id, data-toggle='modal', data-target='#confirm-delete') Delete
+          //- if buyer.buyer_notifications == true
+            //- tr.success
+          //- else
+
+          tr.small
+            td= buyer.buyer_address
+            td= buyer.buyer_city
+            td= buyer.buyer_state
+            td= buyer.buyer_zip
+            //- td= buyer.buyer_address + ', ' + buyer.buyer_city + ', ' + buyer.buyer_state + ' ' + buyer.buyer_zip
+            td #{moment(buyer.updatedAt).format('MM/DD/YYYY')}
+            td
+              a(href='/buyer/' + buyer._id)= post
+                button(type="button") Edit
+              button(type="button", data-href='/buyers/' + buyer._id, data-toggle='modal', data-target='#confirm-delete') Delete
 
       #confirm-delete.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
         .modal-dialog
@@ -43,3 +44,6 @@ block content
               button.btn.btn-default(type='button', data-dismiss='modal') Cancel
               a.btn.btn-danger.btn-ok Delete
 
+    div
+      if process.env.DEBUG= true
+        code.formattedDebug= buyers
