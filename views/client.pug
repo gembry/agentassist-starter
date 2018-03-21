@@ -9,3 +9,7 @@ block content
     .col-sm-8
       include partials/client
     .col-sm-2  
+
+    div
+      if process.env.DEBUG= true
+        code.formattedDebug= client

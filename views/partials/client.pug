@@ -69,7 +69,7 @@ form(method="post")
             // Terms Checkbox
             .checkbox
                 label
-                input(name='client_notifications', type='checkbox', value=client.client_notifications)
+                input(name='client_notifications', type="checkbox", checked=(client.client_notifications==='true' ? "checked" : undefined))
                 |  Yes, send Email Notifications.
 
     .row
