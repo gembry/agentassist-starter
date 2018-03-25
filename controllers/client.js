@@ -3,7 +3,7 @@
  */
 const Client = require("../models/Client");
 
-const states_object = [
+const statesArray = [
   {
     option: "AL",
     value: "Alabama"
@@ -241,7 +241,7 @@ exports.getClient = (req, res) => {
         title: "Update Client",
         client: updateClient,
         method: "PUT",
-        states: states_object
+        states: statesArray
       });
     });
   } else {
@@ -250,7 +250,7 @@ exports.getClient = (req, res) => {
       title: "Add Client",
       client: defaultClient,
       method: "POST",
-      states: states_object
+      states: statesArray
     });
   }
 };

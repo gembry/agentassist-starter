@@ -27,8 +27,8 @@ const upload = multer({ dest: process.env.AA_STORAGE });
 /**
  * Load environment variables from .env file, where API keys and passwords are configured.
  */
-dotenv.load({ path: '.env.localhost' });
-// dotenv.load({ path: '.env.develop' });
+// dotenv.load({ path: '.env.localhost' });
+dotenv.load({ path: '.env.develop' });
 
 /**
  * Controllers (route handlers).
@@ -59,6 +59,7 @@ const app = express();
 
 /* Manage Dates */
 app.locals.moment = require('moment');
+const tzOffset = new Date().toLocaleTimeString('en-us',{timeZoneName:'short'}).split(' ')[2];
 //app.locals.fullcalendar = require('fullcalendar');
 
 /**

@@ -3,7 +3,7 @@
  */
 const Buyer = require("../models/Buyer");
 
-const states_object = [
+const statesArray = [
   {
     option: "AL",
     value: "Alabama"
@@ -210,6 +210,86 @@ const states_object = [
   }
 ];
 
+const titlecompaniesArray = [
+  {
+    option: "1",
+    value: "Land Title Company"
+  },
+  {
+    option: "2",
+    value: "Abstract Title Company"
+  },
+  {
+    option: "3",
+    value: "Walker Heights Title Company"
+  },
+  {
+    option: "4",
+    value: "Golden Title Company"
+  },
+  {
+    option: "5",
+    value: "Simpson Title Company"
+  }
+];
+
+const mortgagelendersArray = [
+  {
+    option: "1",
+    value: "Big Mortgage Company"
+  },
+  {
+    option: "2",
+    value: "The Mortgage Company"
+  },
+  {
+    option: "3",
+    value: "Barstow Mortgage Pros"
+  },
+  {
+    option: "4",
+    value: "Mortgages-R-Us"
+  }
+];
+
+const sellingagentsArray = [
+  {
+    option: "1",
+    value: "Bobby Bo"
+  },
+  {
+    option: "2",
+    value: "Greg Smithenstein"
+  },
+  {
+    option: "3",
+    value: "Laura James"
+  },
+  {
+    option: "4",
+    value: "Kimber Stocks"
+  }
+];
+
+const salestypesArray = [
+  {
+    option: "1",
+    value: "N/A"
+  },
+  {
+    option: "2",
+    value: "HUD"
+  },
+  {
+    option: "3",
+    value: "REO"
+  },
+  {
+    option: "4",
+    value: "Short Sale"
+  }
+];
+
 // Setup empty object
 const defaultBuyer = new Buyer({
   buyer_address: null,
@@ -244,18 +324,26 @@ exports.getBuyer = (req, res) => {
       // Render to the pug view - ready for PUT
       res.render("buyer", {
         title: "Update Buyer Offer",
-        buyer: updateBuyer,
         method: "PUT",
-        states: states_object
+        buyer: updateBuyer,
+        states: statesArray,
+        titlecompanies: titlecompaniesArray,
+        mortgagelenders: mortgagelendersArray,
+        sellingagents: sellingagentsArray,
+        salestypes: salestypesArray
       });
     });
   } else {
     // Render to the pug view - ready for POST
     res.render("buyer", {
       title: "Add Buyer Offer",
-      buyer: defaultBuyer,
       method: "POST",
-      states: states_object
+      buyer: defaultBuyer,
+      states: statesArray,
+      titlecompanies: titlecompaniesArray,
+      mortgagelenders: mortgagelendersArray,
+      sellingagents: sellingagentsArray,
+      salestypes: salestypesArray
     });
   }
 };
