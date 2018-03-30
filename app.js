@@ -58,8 +58,10 @@ const passportConfig = require('./config/passport');
 const app = express();
 
 /* Manage Dates */
-app.locals.moment = require('moment');
-const tzOffset = new Date().toLocaleTimeString('en-us',{timeZoneName:'short'}).split(' ')[2];
+//app.locals.moment = require('moment');
+app.locals.moment = require('moment-timezone');
+//app.locals.tz = require('moment-timezone');
+//const tzOffset = new Date().toLocaleTimeString('en-us',{timeZoneName:'short'}).split(' ')[2];
 //app.locals.fullcalendar = require('fullcalendar');
 
 /**

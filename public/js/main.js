@@ -89,9 +89,9 @@ $(document).ready(function() {
 
   // All Input Masks
   $("input#client_cellphone, input#client_homephone").inputmask( "(999) 999-9999" );
-  $("input#client_zip").inputmask("99999[-9999]", { greedy: false });
+  $("input#client_zip, input#buyer_zip").inputmask("99999[-9999]", { greedy: false });
   $('input#buyer_purchaseprice, input#buyer_earnestprice, input#buyer_concession')
-    .maskMoney({precision: 0, allowEmpty: true, allowNegative: false, thousands:','});
+    .maskMoney({precision: 0, allowEmpty: true, allowNegative: false, thousands:','}).trigger('mask.maskMoney');
 
 // may not even need this.. keep for now
   // come up w/ better naming so you don't have to use NOT on other class
@@ -108,6 +108,17 @@ $(document).ready(function() {
         console.log('default.');
     }
   });  
+
+  // var tz = jstz.determine();
+  // var tzname = tz.name();
+
+  // var dt = new timezoneJS.Date('12/27/2010', tzname);
+  // alert(dt.getTimezone());
+
+  // function toTimeZone(time) {
+  //   var format = 'YYYY/MM/DD HH:mm:ss ZZ';
+  //   return moment(time, format).tz(zone).format(format);
+  // }
 
 });
 

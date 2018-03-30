@@ -17,16 +17,16 @@ block content
 
             ul#tabgroup1.nav.nav-tabs
               .liner
-              li#tabInformationPanel.active
+              li#buytab1.active
                 a(href='#tabInformation', data-toggle='tab', title='Contract Address')
                   span.round-tabs.one
                     i.glyphicon.glyphicon-home
-              li#tabdditionalPanel
+              li#buytab2
                 a(href='#tabAdditional', data-toggle='tab', title='Additional Information')
                   span.round-tabs.two
                     i.glyphicon.glyphicon-plus
 
-              li(style='float:right;')
+              li#buytab3(style='float:right;')
                 button.btn.btn-primary(name='buyer_submit', type='submit')
                     i.fa.fa-hand-pointer-o
                     | Save Buyer Record
@@ -77,15 +77,17 @@ block content
                 .form-row
                   .col-sm-6
                     label.lb-sm(for='buyer_contractdate') Contract Date
-                    input#buyer_contractdate.form-control(name='buyer_contractdate', type='date', value=moment(buyer.buyer_contractdate).format('YYYY-MM-DD'))
+                    input#buyer_contractdate.form-control(name='buyer_contractdate', type='date', value=moment(buyer.buyer_contractdate).tz("UTC").format('YYYY-MM-DD'))
+
                   .col-sm-6
                     label.lb-sm(for='buyer_closingdate') Closing Date
-                    input#buyer_closingdate.form-control(name='buyer_closingdate', type='date', value=moment(buyer.buyer_closingdate).format('YYYY-MM-DD'))
+                    input#buyer_closingdate.form-control(name='buyer_closingdate', type='date', value=moment(buyer.buyer_closingdate).tz("UTC").format('YYYY-MM-DD'))
+
                 .form-row.col-sm-12
                     br
                 .form-row
                   .col-sm-12
-                    input(name='buyer_notifications', type="checkbox", checked=(buyer.buyer_notifications==='true' ? "checked" : undefined))
+                    input(name='buyer_notifications', type="checkbox", checked=(buyer.buyer_notifications===true ? "checked" : undefined))
                     |  Send deadline notifications to me. (agent only)
 
               #tabAdditional.tab-pane.fade
@@ -227,302 +229,81 @@ block content
           ul#tabgroup2.nav.nav-tabs
             .liner
             li.active
-              a(href='#doctab0', data-toggle='tab', title='doctab0')
-                span.round-tabs.zero
-                  | Calendar 
-            li
-              a(href='#doctab2', data-toggle='tab', title='doctab2')
+              a(href='#doctab1', data-toggle='tab', title='doctab1')
                 span.round-tabs.two
                   | Pending 
                   //- span.label.label-primary 25%
             li
-              a(href='#doctab3', data-toggle='tab', title='doctab3')
+              a(href='#doctab2', data-toggle='tab', title='doctab2')
                 span.round-tabs.three
                   | Title Company 
                   //- span.label.label-primary 65%
             li
-              a(href='#doctab4', data-toggle='tab', title='doctab4')
+              a(href='#doctab3', data-toggle='tab', title='doctab3')
                 span.round-tabs.four
                   | Misc. 
                   //- span.label.label-default
 
         .tab-content
 
-          #doctab0.tab-pane.fade.active.in
-            p
-            #calendar.calendar
-          //- NOTE - use table like used with clients listing 
-          #doctab2.tab-pane.fade
-            table.table.table-striped
+          #doctab1.tab-pane.fade.active.in
+            table#docspendingTable.table(data-toggle='table', data-pagination='true', data-search='true', data-show-refresh='true', data-show-toggle='true', <='', body='', data-show-columns='true')
               thead
-                tr
-                  th.lb-sm Documents
-                  th.lb-sm Uploaded On
-                  th.lb-sm Attachments
-                  th.lb-sm Action
+                tr 
+                  th(data-field='Documents', data-sortable='true') Documents
+                  th(data-field='UploadedOn', data-sortable='false') Uploaded On
+                  th(data-field='Attachments', data-sortable='false') Attachments
+                  th.text-center(data-field='Action', data-sortable='false') Action
               tbody
-                tr
-                  td Sales Contract
-                  td 
-                  td 
-                  td 
-                    a(href='#') Upload
-                tr
-                  td Counter-Proposal
-                  td 
-                  td 
-                  td 
-                    a(href='#') Upload
-                tr
-                  td Closing Instructions
-                  td 10/15/2017
-                  td 
-                    img(src='https://www.santacruzpl.org/media/img/site/icons/sm_pdf.png')
-                  td 
-                    a(href='#') Upload
-                tr
-                  td Earnest Money Receipted
-                  td 
-                  td 
-                  td 
-                    a(href='#') Upload
-                tr
-                  td Square Footage Disclosure (*)
-                  td 
-                  td 
-                  td 
-                    a(href='#') Upload
-                tr
-                  td Sellers Property Disclosure (*)
-                  td 10/15/2017
-                  td 
-                    img(src='https://www.santacruzpl.org/media/img/site/icons/sm_pdf.png')
-                  td 
-                    a(href='#') Upload
-                tr
-                  td Lead Based Paint (Obligations) (pre 1978)
-                  td 10/15/2017
-                  td 
-                    img(src='https://www.santacruzpl.org/media/img/site/icons/sm_pdf.png')
-                  td 
-                    a(href='#') Upload
-                tr
-                  td Source of Water Addendum (unless on SPD)
-                  td 10/15/2017
-                  td 
-                    img(src='https://www.santacruzpl.org/media/img/site/icons/sm_pdf.png')                     
-                  td 
-                    a(href='#') Upload
-                tr
-                  td Inspection Objection
-                  td 10/15/2017
-                  td 
-                    img(src='https://www.santacruzpl.org/media/img/site/icons/sm_pdf.png')                     
-                  td 
-                    a(href='#') Upload
-                tr
-                  td Inspection Resolution
-                  td 
-                  td 
-                  td 
-                    a(href='#') Upload
-                tr
-                  td Title Commitment
-                  td 
-                  td 
-                  td 
-                    a(href='#') Upload
-                tr
-                  td Notice of Termination
-                  td 
-                  td 
-                  td 
-                    a(href='#') Upload
-                tr
-                  td Earnest Money Release
-                  td 
-                  td 
-                  td 
-                    a(href='#') Upload
-                tr
-                  td Other Documents
-                  td 
-                  td 
-                  td 
-                    a(href='#') Upload
+                each doc in docspending
+                  tr.small
+                    td= doc.value
+                    td 10/15/2017
+                    td 
+                      img(src='https://www.santacruzpl.org/media/img/site/icons/sm_pdf.png')
+                      img(src='https://www.santacruzpl.org/media/img/site/icons/sm_pdf.png')
+                    td
+                      a(href='#') Upload
             button.btn.btn-danger.btn-cons(type='button') Terminate Current Contract
 
+          #doctab2.tab-pane.fade
+            table#docstitlecompanyTable.table.table-striped(data-toggle='table', data-pagination='true', data-search='true', data-show-refresh='true', data-show-toggle='true', <='', body='', data-show-columns='true')
+              thead
+                tr 
+                  th(data-field='Documents', data-sortable='true') Documents
+                  th(data-field='UploadedOn', data-sortable='false') Uploaded On
+                  th(data-field='Attachments', data-sortable='false') Attachments
+                  th.text-center(data-field='Action', data-sortable='false') Action
+              tbody
+                each doc in docstitlecompany
+                  tr.small
+                    td= doc.value
+                    td 10/15/2017
+                    td 
+                      img(src='https://www.santacruzpl.org/media/img/site/icons/sm_pdf.png')
+                      img(src='https://www.santacruzpl.org/media/img/site/icons/sm_pdf.png')
+                    td
+                      a(href='#') Upload
+
           #doctab3.tab-pane.fade
-            table.table.table-striped
+            table#docsmiscTable.table.table-striped.table-no-bordered(data-toggle='table', data-pagination='true', data-search='true', data-show-refresh='true', data-show-toggle='true', <='', body='', data-show-columns='true')
               thead
                 tr
-                  th.lb-sm Documents
-                  th.lb-sm Uploaded On
-                  th.lb-sm Attachments
-                  th.lb-sm Action
+                  th(data-field='Documents', data-sortable='true') Documents
+                  th(data-field='UploadedOn', data-sortable='false') Uploaded On
+                  th(data-field='Attachments', data-sortable='false') Attachments
+                  th.text-center(data-field='Action', data-sortable='false') Action
               tbody
-                tr
-                  td Buyer's Settlement Statement
-                  td 10/15/2017
-                  td 
-                    img(src='https://www.santacruzpl.org/media/img/site/icons/sm_pdf.png')
-                  td 
-                    a(href='#') Upload
-                tr
-                  td Buyer's Settlement Statement
-                  td 10/15/2017
-                  td 
-                    img(src='https://www.santacruzpl.org/media/img/site/icons/sm_pdf.png')
-                  td 
-                    a(href='#') Upload
-                tr
-                  td Closing Instructions
-                  td 
-                  td 
-                  td 
-                    a(href='#') Upload
-                tr
-                  td Power of Attorney
-                  td 
-                  td 
-                  td 
-                    a(href='#') Upload
-                tr
-                  td Deed (General/Special/P.R.) (*)
-                  td 
-                  td 
-                  td 
-                    a(href='#') Upload
-                tr
-                  td Four Column Summary
-                  td 10/15/2017
-                  td 
-                    img(src='https://www.santacruzpl.org/media/img/site/icons/sm_pdf.png')
-                  td 
-                    a(href='#') Upload
-                tr
-                  td Tax Certificate
-                  td 10/15/2017
-                  td 
-                    img(src='https://www.santacruzpl.org/media/img/site/icons/sm_pdf.png')
-                    img(src='https://www.santacruzpl.org/media/img/site/icons/sm_pdf.png')                     
-                    img(src='https://www.santacruzpl.org/media/img/site/icons/sm_pdf.png')                     
-                    img(src='https://www.santacruzpl.org/media/img/site/icons/sm_pdf.png')                     
-                  td 
-                    a(href='#') Upload
-                tr
-                  td Water/Sewer/HOA Aggreement & Proration
-                  td 
-                  td 
-                  td 
-                    a(href='#') Upload
-                tr
-                  td Bill of Sale
-                  td 
-                  td 
-                  td 
-                    a(href='#') Upload
-                tr
-                  td Real Property Transfer Declaration
-                  td 
-                  td 
-                  td 
-                    a(href='#') Upload
-                tr
-                  td Pay-Off Information
-                  td 
-                  td 
-                  td 
-                    a(href='#') Upload
-                tr
-                  td Final Affidavit and Agreement
-                  td 
-                  td 
-                  td 
-                    a(href='#') Upload
-                tr
-                  td Affirmation of Colorado Residency
-                  td 
-                  td 
-                  td 
-                    a(href='#') Upload
-                tr
-                  td Commission Disbursement
-                  td 
-                  td 
-                  td 
-                    a(href='#') Upload
-                tr
-                  td 1099
-                  td 
-                  td 
-                  td 
-                    a(href='#') Upload
-                tr
-                  td Other Documents
-                  td 
-                  td 
-                  td 
-                    a(href='#') Upload
+                each doc in docsmisc
+                  tr.small
+                    td= doc.value
+                    td 10/15/2017
+                    td 
+                      img(src='https://www.santacruzpl.org/media/img/site/icons/sm_pdf.png')
+                      img(src='https://www.santacruzpl.org/media/img/site/icons/sm_pdf.png')
+                    td
+                      a(href='#') Upload
 
-          #doctab4.tab-pane.fade
-            table.table.table-striped
-              thead
-                tr
-                  th.lb-sm Documents
-                  th.lb-sm Uploaded On
-                  th.lb-sm Attachments
-                  th.lb-sm Action
-              tbody
-                tr
-                  td Listing Fact Sheet
-                  td 
-                  td 
-                  td 
-                    a(href='#') Upload
-                tr
-                  td Mesa County Assessor
-                  td 
-                  td 
-                  td 
-                    a(href='#') Upload
-                tr
-                  td Mill Tailings
-                  td 
-                  td 
-                  td 
-                    a(href='#') Upload
-                tr
-                  td Receipted Doc's & Disclosures
-                  td 
-                  td 
-                  td 
-                    a(href='#') Upload
-                tr
-                  td FHA Amendatory Clause
-                  td 
-                  td 
-                  td 
-                    a(href='#') Upload
-                tr
-                  td Occupancy Rental Agreement
-                  td 
-                  td 
-                  td 
-                    a(href='#') Upload
-                tr
-                  td Referral Form
-                  td 
-                  td 
-                  td 
-                    a(href='#') Upload
-                tr
-                  td Other Documents
-                  td 
-                  td 
-                  td 
-                    a(href='#') Upload
-
-  div
-    if process.env.DEBUG= true
-      code.formattedDebug= buyer
+  //- div
+  //-   if process.env.DEBUG= true
+  //-     code.formattedDebug= buyer
