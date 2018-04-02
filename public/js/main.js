@@ -1,6 +1,6 @@
 $(document).ready(function() {
   // Data Stuff
-  var events_object = [
+  var caldashboardArray = [
     {
       title: "23 Deadlines",
       start: "2017-11-10 12:30:00",
@@ -66,6 +66,10 @@ $(document).ready(function() {
     }
   ];
 
+  // Glocal Calendar Controls
+  $(".fc-prev-button").click({});
+  $(".fc-next-button").click({});
+
   // Full Calendar configurations
   $("#calendar").fullCalendar({
     header: {
@@ -74,14 +78,27 @@ $(document).ready(function() {
       right: "month,agendaWeek,agendaDay"
     },
     selectable: true,
-    events: events_object,
+    events: caldashboardArray,
     eventRender: function(event, element) {
       element.attr("title", event.tip);
     }
   });
-  $(".fc-prev-button").click({});
-  $(".fc-next-button").click({});
 
+  // Dashboard Calendar
+  $("#calDashboard").fullCalendar({
+    header: {
+      left: "prev,next today",
+      center: "title",
+      right: "month,agendaWeek,agendaDay"
+    },
+    selectable: true,
+    events: caldashboardArray,
+    eventRender: function(event, element) {
+      element.attr("title", event.tip);
+    }
+  });
+
+  
   // Delete button action
   $("#confirm-delete").on("show.bs.modal", function(e) {
     $(this).find(".btn-ok").attr("href", $(e.relatedTarget).data("href"));

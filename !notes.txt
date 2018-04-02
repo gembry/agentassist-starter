@@ -5,3 +5,7 @@ git push origin --delete test
 http://fontawesome.io/cheatsheet/
 
 http://danialk.github.io/blog/2013/02/10/building-a-contacts-manager-app-using-backbonejs-and-nodejs-and-mongodb/
+
+https://stackoverflow.com/questions/31713342/mongdb-with-mongoose-select-a-specified-date-range-discarding-time
+Storing dates 
+
