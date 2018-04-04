@@ -2,14 +2,13 @@
  * GET /clients & /client models
  */
 const Buyer = require("../models/Buyer");
-const Buyers = require("../models/Buyers");
 
 /**
  * GET /clients
  * Clients Listing
  */
 exports.getBuyers = function(req, res) {
-  Buyers.find().exec(function(err, buyers_list) {
+  Buyer.find().exec(function(err, buyers_list) {
     if (err) {
       console.log("error dude");
       return next(err);

@@ -2,10 +2,10 @@
  * GET /clients & /client models
  */
 const Client = require("../models/Client");
-const Clients = require("../models/Clients");
+// const Clients = require("../models/Clients");
 
 exports.getClients = function(req, res) {
-  Clients.find().exec(function(err, clients_list) {
+  Client.find().exec(function(err, clients_list) {
     if (err) {
       console.log("error dude");
       return next(err);
@@ -22,7 +22,7 @@ exports.getClients = function(req, res) {
 exports.getClientsJSON = (req, res) => {
   var keyword = req.query.keyword; // URL 
 
-  Clients.find({
+  Client.find({
     $or: [
       { client_firstname: {$regex: new RegExp(keyword, "i")} },
       { client_lastname:  {$regex: new RegExp(keyword, "i")} }

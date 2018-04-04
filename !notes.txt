@@ -9,3 +9,30 @@ http://danialk.github.io/blog/2013/02/10/building-a-contacts-manager-app-using-b
 https://stackoverflow.com/questions/31713342/mongdb-with-mongoose-select-a-specified-date-range-discarding-time
 Storing dates 
 
+
+https://scotch.io/tutorials/using-mongoosejs-in-node-js-and-mongodb-applications
+
+db.getCollection('buyers').find({
+  '$or': [
+    {
+      '$and': [
+        {
+          buyer_contractdate: {
+            $gte: ISODate("2018-02-01T00:00:00.000Z"),
+            $lt: ISODate("2018-04-01T00:00:00.000Z")
+          }
+        }
+      ]
+    },
+    {
+      '$and': [
+        {
+          buyer_closingdate: {
+            $gte: ISODate("2018-02-01T00:00:00.000Z"),
+            $lt: ISODate("2018-04-01T00:00:00.000Z")
+          }
+        }
+      ]
+    }
+  ]
+})

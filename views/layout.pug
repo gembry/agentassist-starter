@@ -17,15 +17,6 @@ html
     link(rel='stylesheet', href='//cdnjs.cloudflare.com/ajax/libs/jquery-flexdatalist/2.2.2/jquery.flexdatalist.min.css')
     link(rel='stylesheet', href='/css/main.css')
 
-  body
-    include partials/header
-
-    .container
-      include partials/flash
-      block content
-
-    include partials/footer
-
     script(type='text/javascript', src='//use.fontawesome.com/f096e46b5a.js')
     script(type='text/javascript', src='/js/lib/jquery-3.1.1.min.js')
     script(type='text/javascript', src='/js/lib/bootstrap.min.js')
@@ -39,6 +30,29 @@ html
     script(type='text/javascript', src='//cdnjs.cloudflare.com/ajax/libs/jquery-flexdatalist/2.2.2/jquery.flexdatalist.min.js')
     script(type='text/javascript', src='//cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js')
     script(type='text/javascript', src='/js/main.js?ver=' + new Date().toISOString())
+
+  body
+    include partials/header
+
+    .container
+      include partials/flash
+      block content
+
+    include partials/footer
+
+    //- script(type='text/javascript', src='//use.fontawesome.com/f096e46b5a.js')
+    //- script(type='text/javascript', src='/js/lib/jquery-3.1.1.min.js')
+    //- script(type='text/javascript', src='/js/lib/bootstrap.min.js')
+    //- script(type='text/javascript', src='//cdnjs.cloudflare.com/ajax/libs/moment.js/2.21.0/moment.min.js')
+    //- //- script(type='text/javascript', src='//cdnjs.cloudflare.com/ajax/libs/jstimezonedetect/1.0.6/jstz.min.js')
+    //- script(type='text/javascript', src='//cdnjs.cloudflare.com/ajax/libs/timezone-js/0.4.13/date.min.js')
+    //- script(type='text/javascript', src='//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.5.1/fullcalendar.min.js')
+    //- script(type='text/javascript', src='//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.js')
+    //- script(type='text/javascript', src='//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js')
+    //- script(type='text/javascript', src='//cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/jquery.inputmask.bundle.js')
+    //- script(type='text/javascript', src='//cdnjs.cloudflare.com/ajax/libs/jquery-flexdatalist/2.2.2/jquery.flexdatalist.min.js')
+    //- script(type='text/javascript', src='//cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js')
+    //- script(type='text/javascript', src='/js/main.js?ver=' + new Date().toISOString())
 
     //- Google Analytics: change UA-XXXXX-X to be your site's ID
     //- script.

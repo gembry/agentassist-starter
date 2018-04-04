@@ -1,7 +1,9 @@
 extends layout
 
 block content
+
   .page-header
+    h3= title
     h3 Hometown Realty & Property Services Dashboard
 
     .row
@@ -14,3 +16,30 @@ block content
       .col-sm-7
         p
         #calDashboard.calendar.col-md-12
+
+  script.
+    $(document).ready(function() {
+      var buyersCalendar = !{buyersCalendar};
+
+      // Glocal Calendar Controls
+      $(".fc-prev-button").click({});
+      $(".fc-next-button").click({});
+
+      // Dashboard Calendar
+      $("#calDashboard").fullCalendar({
+        header: {
+          left: "prev,next today",
+          center: "title",
+          right: "month,agendaWeek,agendaDay"
+        },
+        selectable: true,
+        events: buyersCalendar,
+        eventRender: function(event, element) {
+          element.attr("title", event.tip);
+        }
+      });
+    });
+
+  //- div
+  //-   if process.env.DEBUG= true
+  //-     code.formattedDebug= buyersCalendar

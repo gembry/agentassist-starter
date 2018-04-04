@@ -66,26 +66,9 @@ $(document).ready(function() {
     }
   ];
 
-  // Glocal Calendar Controls
-  $(".fc-prev-button").click({});
-  $(".fc-next-button").click({});
 
   // Full Calendar configurations
   $("#calendar").fullCalendar({
-    header: {
-      left: "prev,next today",
-      center: "title",
-      right: "month,agendaWeek,agendaDay"
-    },
-    selectable: true,
-    events: caldashboardArray,
-    eventRender: function(event, element) {
-      element.attr("title", event.tip);
-    }
-  });
-
-  // Dashboard Calendar
-  $("#calDashboard").fullCalendar({
     header: {
       left: "prev,next today",
       center: "title",

@@ -1,9 +1,7 @@
 // Mongoose schema for Buyer
 const mongoose = require("mongoose");
 
-// const DateOnly = require('mongoose-dateonly')(mongoose);
-// const timeZone = require('mongoose-timezone');
-
+// Create a schema
 const buyerSchema = new mongoose.Schema(
   {
     buyer_address: String,
@@ -25,5 +23,8 @@ const buyerSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+// Create a model
 const Buyer = mongoose.model("Buyer", buyerSchema);
+
+// Make available to the Node app
 module.exports = Buyer;
