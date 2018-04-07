@@ -28,18 +28,32 @@ block content
       // Dashboard Calendar
       $("#calDashboard").fullCalendar({
         header: {
-          left: "prev,next today",
-          center: "title",
-          right: "month,agendaWeek,agendaDay"
+          left: "title", // month,agendaWeek,agendaDay
+          right: "prev,next today"
         },
         selectable: true,
         events: buyersCalendar,
         eventRender: function(event, element) {
-          element.attr("title", event.tip);
+            console.log(event);
+            element.qtip({
+                content: event.description,
+                style: {
+                    background: 'black',
+                    color: '#FFFFFF'
+                },
+                position: {
+                    corner: {
+                        target: 'center',
+                        tooltip: 'bottomMiddle'
+                    }
+                }
+            });
         }
       });
     });
 
   //- div
   //-   if process.env.DEBUG= true
-  //-     code.formattedDebug= buyersCalendar
+      //- code.formattedDebug= buyersCalendar
+      //- p
+      //- code.formattedDebug= dataset

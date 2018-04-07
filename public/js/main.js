@@ -89,7 +89,7 @@ $(document).ready(function() {
 
   // All Input Masks
   $("input#client_cellphone, input#client_homephone").inputmask( "(999) 999-9999" );
-  $("input#client_zip, input#buyer_zip").inputmask("99999[-9999]", { greedy: false });
+  $("input#client_zip, input#buyer_zip").inputmask("99999", { greedy: false }); // removed +4 "99999[-9999]"
   $('input#buyer_purchaseprice, input#buyer_earnestprice, input#buyer_concession')
     .maskMoney({precision: 0, allowEmpty: true, allowNegative: false, thousands:','}).trigger('mask.maskMoney');
 

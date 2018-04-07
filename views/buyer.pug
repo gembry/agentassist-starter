@@ -218,8 +218,7 @@ block content
         .row
           .col-sm-12.text-center
             br
-            h4
-              span.label.label-danger Contract terminated on 11/02/2018
+            iframe(width='95%', height='250', frameborder='0', style='border:0', src='//www.google.com/maps/embed/v1/place?key=AIzaSyAlrNTZfuAAD045rGGlOzVbj-GhwcEjm_M&q='+mapaddress, allowfullscreen='')
 
   .col-md-1
   .col-md-7
@@ -243,6 +242,11 @@ block content
                 span.round-tabs.four
                   | Misc. 
                   //- span.label.label-default
+
+            li(style='float:right;')
+              button.btn.btn-danger.disabled(name='buyer_submit', type='submit')
+                  i.fa.fa-hand-pointer-o
+                  | Contract terminated on 11/02/2018
 
         .tab-content
 
@@ -306,4 +310,4 @@ block content
 
   //- div
   //-   if process.env.DEBUG= true
-  //-     code.formattedDebug= buyer
+  //-     code.formattedDebug= mapaddress

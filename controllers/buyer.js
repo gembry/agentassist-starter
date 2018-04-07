@@ -486,6 +486,7 @@ exports.getBuyer = (req, res) => {
       res.render("buyer", {
         title: "Update Buyer Offer",
         method: "PUT",
+        mapaddress: updateBuyer.buyer_address + ',' + updateBuyer.buyer_city + ',' + updateBuyer.buyer_zip,
         buyer: updateBuyer,
         states: statesArray,
         titlecompanies: titlecompaniesArray,
