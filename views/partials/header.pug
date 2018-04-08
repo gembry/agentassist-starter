@@ -72,6 +72,27 @@
                   //- span.bg-success explain it
                   //- span.fa-home.fa.fa-lg.pull-left.icon-all
 
+          li.dropdown
+            //- a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-hashpopup='true', aria-expanded='false')
+            a.dropdown-toggle(href='#', aria-haspopup='false', aria-expanded='false')
+              | Administration 
+              span.fa-gears.fa.fa-2x.pull-left.icon-all
+              span.caret
+            |
+            ul.dropdown-menu(style='width: auto;').fa-ul
+              li
+                a(href='/admin/titlecompany')
+                  | Add Title Company
+              li
+                a(href='/admin/mortgagelender')
+                  | Add Mortgage Lender
+              li
+                a(href='/admin/sellingagent')
+                  | Add Selling Agent
+              li
+                a(href='/admin/salestype')
+                  | Add Sales Type
+
       ul.nav.navbar-nav.navbar-right
         li.dropdown
           //- a.dropdown-toggle(href='#', data-toggle='dropdown')

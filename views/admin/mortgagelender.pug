@@ -1,0 +1,24 @@
+extends ../layout
+
+block content
+  .page-header
+    h3 Manage Mortgage Lenders
+
+  form.form-horizontal(method='POST')
+    input(type='hidden', name='_csrf', value=_csrf)
+
+    .form-group
+      label(class='col-sm-2 control-label', for='name') Name
+      .col-sm-8
+        input.form-control(type='text', name='name', id='name', autofocus=true)
+
+    .form-group
+      label(class='col-sm-2 control-label', for='value') Value
+      .col-sm-8
+        input.form-control(type='text', name='value', id='value')
+
+    .form-group
+      .col-sm-offset-2.col-sm-8
+        button.btn.btn-primary(type='submit')
+          i.fa.fa-envelope
+          | Save

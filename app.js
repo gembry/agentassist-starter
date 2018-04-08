@@ -27,8 +27,8 @@ const upload = multer({ dest: process.env.AA_STORAGE });
 /**
  * Load environment variables from .env file, where API keys and passwords are configured.
  */
-//dotenv.load({ path: '.env.localhost' });
-dotenv.load({ path: '.env.develop' });
+dotenv.load({ path: '.env.localhost' });
+//dotenv.load({ path: '.env.develop' });
 
 /**
  * Controllers (route handlers).
@@ -46,6 +46,12 @@ const clientsController = require('./controllers/clients');
 const buyersController = require('./controllers/buyers');
 const buyerController = require('./controllers/buyer');
 const sellerController = require('./controllers/seller');
+
+/* OtterDocs Admin Controllers */
+const mortgagelenderController = require("./controllers/admin/mortgagelender");
+const salestypeController = require("./controllers/admin/salestype");
+const sellingagentController = require("./controllers/admin/sellingagent");
+const titlecompanyController = require("./controllers/admin/titlecompany");
 
 /**
  * API keys and Passport configuration.
@@ -173,7 +179,7 @@ app.get('/dashboard', passportConfig.isAuthenticated, dashboardController.getDas
 app.get('/client', passportConfig.isAuthenticated, clientController.getClient)
    .get('/client/:client', passportConfig.isAuthenticated, clientController.getClient)
    .post('/client', passportConfig.isAuthenticated, clientController.postClient)
-   .put('/client/:client', passportConfig.isAuthenticated, clientController.putClient)
+   .put('/client/:client', passportConfig.isAuthenticated, clientController.putClient);
 app.get('/clients', passportConfig.isAuthenticated, clientsController.getClients)
    .get('/clients.json/', passportConfig.isAuthenticated, clientsController.getClientsJSON)
    .get('/clients/:client', passportConfig.isAuthenticated, clientsController.deleteClient);
@@ -182,13 +188,23 @@ app.get('/clients', passportConfig.isAuthenticated, clientsController.getClients
 app.get('/buyer', passportConfig.isAuthenticated, buyerController.getBuyer)
    .get('/buyer/:buyer', passportConfig.isAuthenticated, buyerController.getBuyer)
    .post('/buyer', passportConfig.isAuthenticated, buyerController.postBuyer)
-   .put('/buyer/:buyer', passportConfig.isAuthenticated, buyerController.putBuyer)
+   .put('/buyer/:buyer', passportConfig.isAuthenticated, buyerController.putBuyer);
 app.get('/buyers', passportConfig.isAuthenticated, buyersController.getBuyers)
    .get('/buyers/:buyer', passportConfig.isAuthenticated, buyersController.deleteBuyer);
 
 // Seller(s) related routes
 app.get('/seller', passportConfig.isAuthenticated, sellerController.getSeller);
 app.post('/seller', passportConfig.isAuthenticated, sellerController.postSeller);
+
+// Mortgage Lender routes
+app.get("/admin/mortgagelender", passportConfig.isAuthenticated, mortgagelenderController.getMortgageLender);
+app.post("/admin/mortgagelender", passportConfig.isAuthenticated, mortgagelenderController.postMortgageLender);
+app.get("/admin/salestype", passportConfig.isAuthenticated, salestypeController.getSalesType);
+app.post("/admin/salestype", passportConfig.isAuthenticated, salestypeController.postSalesType);
+app.get("/admin/sellingagent", passportConfig.isAuthenticated, sellingagentController.getSellingAgent);
+app.post("/admin/sellingagent", passportConfig.isAuthenticated, sellingagentController.postSellingAgent);
+app.get("/admin/titlecompany", passportConfig.isAuthenticated, titlecompanyController.getTitleCompany);
+app.post("/admin/titlecompany", passportConfig.isAuthenticated, titlecompanyController.postTitleCompany);
 
 /**
  * API examples routes.

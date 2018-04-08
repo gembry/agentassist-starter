@@ -40,6 +40,7 @@ block content
                     label.lb-sm(for='buyer_clientIDs') Clients [search by first/last name or city]
                     input#buyer_clientIDs.flexdatalist(type='text', 
                                                       name='buyer_clientIDs',
+                                                      placeholder="add...",
                                                       value=buyer.buyer_clientIDs,
                                                       multiple='true', 
                                                       data-data='/clients.json', 
@@ -48,7 +49,7 @@ block content
                                                       data-selection-required='true', 
                                                       data-value-property='_id', 
                                                       data-text-property='{client_firstname} {client_lastname} - {client_city}', 
-                                                      data-min-length='1', 
+                                                      data-min-length='2', 
                                                       data-remove-on-backspace='false',
                                                       data-focus-first-result='true')
                                                       //- style='width: 100%; border: 0px !important;'
