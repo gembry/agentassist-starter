@@ -551,8 +551,6 @@ exports.postBuyer = (req, res) => {
     buyer_closingdate: req.body.buyer_closingdate,
     buyer_notifications: req.body.buyer_notifications ? true : false
   });
-  //console.log(insertBuyer);
-
   
   insertBuyer.save(err => {
     if (err) {

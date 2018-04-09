@@ -1,0 +1,46 @@
+extends ../layout
+
+block content
+  .page-header
+    h3 Manage Documents
+
+  form.form-horizontal(method='POST')
+    input(type='hidden', name='_csrf', value=_csrf)
+
+    .form-group
+      .col-sm-2
+        label(class='control-label', for='clienttype') Client Type
+        select#clienttype.form-control(name='clienttype', type='select', required='required', autofocus='autofocus')
+          option(hidden='true') 
+          option(value='BUYER') Buyer
+          option(value='SELLER') Seller
+        
+      .col-sm-3
+        label(class='control-label', for='doctype') Doc Type
+        select#doctype.form-control(name='doctype', type='select', required='required')
+          option(hidden='true') 
+          option(value='BUYERPENDI', data-chained='BUYER') Pending Document
+          option(value='BUYERTITLE', data-chained='BUYER') Title Company Document
+          option(value='BUYERMISCE', data-chained='BUYER') Miscellaneous Document
+          option(value='SELLERLIST', data-chained='SELLER') Listing Document
+          option(value='SELLERPEND', data-chained='SELLER') Pending Document
+          option(value='SELLERCLOS', data-chained='SELLER') Closing Document
+          option(value='SELLERMISC', data-chained='SELLER') Miscellaneous Document
+        
+      .col-sm-6
+        label(class='control-label', for='docname') Doc Name
+        input#docname.form-control(name='docname', type='text', required='required')
+        //- small#docnameHelp.form-text.text-muted
+        //-   | Enter
+
+      .col-sm-1
+        label(class='control-label') &nbsp;
+        br
+        button.btn.btn-primary(type='submit')
+          i.fa.fa-floppy-o
+          | Save
+
+  script.
+    $(document).ready(function() {
+      $("#doctype").chainedTo("#clienttype");
+    });

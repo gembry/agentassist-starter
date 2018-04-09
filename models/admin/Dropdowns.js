@@ -2,7 +2,7 @@
 const mongoose = require("mongoose");
 
 // Create a schema
-const titlecompanySchema = new mongoose.Schema(
+const dropdownsSchema = new mongoose.Schema(
   {
     option: String,
     value: String
@@ -11,7 +11,7 @@ const titlecompanySchema = new mongoose.Schema(
 );
 
 // Create a model
-const TitleCompany = mongoose.model("TitleCompany", titlecompanySchema);
+const Dropdowns = mongoose.model("MortgageLender", dropdownsSchema);
 
 // Make available to the Node app
-module.exports = TitleCompany;
+module.exports = Dropdowns;

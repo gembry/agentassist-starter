@@ -35,6 +35,7 @@
     "fullcalendar": "^3.5.1",
     "github": "^9.2.0",
     "instagram-node": "^0.5.8",
+    "jquery-chained": "^2.0.0-beta.2",
     "jstimezonedetect": "^1.0.6",
     "lastfm": "^0.9.2",
     "lob": "^4.1.1",
