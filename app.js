@@ -195,8 +195,11 @@ app.get('/seller', passportConfig.isAuthenticated, sellerController.getSeller);
 app.post('/seller', passportConfig.isAuthenticated, sellerController.postSeller);
 
 // Administration Routes
-app.get("/admin/documents", passportConfig.isAuthenticated, documentsController.getDocuments);
-app.post("/admin/documents", passportConfig.isAuthenticated, documentsController.postDocuments);
+app.get('/admin/documents', passportConfig.isAuthenticated, documentsController.getDocuments)
+   .get('/admin/documents/:document', passportConfig.isAuthenticated, documentsController.getDocuments)
+   .post('/admin/documents', passportConfig.isAuthenticated, documentsController.postDocuments)
+   .put('/admin/documents/:document', passportConfig.isAuthenticated, documentsController.putDocuments);
+
 app.get("/admin/dropdowns", passportConfig.isAuthenticated, dropdownsController.getDropdowns);
 app.post("/admin/dropdowns", passportConfig.isAuthenticated, dropdownsController.postDropdowns);
 

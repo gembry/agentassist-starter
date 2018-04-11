@@ -2,7 +2,7 @@ extends ../layout
 
 block content
   .page-header
-    h3 Manage Documents
+    h3= title
 
   form.form-horizontal(method='POST')
     input(type='hidden', name='_csrf', value=_csrf)
@@ -12,26 +12,24 @@ block content
         label(class='control-label', for='clienttype') Client Type
         select#clienttype.form-control(name='clienttype', type='select', required='required', autofocus='autofocus')
           option(hidden='true') 
-          option(value='BUYER') Buyer
-          option(value='SELLER') Seller
-        
+          option(value='BUYER', selected='BUYER' === document.clienttype) Buyer
+          option(value='SELLER', selected='SELLER' === document.clienttype) Seller
+
       .col-sm-3
         label(class='control-label', for='doctype') Doc Type
         select#doctype.form-control(name='doctype', type='select', required='required')
           option(hidden='true') 
-          option(value='BUYERPENDI', data-chained='BUYER') Pending Document
-          option(value='BUYERTITLE', data-chained='BUYER') Title Company Document
-          option(value='BUYERMISCE', data-chained='BUYER') Miscellaneous Document
-          option(value='SELLERLIST', data-chained='SELLER') Listing Document
-          option(value='SELLERPEND', data-chained='SELLER') Pending Document
-          option(value='SELLERCLOS', data-chained='SELLER') Closing Document
-          option(value='SELLERMISC', data-chained='SELLER') Miscellaneous Document
+          option(value='BUYERPENDI', data-chained='BUYER', selected='BUYERPENDI' === document.doctype) Pending Document
+          option(value='BUYERTITLE', data-chained='BUYER', selected='BUYERTITLE' === document.doctype) Title Company Document
+          option(value='BUYERMISCE', data-chained='BUYER', selected='BUYERMISCE' === document.doctype) Miscellaneous Document
+          option(value='SELLERLIST', data-chained='SELLER', selected='SELLERLIST' === document.doctype) Listing Document
+          option(value='SELLERPEND', data-chained='SELLER', selected='SELLERPEND' === document.doctype) Pending Document
+          option(value='SELLERCLOS', data-chained='SELLER', selected='SELLERCLOS' === document.doctype) Closing Document
+          option(value='SELLERMISC', data-chained='SELLER', selected='SELLERMISC' === document.doctype) Miscellaneous Document
         
       .col-sm-6
         label(class='control-label', for='docname') Doc Name
-        input#docname.form-control(name='docname', type='text', required='required')
-        //- small#docnameHelp.form-text.text-muted
-        //-   | Enter
+        input#docname.form-control(name='docname', type='text', required='required', value=document.docname)
 
       .col-sm-1
         label(class='control-label') &nbsp;
@@ -39,6 +37,56 @@ block content
         button.btn.btn-primary(type='submit')
           i.fa.fa-floppy-o
           | Save
+
+    div(class='container')
+    table#documentsTable.table.table-striped.table-no-bordered(data-toggle='table', data-pagination='true', data-search='true', data-show-refresh='true', data-show-toggle='true', <='', body='', data-show-columns='true')
+
+      thead
+        tr 
+          th(data-field='clienttype', data-sortable='true') Client Type
+          th(data-field='doctype', data-sortable='true') Document Type
+          th(data-field='docname', data-sortable='true') Document Name
+          th(data-field='updatedAt', data-sortable='true') Updated
+          th.text-center(data-field='Action', data-sortable='false') Action
+
+      tbody
+        each document in documents
+          tr.small
+            td= document.clienttype
+            td 
+              case document.doctype
+                when 'BUYERPENDI'
+                  | Pending Document
+                when 'BUYERTITLE'
+                  | Title Company Document
+                when 'BUYERMISCE'
+                  | Miscellaneous Document
+                when 'SELLERLIST'
+                  | Listing Document
+                when 'SELLERPEND'
+                  | Pending Document
+                when 'SELLERCLOS'
+                  | Closing Document
+                when 'SELLERMISC'
+                  | Miscellaneous Document
+
+            td= document.docname
+            td #{moment(document.updatedAt).format('MM/DD/YYYY')}
+            td
+              a(href='/admin/documents/' + document._id)= post
+                button(type="button") Edit
+              button(type="button", data-href='/admin/documents/' + document._id, data-toggle='modal', data-target='#confirm-delete') Delete
+
+      #confirm-delete.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+        .modal-dialog
+          .modal-content
+            .modal-header.h4
+              | Please confirm!
+            .modal-body
+              | You are about to delete this documents record.
+            .modal-footer
+              button.btn.btn-default(type='button', data-dismiss='modal') Cancel
+              a.btn.btn-danger.btn-ok Delete
 
   script.
     $(document).ready(function() {
