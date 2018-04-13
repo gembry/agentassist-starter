@@ -1,17 +1,17 @@
-// Mongoose schema for Buyer
+// Mongoose schema for Dropdowns
 const mongoose = require("mongoose");
 
 // Create a schema
 const dropdownsSchema = new mongoose.Schema(
   {
-    option: String,
-    value: String
+    optionname: String,
+    optionvalue: String
   },
   { timestamps: true }
 );
 
 // Create a model
-const Dropdowns = mongoose.model("MortgageLender", dropdownsSchema);
+const Dropdowns = mongoose.model("Dropdowns", dropdownsSchema);
 
 // Make available to the Node app
 module.exports = Dropdowns;

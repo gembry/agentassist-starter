@@ -7,27 +7,6 @@ const defaultDocuments = new Document({
   docname: null
 });
 
-/**
- * GET /clients
- * Clients Listing
- */
-// exports.getDocuments = function(req, res) {
-//   Document.find().exec(function(err, documents_list) {
-//     if (err) {
-//       console.log("error dude");
-//       return next(err);
-//     }
-
-//     //if successful
-//     res.render("admin/documents", {
-//       title: "All Documents",
-//       documents: documents_list
-//     });
-//   });
-// };
-
-var async = require('async');
-
 function getDocument(id, callback) {
   db.collection('queryes', function(err, collection) {
     collection.findOne({'_id':id}, callback);
@@ -116,18 +95,8 @@ exports.postDocuments = (req, res) => {
  * PUT/UPDATE form data
  */
 exports.putDocuments = (req, res) => {
-  // req.assert("buyer_firstname", "First name cannot be blank").notEmpty();
-  // req.assert("buyer_lastname", "Last name cannot be blank").notEmpty();
-  // req.assert("buyer_email", "Email is not valid").isEmail();
 
-  // const errors = req.validationErrors();
-
-  // if (errors) {
-  //   req.flash("errors", errors);
-  //   return res.redirect("/buyer");
-  // }
-
-  Document.findById(req.params.buyer, (err, updateDocuments) => {
+  Document.findById(req.params.document, (err, updateDocuments) => {
     if (err) {
       console.log(err);
       //return next(err);
@@ -138,15 +107,27 @@ exports.putDocuments = (req, res) => {
     updateDocuments.docname = req.body.docname;
 
     updateDocuments.save(err => {
-      // if (err) {
-      //   if (err.code === 11000) {
-      //     req.flash('errors', { msg: 'The email address you have entered is already associated with an account.' });
-      //     return res.redirect('/documents');
-      //   }
-      //   return next(err);
-      // }
       req.flash("success", { msg: "Documents information has been updated." });
-      res.redirect("/documents");
+      res.redirect("/admin/documents");
     });
+
   });
+};
+
+/**
+ * DELETE buyer
+ */
+exports.deleteDocument = (req, res) => {
+  Document.remove(
+    {
+      _id: req.params.document
+    },
+    function(err, document) {
+      if (err) res.send(err);
+
+      req.flash("success", { msg: "Document information has been deleted." });
+      res.redirect("/admin/documents");
+      //res.json({ message: "Successfully deleted" });
+    }
+  );
 };

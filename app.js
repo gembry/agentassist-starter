@@ -198,10 +198,13 @@ app.post('/seller', passportConfig.isAuthenticated, sellerController.postSeller)
 app.get('/admin/documents', passportConfig.isAuthenticated, documentsController.getDocuments)
    .get('/admin/documents/:document', passportConfig.isAuthenticated, documentsController.getDocuments)
    .post('/admin/documents', passportConfig.isAuthenticated, documentsController.postDocuments)
-   .put('/admin/documents/:document', passportConfig.isAuthenticated, documentsController.putDocuments);
+   .put('/admin/documents/:document', passportConfig.isAuthenticated, documentsController.putDocuments)
+   .get('/admin/document/:document', passportConfig.isAuthenticated, documentsController.deleteDocument);
 
-app.get("/admin/dropdowns", passportConfig.isAuthenticated, dropdownsController.getDropdowns);
-app.post("/admin/dropdowns", passportConfig.isAuthenticated, dropdownsController.postDropdowns);
+// app.get('/admin/dropdowns', passportConfig.isAuthenticated, dropdownsController.getDropdowns)
+//    .get('/admin/dropdowns/:dropdown', passportConfig.isAuthenticated, dropdownsController.getDropdowns)
+//    .post('/admin/dropdowns', passportConfig.isAuthenticated, dropdownsController.postDropdowns)
+//    .put('/admin/dropdowns/:dropdown', passportConfig.isAuthenticated, dropdownsController.putDropdowns);
 
 /**
  * API examples routes.

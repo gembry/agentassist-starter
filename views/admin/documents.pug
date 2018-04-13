@@ -6,6 +6,7 @@ block content
 
   form.form-horizontal(method='POST')
     input(type='hidden', name='_csrf', value=_csrf)
+    input(type='hidden', name='_method', value=method)
 
     .form-group
       .col-sm-2
@@ -75,7 +76,7 @@ block content
             td
               a(href='/admin/documents/' + document._id)= post
                 button(type="button") Edit
-              button(type="button", data-href='/admin/documents/' + document._id, data-toggle='modal', data-target='#confirm-delete') Delete
+              button(type="button", data-href='/admin/document/' + document._id, data-toggle='modal', data-target='#confirm-delete') Delete
 
       #confirm-delete.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
         .modal-dialog
