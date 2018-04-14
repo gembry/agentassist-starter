@@ -119,6 +119,9 @@ $(document).ready(function() {
   //   return moment(time, format).tz(zone).format(format);
   // }
 
+  // Enable popovers everywhere
+  $('[data-toggle="popover"]').popover()
+
 });
 
 
