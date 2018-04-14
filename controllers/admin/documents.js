@@ -95,7 +95,7 @@ exports.putDocuments = (req, res) => {
     updateDocuments.docname = req.body.docname;
 
     updateDocuments.save(err => {
-      req.flash("success", { msg: "Documents information has been updated." });
+      req.flash("success", { msg: "Document information has been updated." });
       res.redirect("/admin/documents");
     });
 

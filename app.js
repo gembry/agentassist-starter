@@ -201,10 +201,11 @@ app.get('/admin/documents', passportConfig.isAuthenticated, documentsController.
    .put('/admin/documents/:document', passportConfig.isAuthenticated, documentsController.putDocuments)
    .get('/admin/document/:document', passportConfig.isAuthenticated, documentsController.deleteDocument);
 
-// app.get('/admin/dropdowns', passportConfig.isAuthenticated, dropdownsController.getDropdowns)
-//    .get('/admin/dropdowns/:dropdown', passportConfig.isAuthenticated, dropdownsController.getDropdowns)
-//    .post('/admin/dropdowns', passportConfig.isAuthenticated, dropdownsController.postDropdowns)
-//    .put('/admin/dropdowns/:dropdown', passportConfig.isAuthenticated, dropdownsController.putDropdowns);
+app.get('/admin/dropdowns', passportConfig.isAuthenticated, dropdownsController.getDropdowns)
+   .get('/admin/dropdowns/:dropdown', passportConfig.isAuthenticated, dropdownsController.getDropdowns)
+   .post('/admin/dropdowns', passportConfig.isAuthenticated, dropdownsController.postDropdowns)
+   .put('/admin/dropdowns/:dropdown', passportConfig.isAuthenticated, dropdownsController.putDropdowns)
+   .get('/admin/dropdown/:dropdown', passportConfig.isAuthenticated, dropdownsController.deleteDropdown);
 
 /**
  * API examples routes.

@@ -6,7 +6,7 @@ block content
 
   form.form-horizontal(method='POST')
     input(type='hidden', name='_csrf', value=_csrf)
-    //- input(type='hidden', name='_method', value=method)
+    input(type='hidden', name='_method', value=method)
 
     .form-group
 
@@ -59,7 +59,7 @@ block content
             td
               a(href='/admin/dropdowns/' + dropdown._id)= post
                 button(type="button") Edit
-              button(type="button", data-href='/admin/dropdowns/' + dropdown._id, data-toggle='modal', data-target='#confirm-delete') Delete
+              button(type="button", data-href='/admin/dropdown/' + dropdown._id, data-toggle='modal', data-target='#confirm-delete') Delete
 
       #confirm-delete.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
         .modal-dialog
@@ -67,12 +67,7 @@ block content
             .modal-header.h4
               | Please confirm!
             .modal-body
-              | You are about to delete this dropdowns record.
+              | You are about to delete this dropdown record.
             .modal-footer
               button.btn.btn-default(type='button', data-dismiss='modal') Cancel
               a.btn.btn-danger.btn-ok Delete
-
-  //- script.
-  //-   $(document).ready(function() {
-  //-     $("#optionname").chainedTo("#clienttype");
-  //-   });
