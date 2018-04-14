@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 // Create a schema
 const dropdownsSchema = new mongoose.Schema(
   {
-    optionname: String,
+    dropdownname: String,
     optionvalue: String
   },
   { timestamps: true }

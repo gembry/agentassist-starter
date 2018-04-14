@@ -2,7 +2,7 @@ const Dropdown = require("../../models/admin/Dropdowns");
 
 // Setup empty object
 const defaultDropdowns = new Dropdown({
-  optionname: null,
+  dropdownname: null,
   optionvalue: null
 });
 
@@ -19,7 +19,7 @@ exports.getDropdowns = (req, res) => {
     ]).then( ([ dropdown, dropdowns ]) => {
       // Render to the pug view - ready for PUT
       res.render("admin/dropdowns", {
-        title: "Update Dropdown Types",
+        title: "Update Dropdown Values",
         method: "PUT",
         dropdown: dropdown,
         dropdowns: dropdowns
@@ -35,7 +35,7 @@ exports.getDropdowns = (req, res) => {
       }
 
       res.render("admin/dropdowns", {
-        title: "Add Dropdown Types",
+        title: "Add Dropdown Values",
         dropdown: defaultDropdowns,
         dropdowns: dropdowns_list
       });
@@ -63,7 +63,7 @@ exports.postDropdowns = (req, res) => {
   // Use ids (numeric) for drop-downs ???
 
   const insertDropdown = new Dropdown({
-    optionname: req.body.optionname,
+    dropdownname: req.body.dropdownname,
     optionvalue: req.body.optionvalue
   });
 
@@ -88,7 +88,7 @@ exports.putDropdowns = (req, res) => {
       //return next(err);
     }
 
-    updateDropdowns.optionname = req.body.optionname,
+    updateDropdowns.dropdownname = req.body.dropdownname,
     updateDropdowns.optionvalue = req.body.optionvalue;
 
     updateDropdowns.save(err => {

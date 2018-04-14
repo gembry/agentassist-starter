@@ -40,7 +40,16 @@ block content
           | Save
 
     div(class='container')
-    table#documentsTable.table.table-striped.table-no-bordered(data-toggle='table', data-pagination='true', data-search='true', data-show-refresh='true', data-show-toggle='true', <='', body='', data-show-columns='true')
+    table#documentsTable.table.table-striped.table-no-bordered(
+      data-toggle='table', 
+      data-pagination='true', 
+      data-search='true', 
+      data-show-refresh='false', 
+      data-show-toggle='true', 
+      data-show-columns='true', 
+      data-page-size="50", 
+      data-page-list='[50, 75, 100, 200, 300, 500]'
+    )
 
       thead
         tr 
