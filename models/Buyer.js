@@ -14,7 +14,7 @@ const buyerSchema = new mongoose.Schema(
     buyer_concession: Number,
     buyer_titlecompany: String,
     buyer_mortgagelender: String,
-    buyer_sellingagent: String,
+    buyer_listingagent: String,
     buyer_salestype: String,
     buyer_contractdate: Date,
     buyer_closingdate: Date,

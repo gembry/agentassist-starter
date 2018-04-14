@@ -1,7 +1,9 @@
 /**
- * GET model
+ * GET models
  */
 const Buyer = require("../models/Buyer");
+const Dropdowns = require("../models/admin/Dropdowns");
+const Documents = require("../models/admin/Documents");
 
 const statesArray = [
   {
@@ -210,86 +212,6 @@ const statesArray = [
   }
 ];
 
-const titlecompaniesArray = [
-  {
-    option: "1",
-    value: "Land Title Company"
-  },
-  {
-    option: "2",
-    value: "Abstract Title Company"
-  },
-  {
-    option: "3",
-    value: "Walker Heights Title Company"
-  },
-  {
-    option: "4",
-    value: "Golden Title Company"
-  },
-  {
-    option: "5",
-    value: "Simpson Title Company"
-  }
-];
-
-const mortgagelendersArray = [
-  {
-    option: "1",
-    value: "Big Mortgage Company"
-  },
-  {
-    option: "2",
-    value: "The Mortgage Company"
-  },
-  {
-    option: "3",
-    value: "Barstow Mortgage Pros"
-  },
-  {
-    option: "4",
-    value: "Mortgages-R-Us"
-  }
-];
-
-const sellingagentsArray = [
-  {
-    option: "1",
-    value: "Bobby Bo"
-  },
-  {
-    option: "2",
-    value: "Greg Smithenstein"
-  },
-  {
-    option: "3",
-    value: "Laura James"
-  },
-  {
-    option: "4",
-    value: "Kimber Stocks"
-  }
-];
-
-const salestypesArray = [
-  {
-    option: "1",
-    value: "N/A"
-  },
-  {
-    option: "2",
-    value: "HUD"
-  },
-  {
-    option: "3",
-    value: "REO"
-  },
-  {
-    option: "4",
-    value: "Short Sale"
-  }
-];
-
 const docspendingArray = [
   {
     option: "1",
@@ -463,7 +385,7 @@ const defaultBuyer = new Buyer({
   buyer_concession: null,
   buyer_titlecompany: null,
   buyer_mortgagelender: null,
-  buyer_sellingagent: null,
+  buyer_listingagent: null,
   buyer_salestype: null,
   buyer_contractdate: null,
   buyer_closingdate: null,
@@ -475,44 +397,53 @@ const defaultBuyer = new Buyer({
  */
 exports.getBuyer = (req, res) => {
   if (req.params.buyer) {
-    // find existing buyer
-    Buyer.findOne({ _id: req.params.buyer }, (err, updateBuyer) => {
-      if (err) {
-        console.log(err);
-        //return next(err);
-      }
 
-      // Render to the pug view - ready for PUT
+    Promise.all([
+      Buyer.findOne({ _id: req.params.buyer }),
+      Dropdowns.find({ dropdownname: 'TITLECOMP' }).sort({ "optionvalue": 1 }),
+      Dropdowns.find({ dropdownname: 'MORTGLEND' }).sort({ "optionvalue": 1 }),
+      Dropdowns.find({ dropdownname: 'LISEAGENT' }).sort({ "optionvalue": 1 }),
+      Dropdowns.find({ dropdownname: 'SALESTYPE' }).sort({ "optionvalue": 1 })
+    ]).then( ([ qrybuyer, qrytitlecomps, qrymortglends, qryliseagents, qrysalestypes ]) => {
       res.render("buyer", {
         title: "Update Buyer Offer",
         method: "PUT",
-        mapaddress: updateBuyer.buyer_address + ',' + updateBuyer.buyer_city + ',' + updateBuyer.buyer_zip,
-        buyer: updateBuyer,
+        buyer: qrybuyer,
+        mapaddress: qrybuyer.buyer_address + ',' + qrybuyer.buyer_city + ',' + qrybuyer.buyer_zip,
         states: statesArray,
-        titlecompanies: titlecompaniesArray,
-        mortgagelenders: mortgagelendersArray,
-        sellingagents: sellingagentsArray,
-        salestypes: salestypesArray,
+        titlecompanies: qrytitlecomps,
+        mortgagelenders: qrymortglends,
+        listingagents: qryliseagents,
+        salestypes: qrysalestypes,
         docspending: docspendingArray,
         docstitlecompany: docstitlecompanyArray,
         docsmisc: docsmiscArray
       });
     });
+
   } else {
-    // Render to the pug view - ready for POST
-    res.render("buyer", {
-      title: "Add Buyer Offer",
-      method: "POST",
-      buyer: defaultBuyer,
-      states: statesArray,
-      titlecompanies: titlecompaniesArray,
-      mortgagelenders: mortgagelendersArray,
-      sellingagents: sellingagentsArray,
-      salestypes: salestypesArray,
-      docspending: docspendingArray,
-      docstitlecompany: docstitlecompanyArray,
-      docsmisc: docsmiscArray
+
+    Promise.all([
+      Dropdowns.find({ dropdownname: 'TITLECOMP' }).sort({ "optionvalue": 1 }),
+      Dropdowns.find({ dropdownname: 'MORTGLEND' }).sort({ "optionvalue": 1 }),
+      Dropdowns.find({ dropdownname: 'LISEAGENT' }).sort({ "optionvalue": 1 }),
+      Dropdowns.find({ dropdownname: 'SALESTYPE' }).sort({ "optionvalue": 1 })
+    ]).then( ([ qrytitlecomps, qrymortglends, qryliseagents, qrysalestypes ]) => {
+      res.render("buyer", {
+        title: "Add Buyer Offer",
+        method: "POST",
+        buyer: defaultBuyer,
+        states: statesArray,
+        titlecompanies: qrytitlecomps,
+        mortgagelenders: qrymortglends,
+        listingagents: qryliseagents,
+        salestypes: qrysalestypes,
+        docspending: docspendingArray,
+        docstitlecompany: docstitlecompanyArray,
+        docsmisc: docsmiscArray
+      });
     });
+
   }
 };
 
@@ -545,7 +476,7 @@ exports.postBuyer = (req, res) => {
     buyer_concession: req.body.buyer_concession.split(",").join(""),
     buyer_titlecompany: req.body.buyer_titlecompany,
     buyer_mortgagelender: req.body.buyer_mortgagelender,
-    buyer_sellingagent: req.body.buyer_sellingagent,
+    buyer_listingagent: req.body.buyer_listingagent,
     buyer_salestype: req.body.buyer_salestype,
     buyer_contractdate: req.body.buyer_contractdate,
     buyer_closingdate: req.body.buyer_closingdate,
@@ -593,7 +524,7 @@ exports.putBuyer = (req, res) => {
     updateBuyer.buyer_concession = req.body.buyer_concession.split(",").join(""),
     updateBuyer.buyer_titlecompany = req.body.buyer_titlecompany,
     updateBuyer.buyer_mortgagelender = req.body.buyer_mortgagelender,
-    updateBuyer.buyer_sellingagent = req.body.buyer_sellingagent,
+    updateBuyer.buyer_listingagent = req.body.buyer_listingagent,
     updateBuyer.buyer_salestype = req.body.buyer_salestype,
     updateBuyer.buyer_contractdate = req.body.buyer_contractdate,
     updateBuyer.buyer_closingdate = req.body.buyer_closingdate,
