@@ -20,9 +20,11 @@ const expressValidator = require('express-validator');
 const expressStatusMonitor = require('express-status-monitor');
 const sass = require('node-sass-middleware');
 const multer = require('multer');
+const csv = require('csv-express');
 //const smartTable = require('angular-smart-table');
 //const upload = multer({ dest: path.join(__dirname, 'uploads') });
 const upload = multer({ dest: process.env.AA_STORAGE }); 
+// const router = express.Router(); not used... at this time
 
 /**
  * Load environment variables from .env file, where API keys and passwords are configured.
@@ -50,6 +52,7 @@ const sellerController = require('./controllers/seller');
 /* OtterDocs Admin Controllers */
 const documentsController = require("./controllers/admin/documents");
 const dropdownsController = require("./controllers/admin/dropdowns");
+const exportController = require("./controllers/admin/export");
 
 /**
  * API keys and Passport configuration.
@@ -206,6 +209,10 @@ app.get('/admin/dropdowns', passportConfig.isAuthenticated, dropdownsController.
    .post('/admin/dropdowns', passportConfig.isAuthenticated, dropdownsController.postDropdowns)
    .put('/admin/dropdowns/:dropdown', passportConfig.isAuthenticated, dropdownsController.putDropdowns)
    .get('/admin/dropdown/:dropdown', passportConfig.isAuthenticated, dropdownsController.deleteDropdown);
+
+app.get('/admin/export', passportConfig.isAuthenticated, exportController.getExport)
+   .get('/admin/exportclients', passportConfig.isAuthenticated, exportController.getExportclients)
+   .get('/admin/exportbuyers', passportConfig.isAuthenticated, exportController.getExportbuyers);
 
 /**
  * API examples routes.

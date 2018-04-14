@@ -118,7 +118,7 @@ block content
 
                 .form-row
                   .col-sm-12
-                    span.glyphicon.glyphicon-question-sign(style='float:right; color:#D86C70;', data-container='body', data-toggle='popover', data-html='true' data-content='You can add a new Title Company from Manage Dropdown Values in the Administration section.')
+                    span.glyphicon.glyphicon-question-sign(style='float:right; color:silver;', data-container='body', data-toggle='popover', data-html='true' data-content='You can add or edit a Title Company, Mortgage Lender, List/Sell Agent or Sales Type from Manage Dropdown Values in the Administration section.')
                     label.lb-sm(for='buyer_titlecompany') Title Company
                     select#buyer_titlecompany.selectpicker.form-control(name='buyer_titlecompany', type='select', required='required', title='Select', data-live-search='true', data-dropup-auto='false', data-size='5')
                       for titlecompany in titlecompanies
@@ -126,7 +126,7 @@ block content
 
                 .form-row
                   .col-sm-12
-                    span.glyphicon.glyphicon-question-sign(style='float:right; color:#D86C70;', data-container='body', data-toggle='popover', data-html='true' data-content='You can add a new Mortgage Lender from Manage Dropdown Values in the Administration section.')
+                    //- span.glyphicon.glyphicon-question-sign(style='float:right; color:silver;', data-container='body', data-toggle='popover', data-html='true' data-content='You can add a new Mortgage Lender from Manage Dropdown Values in the Administration section.')
                     label.lb-sm(for='buyer_mortgagelender') Mortgage Lender
                     select#buyer_mortgagelender.selectpicker.form-control(name='buyer_mortgagelender', type='select', required='required', title='Select', data-live-search='true', data-dropup-auto='false', data-size='5')
                       for lender in mortgagelenders
@@ -134,7 +134,7 @@ block content
 
                 .form-row
                   .col-sm-12
-                    span.glyphicon.glyphicon-question-sign(style='float:right; color:#D86C70;', data-container='body', data-toggle='popover', data-html='true' data-content='You can add a new Listing Agent from Manage Dropdown Values in the Administration section.')
+                    //- span.glyphicon.glyphicon-question-sign(style='float:right; color:silver;', data-container='body', data-toggle='popover', data-html='true' data-content='You can add a new Listing Agent from Manage Dropdown Values in the Administration section.')
                     label.lb-sm(for='buyer_listingagent') Listing Agent
                     select#buyer_listingagent.selectpicker.form-control(name='buyer_listingagent', type='select', required='required', title='Select', data-live-search='true', data-dropup-auto='false', data-size='5')
                       for agent in listingagents
@@ -142,7 +142,7 @@ block content
 
                 .form-row
                   .col-sm-12
-                    span.glyphicon.glyphicon-question-sign(style='float:right; color:#D86C70;', data-container='body', data-toggle='popover', data-html='true' data-content='You can add a new Sales Type from Manage Dropdown Values in the Administration section.')
+                    //- span.glyphicon.glyphicon-question-sign(style='float:right; color:silver;', data-container='body', data-toggle='popover', data-html='true' data-content='You can add a new Sales Type from Manage Dropdown Values in the Administration section.')
                     label.lb-sm(for='buyer_salestype') Sales Type
                     select#buyer_salestype.selectpicker.form-control(name='buyer_salestype', type='select', required='required', title='Select', data-live-search='true', data-dropup-auto='false', data-size='5')
                       for salestype in salestypes
@@ -252,7 +252,16 @@ block content
         .tab-content
 
           #doctab1.tab-pane.fade.active.in
-            table#docspendingTable.table.table-striped.table-no-bordered(data-toggle='table', data-pagination='true', data-search='true', data-show-refresh='true', data-show-toggle='true', <='', body='', data-show-columns='true')
+            table#docspendingTable.table.table-striped.table-no-bordered(
+              data-toggle='table', 
+              data-pagination='true', 
+              data-search='true', 
+              data-show-refresh='false', 
+              data-show-toggle='true', 
+              data-show-columns='true', 
+              data-page-size="50", 
+              data-page-list='[50, 75, 100, 200, 300, 500]'
+            )
               thead
                 tr 
                   th(data-field='Documents', data-sortable='true') Documents
@@ -272,7 +281,16 @@ block content
             button.btn.btn-danger.btn-cons(type='button') Terminate Current Contract
 
           #doctab2.tab-pane.fade
-            table#docstitlecompanyTable.table.table-striped.table-no-bordered(data-toggle='table', data-pagination='true', data-search='true', data-show-refresh='true', data-show-toggle='true', <='', body='', data-show-columns='true')
+            table#docstitlecompanyTable.table.table-striped.table-no-bordered(
+              data-toggle='table', 
+              data-pagination='true', 
+              data-search='true', 
+              data-show-refresh='false', 
+              data-show-toggle='true', 
+              data-show-columns='true', 
+              data-page-size="50", 
+              data-page-list='[50, 75, 100, 200, 300, 500]'
+            )
               thead
                 tr 
                   th(data-field='Documents', data-sortable='true') Documents
@@ -291,7 +309,16 @@ block content
                       a(href='#') Upload
 
           #doctab3.tab-pane.fade
-            table#docsmiscTable.table.table-striped.table-no-bordered(data-toggle='table', data-pagination='true', data-search='true', data-show-refresh='true', data-show-toggle='true', <='', body='', data-show-columns='true')
+            table#docsmiscTable.table.table-striped.table-no-bordered(
+              data-toggle='table', 
+              data-pagination='true', 
+              data-search='true', 
+              data-show-refresh='false', 
+              data-show-toggle='true', 
+              data-show-columns='true', 
+              data-page-size="50", 
+              data-page-list='[50, 75, 100, 200, 300, 500]'
+            )
               thead
                 tr
                   th(data-field='Documents', data-sortable='true') Documents
