@@ -8,10 +8,9 @@ block content
 
     .row
       .col-sm-4
-        p
-        | Favorites
-        p
-        | Activity Feed
+        a.twitter-timeline(href='https://twitter.com/HometownTwins')
+          | Tweets by HometownTwins
+
       .col-sm-1
       .col-sm-7
         p
@@ -50,7 +49,9 @@ block content
             });
         }
       });
+      
     });
+
 
   //- div
   //-   if process.env.DEBUG= true

@@ -7,18 +7,6 @@ const defaultDocuments = new Document({
   docname: null
 });
 
-function getDocument(id, callback) {
-  db.collection('queryes', function(err, collection) {
-    collection.findOne({'_id':id}, callback);
-  });
-}
-
-function getDocuments(callback) {
-  db.collection('questions', function(err, collection) {
-    collection.find().toArray(callback);
-  });
-}
-
 /**
  * GET documents form ready for insert or update
  */
