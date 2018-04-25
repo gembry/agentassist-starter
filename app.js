@@ -18,13 +18,28 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const expressValidator = require('express-validator');
 const expressStatusMonitor = require('express-status-monitor');
+const fileUpload = require('express-fileupload');
 const sass = require('node-sass-middleware');
 const multer = require('multer');
 const csv = require('csv-express');
 //const smartTable = require('angular-smart-table');
-//const upload = multer({ dest: path.join(__dirname, 'uploads') });
-const upload = multer({ dest: process.env.AA_STORAGE }); 
 // const router = express.Router(); not used... at this time
+//const upload = multer({ dest: path.join(__dirname, 'uploads') });
+// const upload = multer({ dest: process.env.AA_STORAGE }); 
+
+var storage =   multer.diskStorage({  
+  destination: function (req, file, callback) { 
+    callback(null, './uploads');  
+
+  },  
+  filename: function (req, file, callback) {  
+    callback(null, file.originalname);  
+  }  
+});
+const upload = multer({ storage : storage }).single('myfile');
+
+// const request = require('request');
+// const fs = require('fs');
 
 /**
  * Load environment variables from .env file, where API keys and passwords are configured.
@@ -117,6 +132,8 @@ app.use(flash());
 app.use((req, res, next) => {
   if (req.path === '/api/upload') {
     next();
+  } else if (req.path === '/uploadjavatpoint') {
+    next();
   } else {
     lusca.csrf()(req, res, next);
   }
@@ -193,6 +210,70 @@ app.get('/buyer', passportConfig.isAuthenticated, buyerController.getBuyer)
 app.get('/buyers', passportConfig.isAuthenticated, buyersController.getBuyers)
    .get('/buyers/:buyer', passportConfig.isAuthenticated, buyersController.deleteBuyer);
 
+// app.post('/upload', passportConfig.isAuthenticated, buyerController.pushDropbox)
+
+// Upload documents
+
+app.post('/uploadjavatpoint',function(req, res){
+  
+  upload(req,res,function(err) {  
+      if(err) {  
+          return res.end("Error uploading file.");  
+      }  
+      console.log(res.body);
+      res.end("File is uploaded successfully!");  
+  });  
+});  
+
+
+// app.use(fileUpload());
+// app.post('/upload', function(req, res) {
+//   if (!req.files)
+//     return res.status(400).send('No files were uploaded.');
+ 
+//   // The name of the input field (i.e. "srcdoc") is used to retrieve the uploaded file
+//   let srcdoc = req.files.srcdoc;
+//   // const srclocation = srcdoc;
+//   console.log(req.files.srcdoc.name);
+
+//   // Use the mv() method to place the file somewhere on your server
+//   // srcdoc.mv('c:\temp.png', function(err) {
+//   //   if (err)
+//   //     return res.status(500).send(err);
+//   // });
+
+//   const content = fs.readFileSync(req.files.srcdoc.name);
+
+//   // const access_token = "RWsH3v07wC8AAAAAAAABvVZCWzK18WLGP-Tx6_QwkuQCOdIH7R0nlqrjplLEy3K3";
+
+//   // options = {
+//   //   method: "POST",
+//   //   url: 'https://content.dropboxapi.com/2/files/upload',
+//   //   headers: {
+//   //     "Content-Type": "application/octet-stream",
+//   //     "Authorization": "Bearer " + access_token,
+//   //     "Dropbox-API-Arg": "{\"path\": \"/monkey/"+srcfile+"\",\"mode\": \"overwrite\",\"autorename\": true,\"mute\": false}",
+//   //   },
+//   //   body:content
+//   // };
+
+//   // request(options, function(err, res, body){
+//   //   // console.log("Err : " + err);
+//   //   // console.log("res : " + res);
+//   //   console.log("body : " + body);
+//   // })
+
+ 
+//   // Use the mv() method to place the file somewhere on your server
+//   // srcdoc.mv('/somewhere/on/your/server/filename.jpg', function(err) {
+//     // if (err)
+//       // return res.status(500).send(err);
+ 
+//   res.end('File uploaded!');
+// });
+
+
+
 // Seller(s) related Routes
 app.get('/seller', passportConfig.isAuthenticated, sellerController.getSeller);
 app.post('/seller', passportConfig.isAuthenticated, sellerController.postSeller);
@@ -213,6 +294,8 @@ app.get('/admin/dropdowns', passportConfig.isAuthenticated, dropdownsController.
 app.get('/admin/export', passportConfig.isAuthenticated, exportController.getExport)
    .get('/admin/exportclients', passportConfig.isAuthenticated, exportController.getExportclients)
    .get('/admin/exportbuyers', passportConfig.isAuthenticated, exportController.getExportbuyers);
+
+
 
 /**
  * API examples routes.

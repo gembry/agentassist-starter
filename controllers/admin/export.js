@@ -1,6 +1,8 @@
 const Client = require("../../models/Client");
 const Buyer = require("../../models/Buyer");
 
+// http://programmerblog.net/generate-csv-using-nodejs/
+
 exports.getExport = (req, res) => {
   res.render("admin/export", {
     title: "Export CSV Data"

@@ -277,7 +277,24 @@ block content
                       img(src='https://www.santacruzpl.org/media/img/site/icons/sm_pdf.png')
                       img(src='https://www.santacruzpl.org/media/img/site/icons/sm_pdf.png')
                     td
-                      a(href='#') Upload
+                      //- input#upload(type='file')
+                      //- a#upload_link(href='') Upload
+
+                      //- form#uploadForm(enctype='multipart/form-data', action='/uploadme', method='POST')
+                      //-   input(type='file', name='myfile')
+                      //-   input(type='submit', value='Upload', name='submit')
+                      //-   span#status
+
+                      form#uploadForm(enctype='multipart/form-data', action='/uploadjavatpoint', method='post')
+                        input(type='file', name='myfile')
+                        input(name='buyer_address', type='hidden', value='397 Skyler Street')
+                        br
+                        br
+                        input(type='submit', value='Upload Image', name='submit')
+                        br
+                        br
+                        span#status
+
             button.btn.btn-danger.btn-cons(type='button') Terminate Current Contract
 
           #doctab2.tab-pane.fade
@@ -335,6 +352,55 @@ block content
                       img(src='https://www.santacruzpl.org/media/img/site/icons/sm_pdf.png')
                     td
                       a(href='#') Upload
+
+  script.
+    $(document).ready(function() {
+
+      $('#uploadForm').submit(function() {
+        $("#status").empty().text("File is uploading...");
+
+        $(this).ajaxSubmit({
+
+          error: function(xhr) {
+            status('Error xxxx: ' + xhr.status);
+          },
+
+          success: function(response) {
+            console.log(response)
+            $("#status").empty().text(response);
+          }
+    });
+
+    return false;  
+    });
+
+    //- var data = {};
+    //- data.title = "title of file";
+    //- data.srcdoc = $('input[name="srcdoc"]').attr('value');
+
+    //- $('#uploadForm').submit(function() {
+    //-   $("#status").empty().text("File is uploading...");
+    //-   $(this).ajaxSubmit({
+    //-     url: '/upload', 
+    //-     type: 'post',
+    //-     dataType: "json",
+    //-     data: JSON.stringify(data),
+    //-     //- cache: false,
+    //-     contentType: "application/json; charset=utf-8;",
+    //-     error: function(xhr) {
+    //-       status('Error: ' + xhr.status);
+    //-       console.log('*** ajaxSubmit ERROR ***');
+    //-     },
+    //-     success: function(response) {
+    //-       $("#status").empty().text(response);
+    //-       console.log('*** ajaxSubmit SUCCESS ***');
+    //-     }
+    //-   });
+    //- //Very important line, it disable the page refresh.
+    //- return false;
+    //- });
+
+    });
 
   //- div
   //-   if process.env.DEBUG= true

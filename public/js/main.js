@@ -122,6 +122,11 @@ $(document).ready(function() {
   // Enable popovers everywhere
   $('[data-toggle="popover"]').popover()
 
+  $("#upload_link").on('click', function(e){
+    e.preventDefault();
+    $("#upload:hidden").trigger('click');
+  });
+
 });
 
 
