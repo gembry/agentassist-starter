@@ -403,8 +403,10 @@ exports.getBuyer = (req, res) => {
       Dropdowns.find({ dropdownname: 'TITLECOMP' }).sort({ "optionvalue": 1 }),
       Dropdowns.find({ dropdownname: 'MORTGLEND' }).sort({ "optionvalue": 1 }),
       Dropdowns.find({ dropdownname: 'LISEAGENT' }).sort({ "optionvalue": 1 }),
-      Dropdowns.find({ dropdownname: 'SALESTYPE' }).sort({ "optionvalue": 1 })
-    ]).then( ([ qrybuyer, qrytitlecomps, qrymortglends, qryliseagents, qrysalestypes ]) => {
+      Dropdowns.find({ dropdownname: 'SALESTYPE' }).sort({ "optionvalue": 1 }),
+      Documents.find({ doctype: 'BUYERPENDI' }).sort({ "docname": 1 })
+      //, Documents.find({ dropdownname: 'SALESTYPE' }).sort({ "optionvalue": 1 })
+    ]).then( ([ qrybuyer, qrytitlecomps, qrymortglends, qryliseagents, qrysalestypes, qrydocspending ]) => {
       res.render("buyer", {
         title: "Update Buyer Offer",
         method: "PUT",
@@ -415,7 +417,7 @@ exports.getBuyer = (req, res) => {
         mortgagelenders: qrymortglends,
         listingagents: qryliseagents,
         salestypes: qrysalestypes,
-        docspending: docspendingArray,
+        docspending: qrydocspending,
         docstitlecompany: docstitlecompanyArray,
         docsmisc: docsmiscArray
       });
@@ -427,8 +429,9 @@ exports.getBuyer = (req, res) => {
       Dropdowns.find({ dropdownname: 'TITLECOMP' }).sort({ "optionvalue": 1 }),
       Dropdowns.find({ dropdownname: 'MORTGLEND' }).sort({ "optionvalue": 1 }),
       Dropdowns.find({ dropdownname: 'LISEAGENT' }).sort({ "optionvalue": 1 }),
-      Dropdowns.find({ dropdownname: 'SALESTYPE' }).sort({ "optionvalue": 1 })
-    ]).then( ([ qrytitlecomps, qrymortglends, qryliseagents, qrysalestypes ]) => {
+      Dropdowns.find({ dropdownname: 'SALESTYPE' }).sort({ "optionvalue": 1 }),
+      Documents.find({ doctype: 'BUYERPENDI' }).sort({ "docname": 1 })
+    ]).then( ([ qrytitlecomps, qrymortglends, qryliseagents, qrysalestypes, qrydocspending ]) => {
       res.render("buyer", {
         title: "Add Buyer Offer",
         method: "POST",
@@ -438,7 +441,7 @@ exports.getBuyer = (req, res) => {
         mortgagelenders: qrymortglends,
         listingagents: qryliseagents,
         salestypes: qrysalestypes,
-        docspending: docspendingArray,
+        docspending: qrydocspending,
         docstitlecompany: docstitlecompanyArray,
         docsmisc: docsmiscArray
       });
@@ -547,35 +550,35 @@ exports.putBuyer = (req, res) => {
 /**
  * Push file to DropBox
  */
-exports.pushDropbox = (req, res) => {
+// exports.pushDropbox = (req, res) => {
 
-  const request = require('request');
-  const fs = require('fs');
-  const access_token = "RWsH3v07wC8AAAAAAAABvVZCWzK18WLGP-Tx6_QwkuQCOdIH7R0nlqrjplLEy3K3";
-  const srcfile = 'test.png';
-  const srclocation = 'uploads';
-  const content = fs.readFileSync(srclocation + '\/' + srcfile);
+//   const request = require('request');
+//   const fs = require('fs');
+//   const access_token = "RWsH3v07wC8AAAAAAAABvVZCWzK18WLGP-Tx6_QwkuQCOdIH7R0nlqrjplLEy3K3";
+//   const srcfile = 'test.png';
+//   const srclocation = 'uploads';
+//   const content = fs.readFileSync(srclocation + '\/' + srcfile);
 
-  console.log('---- req ----');
-  console.log(req.body);
+//   console.log('---- req ----');
+//   console.log(req.body);
 
-  options = {
-    method: "POST",
-    url: 'https://content.dropboxapi.com/2/files/upload',
-    headers: {
-      "Content-Type": "application/octet-stream",
-      "Authorization": "Bearer " + access_token,
-      "Dropbox-API-Arg": "{\"path\": \"/monkey/"+srcfile+"\",\"mode\": \"overwrite\",\"autorename\": true,\"mute\": false}",
-    },
-    body:content
-  };
+//   options = {
+//     method: "POST",
+//     url: 'https://content.dropboxapi.com/2/files/upload',
+//     headers: {
+//       "Content-Type": "application/octet-stream",
+//       "Authorization": "Bearer " + access_token,
+//       "Dropbox-API-Arg": "{\"path\": \"/monkey/"+srcfile+"\",\"mode\": \"overwrite\",\"autorename\": true,\"mute\": false}",
+//     },
+//     body:content
+//   };
 
-  request(options, function(err, res, body){
-    // console.log("Err : " + err);
-    // console.log("res : " + res);
-    console.log("body : " + body);
-  })
+//   request(options, function(err, res, body){
+//     // console.log("Err : " + err);
+//     // console.log("res : " + res);
+//     console.log("body : " + body);
+//   })
 
-  res.end("File is uploaded");
+//   res.end("File is uploaded");
 
-};
+// };

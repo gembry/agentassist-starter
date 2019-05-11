@@ -271,7 +271,7 @@ block content
               tbody
                 each doc in docspending
                   tr.small
-                    td= doc.value
+                    td= doc.docname
                     td 10/15/2017
                     td 
                       img(src='https://www.santacruzpl.org/media/img/site/icons/sm_pdf.png')
@@ -281,19 +281,17 @@ block content
                       //- a#upload_link(href='') Upload
 
                       //- form#uploadForm(enctype='multipart/form-data', action='/uploadme', method='POST')
-                      //-   input(type='file', name='myfile')
+                      //-   input(type='file', name='buyer_doc')
                       //-   input(type='submit', value='Upload', name='submit')
                       //-   span#status
 
-                      form#uploadForm(enctype='multipart/form-data', action='/uploadjavatpoint', method='post')
-                        input(type='file', name='myfile')
-                        input(name='buyer_address', type='hidden', value='397 Skyler Street')
-                        br
-                        br
-                        input(type='submit', value='Upload Image', name='submit')
-                        br
-                        br
-                        span#status
+                      // THIS WORKED FOR ME
+                      //- form#uploadForm(enctype='multipart/form-data', action='/uploadDoc', method='post')
+                      //-   input(type='file', name='buyer_doc')
+                      //-   input(name='buyer_doctype', type='hidden', value=doc.docname)
+                      //-   input(type='submit', value='Upload', name='submit')
+                      //-   span#status
+                      //-   code.formattedDebug= doc
 
             button.btn.btn-danger.btn-cons(type='button') Terminate Current Contract
 
@@ -401,8 +399,3 @@ block content
     //- });
 
     });
-
-  //- div
-  //-   if process.env.DEBUG= true
-  //-     code.formattedDebug= buyer
-  //-     code.formattedDebug= titlecompanies
