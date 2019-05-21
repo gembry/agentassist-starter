@@ -1,6 +1,17 @@
 extends layout
 
 block content
+
+  style.
+    /* style.css */
+    label.glyphicon.glyphicon-upload {
+      font-size: 21px;
+      cursor: pointer;
+    }
+    label:hover {
+      opacity: 0.6;
+    }
+
   .page-header
     h2= title
     br
@@ -11,215 +22,112 @@ block content
       input(type='hidden', name='_csrf', value=_csrf)
       input(type='hidden', name='_method', value=method)
 
+      .form-row.col-sm-12
+        br
+      .form-row
+        .col-sm-12
+          label.lb-sm(for='buyer_clientIDs') Clients [search by first/last name or city]
+          input#buyer_clientIDs.flexdatalist(type='text', 
+            name='buyer_clientIDs',
+            placeholder="add...",
+            value=buyer.buyer_clientIDs,
+            multiple='true', 
+            data-data='/clients.json', 
+            data-search-in='["client_firstname","client_lastname", "client_city"]', 
+            data-visible-properties='["client_firstname", "client_lastname", "client_city"]', 
+            data-selection-required='true', 
+            data-value-property='_id', 
+            data-text-property='{client_firstname} {client_lastname} - {client_city}', 
+            data-min-length='2', 
+            data-remove-on-backspace='false',
+            data-focus-first-result='true')
+            //- style='width: 100%; border: 0px !important;'
+      .form-row.col-sm-12
+        br
+      .form-row
+        .col-sm-12
+          label.lb-sm(for='buyer_address') Address (Correct?)
+          input#buyer_address.form-control(name='buyer_address', type='text', required='required', placeholder='123 Sample Street, Unit B', value=buyer.buyer_address)
+      .form-row
+        .col-sm-12
+          label.lb-sm(for='buyer_city') City
+          input#buyer_city.form-control(name='buyer_city', type='text', required='required', value=buyer.buyer_city)
+      .form-row
+        .col-sm-8
+          label.lb-sm.control-label(for='buyer_state') State
+          select#buyer_state.selectpicker.form-control(name='buyer_state', type='select', required='required', title='Select', data-live-search='true', data-dropup-auto='false', data-size='3')
+            option(value='' selected=!buyer.buyer_state) Select
+              for state in states
+                option(value=state.option selected=state.option === buyer.buyer_state) #{state.value}
+        .col-sm-4
+          label.lb-sm(for='buyer_zip') ZIP Code
+          input#buyer_zip.form-control(name='buyer_zip', type='text', required='required', value=buyer.buyer_zip)
+      .form-row.col-sm-12
+        br
+      .form-row
+        .col-sm-6
+          label.lb-sm(for='buyer_contractdate') Contract Date
+          input#buyer_contractdate.form-control(name='buyer_contractdate', type='date', value=moment(buyer.buyer_contractdate).tz("UTC").format('YYYY-MM-DD'))
+        .col-sm-6
+          label.lb-sm(for='buyer_closingdate') Closing Date
+          input#buyer_closingdate.form-control(name='buyer_closingdate', type='date', value=moment(buyer.buyer_closingdate).tz("UTC").format('YYYY-MM-DD'))
+      .form-row.col-sm-12
+        br
+      .form-row
+        .col-sm-12
+          label.lb-sm(for='buyer_purchaseprice') Purchase Price
+          .input-group.mb-2.mr-sm-2.mb-sm-0
+            .input-group-addon $
+            input#buyer_purchaseprice.form-control.currency(name='buyer_purchaseprice', type='text', value=buyer.buyer_purchaseprice)
+      .form-row
+        .col-sm-12
+          label.lb-sm(for='buyer_earnestprice') Earnest Money
+          .input-group.mb-2.mr-sm-2.mb-sm-0
+            .input-group-addon $
+            input#buyer_earnestprice.form-control.currency(name='buyer_earnestprice', type='text', value=buyer.buyer_earnestprice)
+      .form-row
+        .col-sm-12
+          label.lb-sm(for='buyer_concession') Buyer Concession (seller?)
+          .input-group.mb-2.mr-sm-2.mb-sm-0
+            .input-group-addon $
+            input#buyer_concession.form-control.currency(name='buyer_concession', type='text', value=buyer.buyer_concession)
       .row
-        .board
-          .board-inner
-
-            ul#tabgroup1.nav.nav-tabs
-              .liner
-              li#buytab1.active
-                a(href='#tabInformation', data-toggle='tab', title='Contract Address')
-                  span.round-tabs.one
-                    i.glyphicon.glyphicon-home
-              li#buytab2
-                a(href='#tabAdditional', data-toggle='tab', title='Additional Information')
-                  span.round-tabs.two
-                    i.glyphicon.glyphicon-plus
-
-              li#buytab3(style='float:right;')
-                button.btn.btn-primary(name='buyer_submit', type='submit')
-                  i.fa.fa-floppy-o
-                  | Save Buyer Record
-
-            .tab-content
-              #tabInformation.tab-pane.fade.active.in
-                .form-row.col-sm-12
-                  br
-                .form-row
-                  .col-sm-12
-                    label.lb-sm(for='buyer_clientIDs') Clients [search by first/last name or city]
-                    input#buyer_clientIDs.flexdatalist(type='text', 
-                      name='buyer_clientIDs',
-                      placeholder="add...",
-                      value=buyer.buyer_clientIDs,
-                      multiple='true', 
-                      data-data='/clients.json', 
-                      data-search-in='["client_firstname","client_lastname", "client_city"]', 
-                      data-visible-properties='["client_firstname", "client_lastname", "client_city"]', 
-                      data-selection-required='true', 
-                      data-value-property='_id', 
-                      data-text-property='{client_firstname} {client_lastname} - {client_city}', 
-                      data-min-length='2', 
-                      data-remove-on-backspace='false',
-                      data-focus-first-result='true')
-                      //- style='width: 100%; border: 0px !important;'
-                .form-row.col-sm-12
-                  br
-                .form-row
-                  .col-sm-12
-                    label.lb-sm(for='buyer_address') Address
-                    input#buyer_address.form-control(name='buyer_address', type='text', required='required', placeholder='123 Sample Street, Unit B', value=buyer.buyer_address)
-                .form-row
-                  .col-sm-12
-                    label.lb-sm(for='buyer_city') City
-                    input#buyer_city.form-control(name='buyer_city', type='text', required='required', value=buyer.buyer_city)
-                .form-row
-                  .col-sm-8
-                    label.lb-sm.control-label(for='buyer_state') State
-                    select#buyer_state.selectpicker.form-control(name='buyer_state', type='select', required='required', title='Select', data-live-search='true', data-dropup-auto='false', data-size='3')
-                      option(value='' selected=!buyer.buyer_state) Select
-                        for state in states
-                          option(value=state.option selected=state.option === buyer.buyer_state) #{state.value}
-                  .col-sm-4
-                    label.lb-sm(for='buyer_zip') ZIP Code
-                    input#buyer_zip.form-control(name='buyer_zip', type='text', required='required', value=buyer.buyer_zip)
-                .form-row.col-sm-12
-                  br
-                .form-row
-                  .col-sm-6
-                    label.lb-sm(for='buyer_contractdate') Contract Date
-                    input#buyer_contractdate.form-control(name='buyer_contractdate', type='date', value=moment(buyer.buyer_contractdate).tz("UTC").format('YYYY-MM-DD'))
-
-                  .col-sm-6
-                    label.lb-sm(for='buyer_closingdate') Closing Date
-                    input#buyer_closingdate.form-control(name='buyer_closingdate', type='date', value=moment(buyer.buyer_closingdate).tz("UTC").format('YYYY-MM-DD'))
-
-                .form-row.col-sm-12
-                  br
-                .form-row
-                  .col-sm-12
-                    input(name='buyer_notifications', type="checkbox", checked=(buyer.buyer_notifications===true ? "checked" : undefined))
-                    |  Send deadline notifications to me. (agent only)
-
-              #tabAdditional.tab-pane.fade
-                .form-row.col-sm-12
-                  br
-                .form-row
-                  .col-sm-12
-                    label.lb-sm(for='buyer_purchaseprice') Purchase Price
-                    .input-group.mb-2.mr-sm-2.mb-sm-0
-                      .input-group-addon $
-                      input#buyer_purchaseprice.form-control.currency(name='buyer_purchaseprice', type='text', value=buyer.buyer_purchaseprice)
-                .form-row
-                  .col-sm-12
-                    label.lb-sm(for='buyer_earnestprice') Earnest Money
-                    .input-group.mb-2.mr-sm-2.mb-sm-0
-                      .input-group-addon $
-                      input#buyer_earnestprice.form-control.currency(name='buyer_earnestprice', type='text', value=buyer.buyer_earnestprice)
-                .form-row
-                  .col-sm-12
-                    label.lb-sm(for='buyer_concession') Buyer Concession (seller?)
-                    .input-group.mb-2.mr-sm-2.mb-sm-0
-                      .input-group-addon $
-                      input#buyer_concession.form-control.currency(name='buyer_concession', type='text', value=buyer.buyer_concession)
-                .row
-                  .col-sm-12
-                    p &nbsp;
-
-                .form-row
-                  .col-sm-12
-                    span.glyphicon.glyphicon-question-sign(style='float:right; color:silver;', data-container='body', data-toggle='popover', data-html='true' data-content='You can add or edit a Title Company, Mortgage Lender, List/Sell Agent or Sales Type from Manage Dropdown Values in the Administration section.')
-                    label.lb-sm(for='buyer_titlecompany') Title Company
-                    select#buyer_titlecompany.selectpicker.form-control(name='buyer_titlecompany', type='select', required='required', title='Select', data-live-search='true', data-dropup-auto='false', data-size='5')
-                      for titlecompany in titlecompanies
-                        option(value=titlecompany._id selected=titlecompany._id == buyer.buyer_titlecompany) #{titlecompany.optionvalue}
-
-                .form-row
-                  .col-sm-12
-                    //- span.glyphicon.glyphicon-question-sign(style='float:right; color:silver;', data-container='body', data-toggle='popover', data-html='true' data-content='You can add a new Mortgage Lender from Manage Dropdown Values in the Administration section.')
-                    label.lb-sm(for='buyer_mortgagelender') Mortgage Lender
-                    select#buyer_mortgagelender.selectpicker.form-control(name='buyer_mortgagelender', type='select', required='required', title='Select', data-live-search='true', data-dropup-auto='false', data-size='5')
-                      for lender in mortgagelenders
-                        option(value=lender._id selected=lender._id == buyer.buyer_mortgagelender) #{lender.optionvalue}
-
-                .form-row
-                  .col-sm-12
-                    //- span.glyphicon.glyphicon-question-sign(style='float:right; color:silver;', data-container='body', data-toggle='popover', data-html='true' data-content='You can add a new Listing Agent from Manage Dropdown Values in the Administration section.')
-                    label.lb-sm(for='buyer_listingagent') Listing Agent
-                    select#buyer_listingagent.selectpicker.form-control(name='buyer_listingagent', type='select', required='required', title='Select', data-live-search='true', data-dropup-auto='false', data-size='5')
-                      for agent in listingagents
-                        option(value=agent._id selected=agent._id == buyer.buyer_listingagent) #{agent.optionvalue}
-
-                .form-row
-                  .col-sm-12
-                    //- span.glyphicon.glyphicon-question-sign(style='float:right; color:silver;', data-container='body', data-toggle='popover', data-html='true' data-content='You can add a new Sales Type from Manage Dropdown Values in the Administration section.')
-                    label.lb-sm(for='buyer_salestype') Sales Type
-                    select#buyer_salestype.selectpicker.form-control(name='buyer_salestype', type='select', required='required', title='Select', data-live-search='true', data-dropup-auto='false', data-size='5')
-                      for salestype in salestypes
-                        option(value=salestype._id selected=salestype._id == buyer.buyer_salestype) #{salestype.optionvalue}
-
-                //- Alternative Earnest Money Deadline
-
-                //- Title
-                //-   Record Title Deadline
-                //-   Record Title Objection Deadline
-                //-   Off-Record Title Deadline
-                //-   Off-Record Title Objection Deadline
-                //-   Title Resolution Deadline
-                //-   Right of First Refusal Deadline
-
-                //- Owners' Association
-                //-   Association Documents Deadline
-                //-   Association Documents Objection Deadline
-
-                //- Seller's Property Disclosure
-                //-   Seller's Property Disclosure Deadline
-
-                //- Loan
-                //-   Loan Application Deadline
-                //-   Loan Objection Deadline
-
-                //- Appraisal
-                //-   Appraisal Deadline
-                //-   Appraisal Objection Deadline
-                //-   Appraisal Resolution Deadline
-
-                //- Survey
-                //-   New ILC or New Survey Deadline
-                //-   New ILC or New Survey Objection Deadline
-                //-   New ILC or New Survey Resolution Deadline
-
-                //- Inspection and Due Diligence
-                //-   Inspection Objection Deadline
-                //-   Inspection Resolution Deadline
-                //-   Property Insurance Objection Deadline
-                //-   Due Diligence Documents Delivery Deadline
-                //-   Due Diligence Documents Objection Deadline
-                //-   Due Diligence Documents Resolution Deadline
-                //-   Conditional Sale Deadline
-
-                //- Closing and Possession
-                //-   Closing Date
-                //-   Possession Date
-
-                //- Alternative Earnest Money Deadline
-                //- Record Title Deadline
-
-            //- #tabNotes.tab-pane.fade
-            //-   .row
-            //-     .col-sm-12
-            //-       table.table.table-striped
-            //-         thead
-            //-           tr
-            //-             th.lb-sm Notes
-            //-             th.lb-sm Added
-            //-             th.lb-sm Action
-            //-         tbody
-            //-           tr
-            //-             td (todo) Need to talk to them about painting the bedroom another color. It is not that attractive.
-            //-             td 10/17/2017
-            //-             td 
-            //-               a(href='#') Edit
-            //-           tr
-            //-             td (done) Garage door needs to be replaced too. Buyer just backed into it. What an idiot!
-            //-             td 10/23/2017
-            //-             td 
-            //-               a(href='#') Edit
-
-        .row
-          .col-sm-12.text-center
-            br
-            iframe(width='95%', height='250', frameborder='0', style='border:0', src='//www.google.com/maps/embed/v1/place?key=AIzaSyAlrNTZfuAAD045rGGlOzVbj-GhwcEjm_M&q='+mapaddress, allowfullscreen='')
+        .col-sm-12
+          p &nbsp;
+      .form-row
+        .col-sm-12
+          span.glyphicon.glyphicon-question-sign(style='float:right; color:silver;', data-container='body', data-toggle='popover', data-html='true' data-content='You can add or edit a Title Company, Mortgage Lender, List/Sell Agent or Sales Type from Manage Dropdown Values in the Administration section.')
+          label.lb-sm(for='buyer_titlecompany') Title Company
+          select#buyer_titlecompany.selectpicker.form-control(name='buyer_titlecompany', type='select', required='required', title='Select', data-live-search='true', data-dropup-auto='false', data-size='5')
+            for titlecompany in titlecompanies
+              option(value=titlecompany._id selected=titlecompany._id == buyer.buyer_titlecompany) #{titlecompany.optionvalue}
+      .form-row
+        .col-sm-12
+          //- span.glyphicon.glyphicon-question-sign(style='float:right; color:silver;', data-container='body', data-toggle='popover', data-html='true' data-content='You can add a new Mortgage Lender from Manage Dropdown Values in the Administration section.')
+          label.lb-sm(for='buyer_mortgagelender') Mortgage Lender
+          select#buyer_mortgagelender.selectpicker.form-control(name='buyer_mortgagelender', type='select', required='required', title='Select', data-live-search='true', data-dropup-auto='false', data-size='5')
+            for lender in mortgagelenders
+              option(value=lender._id selected=lender._id == buyer.buyer_mortgagelender) #{lender.optionvalue}
+      .form-row
+        .col-sm-12
+          //- span.glyphicon.glyphicon-question-sign(style='float:right; color:silver;', data-container='body', data-toggle='popover', data-html='true' data-content='You can add a new Listing Agent from Manage Dropdown Values in the Administration section.')
+          label.lb-sm(for='buyer_listingagent') Listing Agent
+          select#buyer_listingagent.selectpicker.form-control(name='buyer_listingagent', type='select', required='required', title='Select', data-live-search='true', data-dropup-auto='false', data-size='5')
+            for agent in listingagents
+              option(value=agent._id selected=agent._id == buyer.buyer_listingagent) #{agent.optionvalue}
+      .form-row
+        .col-sm-12
+          //- span.glyphicon.glyphicon-question-sign(style='float:right; color:silver;', data-container='body', data-toggle='popover', data-html='true' data-content='You can add a new Sales Type from Manage Dropdown Values in the Administration section.')
+          label.lb-sm(for='buyer_salestype') Sales Type
+          select#buyer_salestype.selectpicker.form-control(name='buyer_salestype', type='select', required='required', title='Select', data-live-search='true', data-dropup-auto='false', data-size='5')
+            for salestype in salestypes
+              option(value=salestype._id selected=salestype._id == buyer.buyer_salestype) #{salestype.optionvalue}
+      .form-row.col-sm-12
+        br
+      .form-row
+        .col-sm-12
+          input(name='buyer_notifications', type="checkbox", checked=(buyer.buyer_notifications===true ? "checked" : undefined))
+          |  Send deadline notifications to me. (agent only)
 
   .col-md-1
   .col-md-7
@@ -245,7 +153,7 @@ block content
                   //- span.label.label-default
 
             li(style='float:right;')
-              button.btn.btn-danger.disabled(name='buyer_submit', type='submit')
+              button.btn.btn-danger.disabled(name='terminate_submit', type='submit')
                 i.fa.fa-floppy-o
                 | Contract terminated on 11/02/2018
 
@@ -267,7 +175,7 @@ block content
                   th(data-field='Documents', data-sortable='true') Documents
                   th(data-field='UploadedOn', data-sortable='false') Uploaded On
                   th(data-field='Attachments', data-sortable='false') Attachments
-                  th.text-center(data-field='Action', data-sortable='false') Action
+                  th.text-center(data-field='Action', data-sortable='false') Upload
               tbody
                 each doc in docspending
                   tr.small
@@ -277,21 +185,11 @@ block content
                       img(src='https://www.santacruzpl.org/media/img/site/icons/sm_pdf.png')
                       img(src='https://www.santacruzpl.org/media/img/site/icons/sm_pdf.png')
                     td
-                      //- input#upload(type='file')
-                      //- a#upload_link(href='') Upload
-
-                      //- form#uploadForm(enctype='multipart/form-data', action='/uploadme', method='POST')
-                      //-   input(type='file', name='buyer_doc')
-                      //-   input(type='submit', value='Upload', name='submit')
-                      //-   span#status
-
-                      // THIS WORKED FOR ME
-                      //- form#uploadForm(enctype='multipart/form-data', action='/uploadDoc', method='post')
-                      //-   input(type='file', name='buyer_doc')
-                      //-   input(name='buyer_doctype', type='hidden', value=doc.docname)
-                      //-   input(type='submit', value='Upload', name='submit')
-                      //-   span#status
-                      //-   code.formattedDebug= doc
+                      form(enctype='multipart/form-data')
+                        input(type='hidden', name='token', id='token', value='RWsH3v07wC8AAAAAAAABvVZCWzK18WLGP-Tx6_QwkuQCOdIH7R0nlqrjplLEy3K3')
+                        input(type='hidden', name='folder', id='folder', value=buyer.buyer_zip + '_' + buyer.buyer_address + '_' + moment(buyer.buyer_contractdate).tz("UTC").format('YYYY-MM-DD') + '/Buyer_PendingDocs')
+                        label.glyphicon.glyphicon-upload.text-success
+                          input(type='file', name='file', id='file', onchange='doDropbox( this.form ); return false;', style='display: none;')
 
             button.btn.btn-danger.btn-cons(type='button') Terminate Current Contract
 
@@ -315,13 +213,17 @@ block content
               tbody
                 each doc in docstitlecompany
                   tr.small
-                    td= doc.value
+                    td= doc.docname
                     td 10/15/2017
                     td 
                       img(src='https://www.santacruzpl.org/media/img/site/icons/sm_pdf.png')
                       img(src='https://www.santacruzpl.org/media/img/site/icons/sm_pdf.png')
                     td
-                      a(href='#') Upload
+                      form(enctype='multipart/form-data')
+                        input(type='hidden', name='token', id='token', value='RWsH3v07wC8AAAAAAAABvVZCWzK18WLGP-Tx6_QwkuQCOdIH7R0nlqrjplLEy3K3')
+                        input(type='hidden', name='folder', id='folder', value=buyer.buyer_zip + '_' + buyer.buyer_address + '_' + moment(buyer.buyer_contractdate).tz("UTC").format('YYYY-MM-DD') + '/Buyer_TitleCompany')
+                        label.glyphicon.glyphicon-upload.text-success
+                          input(type='file', name='file', id='file', onchange='doDropbox( this.form ); return false;', style='display: none;')
 
           #doctab3.tab-pane.fade
             table#docsmiscTable.table.table-striped.table-no-bordered(
@@ -341,61 +243,25 @@ block content
                   th(data-field='Attachments', data-sortable='false') Attachments
                   th.text-center(data-field='Action', data-sortable='false') Action
               tbody
+                
                 each doc in docsmisc
                   tr.small
-                    td= doc.value
+                    td= doc.docname
                     td 10/15/2017
                     td 
                       img(src='https://www.santacruzpl.org/media/img/site/icons/sm_pdf.png')
                       img(src='https://www.santacruzpl.org/media/img/site/icons/sm_pdf.png')
                     td
-                      a(href='#') Upload
+                      form(enctype='multipart/form-data')
+                        input(type='hidden', name='token', id='token', value='RWsH3v07wC8AAAAAAAABvVZCWzK18WLGP-Tx6_QwkuQCOdIH7R0nlqrjplLEy3K3')
+                        input(type='hidden', name='folder', id='folder', value=buyer.buyer_zip + '_' + buyer.buyer_address + '_' + moment(buyer.buyer_contractdate).tz("UTC").format('YYYY-MM-DD') + '/Buyer_Misc')
+                        label.glyphicon.glyphicon-upload.text-success
+                          input(type='file', name='file', id='file', onchange='doDropbox( this.form ); return false;', style='display: none;')
+                      //- code.formattedDebug= JSON.stringify(buyer)
 
-  script.
-    $(document).ready(function() {
-
-      $('#uploadForm').submit(function() {
-        $("#status").empty().text("File is uploading...");
-
-        $(this).ajaxSubmit({
-
-          error: function(xhr) {
-            status('Error xxxx: ' + xhr.status);
-          },
-
-          success: function(response) {
-            console.log(response)
-            $("#status").empty().text(response);
-          }
-    });
-
-    return false;  
-    });
-
-    //- var data = {};
-    //- data.title = "title of file";
-    //- data.srcdoc = $('input[name="srcdoc"]').attr('value');
-
-    //- $('#uploadForm').submit(function() {
-    //-   $("#status").empty().text("File is uploading...");
-    //-   $(this).ajaxSubmit({
-    //-     url: '/upload', 
-    //-     type: 'post',
-    //-     dataType: "json",
-    //-     data: JSON.stringify(data),
-    //-     //- cache: false,
-    //-     contentType: "application/json; charset=utf-8;",
-    //-     error: function(xhr) {
-    //-       status('Error: ' + xhr.status);
-    //-       console.log('*** ajaxSubmit ERROR ***');
-    //-     },
-    //-     success: function(response) {
-    //-       $("#status").empty().text(response);
-    //-       console.log('*** ajaxSubmit SUCCESS ***');
-    //-     }
-    //-   });
-    //- //Very important line, it disable the page refresh.
-    //- return false;
-    //- });
-
-    });
+  //- https://dropbox.github.io/dropbox-sdk-js/tutorial-Getting%20started.html
+  //- script(type='text/javascript', src='/lib/dropbox_sdk/Dropbox-sdk.js')
+  script(type='text/javascript', src='/lib/dropbox_sdk/Dropbox-sdk.min.js')
+  //- script(type='text/javascript', src='/lib/dropbox_sdk/DropboxTeam-sdk.js')
+  script(type='text/javascript', src='/lib/dropbox_sdk/DropboxTeam-sdk.min.js')
+  script(type='text/javascript', src='/js/dropbox.js')

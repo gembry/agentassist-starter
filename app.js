@@ -45,6 +45,7 @@ const clientsController = require( './controllers/clients' );
 const buyersController = require( './controllers/buyers' );
 const buyerController = require( './controllers/buyer' );
 const sellerController = require( './controllers/seller' );
+// const tokensController = require( './controllers/tokens' );
 
 /* OtterDocs Admin Controllers */
 const documentsController = require( "./controllers/admin/documents" );
@@ -195,10 +196,13 @@ app.get( '/buyer', passportConfig.isAuthenticated, buyerController.getBuyer )
 app.get( '/buyers', passportConfig.isAuthenticated, buyersController.getBuyers )
 	.get( '/buyers/:buyer', passportConfig.isAuthenticated, buyersController.deleteBuyer );
 
-// app.route('/').get(dropboxController.home);
-app.post( '/upload', dropboxController.fileUploadMulter );   // file upload using multer
-// NOTE in the controller files I see referece to module.exports.xxx 
-// is 'module.' better to reference -- see dropbox upload for example
+// app.get("/token", function(req, res) { 	
+// 	res.send( process.env.DROPBOX_TOKEN )
+// });
+
+// app.get("/foo-route", function(req, res) { 	
+// 	console.log('foo route called');
+// });
 
 // Seller(s) related Routes
 app.get( '/seller', passportConfig.isAuthenticated, sellerController.getSeller );

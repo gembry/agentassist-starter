@@ -212,167 +212,6 @@ const statesArray = [
   }
 ];
 
-const docspendingArray = [
-  {
-    option: "1",
-    value: "Sales Contract"
-  },
-  {
-    option: "2",
-    value: "Counter-Proposal"
-  },
-  {
-    option: "3",
-    value: "Closing Instructions"
-  },
-  {
-    option: "4",
-    value: "Earnest Money Receipted"
-  },
-  {
-    option: "5",
-    value: "Square Footage Disclosure (*)"
-  },
-  {
-    option: "6",
-    value: "Sellers Property Disclosure (*)"
-  },
-  {
-    option: "7",
-    value: "Lead Based Paint (Obligations) (pre 1978)"
-  },
-  {
-    option: "8",
-    value: "Source of Water Addendum (unless on SPD)"
-  },
-  {
-    option: "9",
-    value: "Inspection Objection"
-  },
-  {
-    option: "10",
-    value: "Inspection Resolution"
-  },
-  {
-    option: "11",
-    value: "Title Commitment"
-  },
-  {
-    option: "12",
-    value: "Notice of Termination"
-  },
-  {
-    option: "13",
-    value: "Earnest Money Release"
-  },
-  {
-    option: "14",
-    value: "Other Documents"
-  }
-];
-
-const docstitlecompanyArray = [
-  {
-    option: "1",
-    value: "Buyer's Settlement Statement"
-  },
-  {
-    option: "2",
-    value: "Buyer's Settlement Statement"
-  },
-  {
-    option: "3",
-    value: "Closing Instructions"
-  },
-  {
-    option: "4",
-    value: "Power of Attorney"
-  },
-  {
-    option: "5",
-    value: "Deed (General/Special/P.R.) (*)"
-  },
-  {
-    option: "6",
-    value: "Four Column Summary"
-  },
-  {
-    option: "7",
-    value: "Tax Certificate"
-  },
-  {
-    option: "8",
-    value: "Water/Sewer/HOA Aggreement & Proration"
-  },
-  {
-    option: "9",
-    value: "Bill of Sale"
-  },
-  {
-    option: "10",
-    value: "Real Property Transfer Declaration"
-  },
-  {
-    option: "11",
-    value: "Pay-Off Information"
-  },
-  {
-    option: "12",
-    value: "Final Affidavit and Agreement"
-  },
-  {
-    option: "13",
-    value: "Affirmation of Colorado Residency"
-  },
-  {
-    option: "14",
-    value: "Commission Disbursement"
-  },
-  {
-    option: "15",
-    value: "1099"
-  },
-  {
-    option: "16",
-    value: "Other Documents"
-  }
-];
-
-const docsmiscArray = [
-  {
-    option: "1",
-    value: "Listing Fact Sheet"
-  },
-  {
-    option: "2",
-    value: "Mesa County Assessor"
-  },
-  {
-    option: "3",
-    value: "Mill Tailings"
-  },
-  {
-    option: "4",
-    value: "Receipted Doc's & Disclosures"
-  },
-  {
-    option: "5",
-    value: "FHA Amendatory Clause"
-  },
-  {
-    option: "6",
-    value: "Occupancy Rental Agreement"
-  },
-  {
-    option: "7",
-    value: "Referral Form"
-  },
-  {
-    option: "8",
-    value: "Other Documents"
-  }
-];
-
 // Setup empty object
 const defaultBuyer = new Buyer({
   buyer_address: null,
@@ -404,9 +243,11 @@ exports.getBuyer = (req, res) => {
       Dropdowns.find({ dropdownname: 'MORTGLEND' }).sort({ "optionvalue": 1 }),
       Dropdowns.find({ dropdownname: 'LISEAGENT' }).sort({ "optionvalue": 1 }),
       Dropdowns.find({ dropdownname: 'SALESTYPE' }).sort({ "optionvalue": 1 }),
-      Documents.find({ doctype: 'BUYERPENDI' }).sort({ "docname": 1 })
+      Documents.find({ doctype: 'BUYERPENDI' }).sort({ "docname": 1 }),
+      Documents.find({ doctype: 'BUYERTITLE' }).sort({ "docname": 1 }),
+      Documents.find({ doctype: 'BUYERMISCE' }).sort({ "docname": 1 })
       //, Documents.find({ dropdownname: 'SALESTYPE' }).sort({ "optionvalue": 1 })
-    ]).then( ([ qrybuyer, qrytitlecomps, qrymortglends, qryliseagents, qrysalestypes, qrydocspending ]) => {
+    ]).then( ([ qrybuyer, qrytitlecomps, qrymortglends, qryliseagents, qrysalestypes, qrydocspending, qrydocstitlecompany, qrydocsmisc ]) => {
       res.render("buyer", {
         title: "Update Buyer Offer",
         method: "PUT",
@@ -418,8 +259,8 @@ exports.getBuyer = (req, res) => {
         listingagents: qryliseagents,
         salestypes: qrysalestypes,
         docspending: qrydocspending,
-        docstitlecompany: docstitlecompanyArray,
-        docsmisc: docsmiscArray
+        docstitlecompany: qrydocstitlecompany,
+        docsmisc: qrydocsmisc
       });
     });
 
@@ -430,8 +271,10 @@ exports.getBuyer = (req, res) => {
       Dropdowns.find({ dropdownname: 'MORTGLEND' }).sort({ "optionvalue": 1 }),
       Dropdowns.find({ dropdownname: 'LISEAGENT' }).sort({ "optionvalue": 1 }),
       Dropdowns.find({ dropdownname: 'SALESTYPE' }).sort({ "optionvalue": 1 }),
-      Documents.find({ doctype: 'BUYERPENDI' }).sort({ "docname": 1 })
-    ]).then( ([ qrytitlecomps, qrymortglends, qryliseagents, qrysalestypes, qrydocspending ]) => {
+      Documents.find({ doctype: 'BUYERPENDI' }).sort({ "docname": 1 }),
+      Documents.find({ doctype: 'BUYERTITLE' }).sort({ "docname": 1 }),
+      Documents.find({ doctype: 'BUYERMISCE' }).sort({ "docname": 1 })
+    ]).then( ([ qrytitlecomps, qrymortglends, qryliseagents, qrysalestypes, qrydocspending, qrydocstitlecompany, qrydocsmisc ]) => {
       res.render("buyer", {
         title: "Add Buyer Offer",
         method: "POST",
@@ -442,8 +285,8 @@ exports.getBuyer = (req, res) => {
         listingagents: qryliseagents,
         salestypes: qrysalestypes,
         docspending: qrydocspending,
-        docstitlecompany: docstitlecompanyArray,
-        docsmisc: docsmiscArray
+        docstitlecompany: qrydocstitlecompany,
+        docsmisc: qrydocsmisc
       });
     });
 
@@ -546,39 +389,3 @@ exports.putBuyer = (req, res) => {
     });
   });
 };
-
-/**
- * Push file to DropBox
- */
-// exports.pushDropbox = (req, res) => {
-
-//   const request = require('request');
-//   const fs = require('fs');
-//   const access_token = "RWsH3v07wC8AAAAAAAABvVZCWzK18WLGP-Tx6_QwkuQCOdIH7R0nlqrjplLEy3K3";
-//   const srcfile = 'test.png';
-//   const srclocation = 'uploads';
-//   const content = fs.readFileSync(srclocation + '\/' + srcfile);
-
-//   console.log('---- req ----');
-//   console.log(req.body);
-
-//   options = {
-//     method: "POST",
-//     url: 'https://content.dropboxapi.com/2/files/upload',
-//     headers: {
-//       "Content-Type": "application/octet-stream",
-//       "Authorization": "Bearer " + access_token,
-//       "Dropbox-API-Arg": "{\"path\": \"/monkey/"+srcfile+"\",\"mode\": \"overwrite\",\"autorename\": true,\"mute\": false}",
-//     },
-//     body:content
-//   };
-
-//   request(options, function(err, res, body){
-//     // console.log("Err : " + err);
-//     // console.log("res : " + res);
-//     console.log("body : " + body);
-//   })
-
-//   res.end("File is uploaded");
-
-// };
