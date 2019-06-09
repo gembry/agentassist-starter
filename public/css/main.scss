@@ -138,3 +138,13 @@ input.currency {
 #upload{
   display:none
 }
+
+.required .asterisk:after {
+  content:" *";
+  color:red;
+  // font-size: 17px;
+}
+
+.form-row {
+  margin-bottom: 10px;
+}
