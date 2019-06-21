@@ -18,7 +18,8 @@ const buyerSchema = new mongoose.Schema(
     buyer_salestype: String,
     buyer_contractdate: Date,
     buyer_closingdate: Date,
-    buyer_notifications: Boolean
+    buyer_notifications: Boolean,
+    buyer_star: Boolean
   },
   { timestamps: true }
 );

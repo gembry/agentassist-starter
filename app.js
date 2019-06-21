@@ -18,10 +18,11 @@ const mongoose = require( 'mongoose' );
 const passport = require( 'passport' );
 const expressValidator = require( 'express-validator' );
 const expressStatusMonitor = require( 'express-status-monitor' );
-const fileUpload = require( 'express-fileupload' );
+// const fileUpload = require( 'express-fileupload' );
 const sass = require( 'node-sass-middleware' );
 // const multer = require('multer');
 const csv = require( 'csv-express' );
+// const moment = require('moment');
 
 /**
  * Load environment variables from .env file, where API keys and passwords are configured.
@@ -46,14 +47,16 @@ const buyersController = require( './controllers/buyers' );
 const buyerController = require( './controllers/buyer' );
 const sellerController = require( './controllers/seller' );
 // const tokensController = require( './controllers/tokens' );
+const starController = require( './controllers/star' );
 
 /* OtterDocs Admin Controllers */
 const documentsController = require( "./controllers/admin/documents" );
 const dropdownsController = require( "./controllers/admin/dropdowns" );
+const auditController = require( "./controllers/admin/auditlog" );
 const exportController = require( "./controllers/admin/export" );
 
 /* 3rd Party Storage */
-const dropboxController = require( './controllers/storage/dropbox' );
+// const dropboxController = require( './controllers/storage/dropbox' );
 
 /**
  * API keys and Passport configuration.
@@ -176,7 +179,6 @@ app.post( '/account/password', passportConfig.isAuthenticated, userController.po
 app.post( '/account/delete', passportConfig.isAuthenticated, userController.postDeleteAccount );
 app.get( '/account/unlink/:provider', passportConfig.isAuthenticated, userController.getOauthUnlink );
 app.get( '/users', passportConfig.isAuthenticated, usersController.getUsers );
-
 app.get( '/dashboard', passportConfig.isAuthenticated, dashboardController.getDashboard );
 
 // Client(s) related routes
@@ -192,21 +194,18 @@ app.get( '/clients', passportConfig.isAuthenticated, clientsController.getClient
 app.get( '/buyer', passportConfig.isAuthenticated, buyerController.getBuyer )
 	.get( '/buyer/:buyer', passportConfig.isAuthenticated, buyerController.getBuyer )
 	.post( '/buyer', passportConfig.isAuthenticated, buyerController.postBuyer )
-	.put( '/buyer/:buyer', passportConfig.isAuthenticated, buyerController.putBuyer );
+	.put( '/buyer/:buyer', passportConfig.isAuthenticated, buyerController.putBuyer )
+	.get( '/buyer/docs/:buyer', passportConfig.isAuthenticated, buyerController.getBuyerDocs );
+
 app.get( '/buyers', passportConfig.isAuthenticated, buyersController.getBuyers )
 	.get( '/buyers/:buyer', passportConfig.isAuthenticated, buyersController.deleteBuyer );
 
-// app.get("/token", function(req, res) { 	
-// 	res.send( process.env.DROPBOX_TOKEN )
-// });
-
-// app.get("/foo-route", function(req, res) { 	
-// 	console.log('foo route called');
-// });
-
 // Seller(s) related Routes
 app.get( '/seller', passportConfig.isAuthenticated, sellerController.getSeller );
-app.post( '/seller', passportConfig.isAuthenticated, sellerController.postSeller );
+// post( '/seller/:seller', passportConfig.isAuthenticated, sellerController.postSeller );
+
+// Misc Routes
+app.get( '/star', passportConfig.isAuthenticated, starController.setStar );
 
 // Administration Routes
 app.get( '/admin/documents', passportConfig.isAuthenticated, documentsController.getDocuments )
@@ -220,6 +219,9 @@ app.get( '/admin/dropdowns', passportConfig.isAuthenticated, dropdownsController
 	.post( '/admin/dropdowns', passportConfig.isAuthenticated, dropdownsController.postDropdowns )
 	.put( '/admin/dropdowns/:dropdown', passportConfig.isAuthenticated, dropdownsController.putDropdowns )
 	.get( '/admin/dropdown/:dropdown', passportConfig.isAuthenticated, dropdownsController.deleteDropdown );
+
+app.get( '/admin/auditlog', passportConfig.isAuthenticated, auditController.getAuditlog )
+	.post( '/admin/auditlog', passportConfig.isAuthenticated, auditController.postAuditlog );
 
 app.get( '/admin/export', passportConfig.isAuthenticated, exportController.getExport )
 	.get( '/admin/exportclients', passportConfig.isAuthenticated, exportController.getExportclients )

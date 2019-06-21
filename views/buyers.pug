@@ -4,52 +4,69 @@ block content
   .page-header
     h2= title
 
-    div(class='container')
-    table#buyersTable.table.table-striped.table-no-bordered(
-      data-toggle='table', 
-      data-pagination='true', 
-      data-search='true', 
-      data-show-refresh='false', 
-      data-show-toggle='true', 
-      data-show-columns='true', 
-      data-page-size="50", 
-      data-page-list='[50, 75, 100, 200, 300, 500]'
-    )
-      thead
-        tr 
-          th(data-field='buyer_address', data-sortable='true') Address
-          th(data-field='buyer_city', data-sortable='false') City
-          th(data-field='buyer_state', data-sortable='false') State
-          th(data-field='buyer_zip', data-sortable='false') ZIP Code
-          th(data-field='updatedAt', data-sortable='true') Updated
-          th.text-center(data-field='Action', data-sortable='false') Action
+    //- .col-sm-1
 
-      tbody
-        each buyer in buyers
-          //- if buyer.buyer_notifications == true
-            //- tr.success
-          //- else
+    .col-md-12
+      div(class='container')
+      table#buyersTable.table.table-striped.table-no-bordered(
+        data-toggle='table', 
+        data-pagination='true', 
+        data-search='true', 
+        data-show-refresh='false', 
+        data-show-toggle='true', 
+        data-show-columns='true', 
+        data-page-size="50", 
+        data-page-list='[50, 75, 100, 200, 300, 500]'
+      )
+        thead
+          tr
+            th.fit.text-center(data-field='buyer_star', data-sortable='false') Fave
+            th(data-field='buyer_address', data-sortable='true') Property Address
+            th(data-field='buyer_city', data-sortable='false') City
+            th.text-center(data-field='buyer_state', data-sortable='false') State/Province/Region
+            th.text-center(data-field='buyer_zip', data-sortable='false') ZIP/Postal Code
+            th.text-center(data-field='updatedAt', data-sortable='true') Updated On
+            th.fit.text-center(data-field='Action', data-sortable='false') Buyer Actions
 
-          tr.small
-            td= buyer.buyer_address
-            td= buyer.buyer_city
-            td= buyer.buyer_state
-            td= buyer.buyer_zip
-            //- td= buyer.buyer_address + ', ' + buyer.buyer_city + ', ' + buyer.buyer_state + ' ' + buyer.buyer_zip
-            td #{moment(buyer.updatedAt).format('MM/DD/YYYY')}
-            td
-              a(href='/buyer/' + buyer._id)= post
-                button(type="button") Edit
-              button(type="button", data-href='/buyers/' + buyer._id, data-toggle='modal', data-target='#confirm-delete') Delete
+        tbody
+          each buyer in buyers
+            //- if buyer.buyer_notifications == true
+              //- tr.success
+            //- else
 
-      #confirm-delete.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
-        .modal-dialog
-          .modal-content
-            .modal-header.h4
-              | Please confirm!
-            .modal-body
-              | You are about to delete this buyer record.
-            .modal-footer
-              button.btn.btn-default(type='button', data-dismiss='modal') Cancel
-              a.btn.btn-danger.btn-ok Delete
+            tr
+              td.fit.text-center
+                if buyer.buyer_star == true
+                  i.fa.fa-star.fa-lg(name='buyerStar_' + buyer._id, value='buyer,' + buyer._id, onclick='toggleStar(this)')
+                else
+                  i.fa.fa-star-o.fa-lg(name='buyerStar_' + buyer._id, value='buyer,' + buyer._id, onclick='toggleStar(this)')
+              td= buyer.buyer_address
+              td= buyer.buyer_city
+              td.text-center= buyer.buyer_state
+              td.text-center= buyer.buyer_zip
+              td.text-center #{moment(buyer.updatedAt).format('MM/DD/YYYY')}
+              td.fit.text-center
+                a.btn.btn-primary.btn-space(href='/buyer/' + buyer._id)
+                  i.fa.fa-pencil
+                  | Edit
+                a.btn.btn-primary.btn-space(href='/buyer/docs/' + buyer._id)
+                  i.fa.fa-file-text
+                  | Docs
+                button.btn.btn-danger(type="button", data-href='/buyers/' + buyer._id, data-toggle='modal', data-target='#confirm-delete')
+                  i.fa.fa-trash
+                  | Delete
 
+        #confirm-delete.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+          .modal-dialog
+            .modal-content
+              .modal-header.h4
+                | Please confirm!
+              .modal-body
+                | You are about to delete this buyer record.
+              .modal-footer
+                button.btn.btn-default(type='button', data-dismiss='modal') Cancel
+                a.btn.btn-danger.btn-ok
+                  i.fa.fa-trash
+                  | Delete
+
+    //- .col-sm-1

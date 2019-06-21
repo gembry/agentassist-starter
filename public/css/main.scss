@@ -148,3 +148,19 @@ input.currency {
 .form-row {
   margin-bottom: 10px;
 }
+
+.fa-star {
+  color:gold;
+}
+
+// force table columns to fit content buttons
+.table td.fit, 
+.table th.fit {
+    white-space: nowrap;
+    width: 1%;
+}
+
+// add space between buttons
+.btn-space {
+  margin-right: 5px;
+}

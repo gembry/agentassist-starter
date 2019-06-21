@@ -8,7 +8,8 @@ const Buyer = require("../models/Buyer");
  * Clients Listing
  */
 exports.getBuyers = function(req, res) {
-  Buyer.find().exec(function(err, buyers_list) {
+  // Note: sort - 1 for asc and -1 for desc
+  Buyer.find().sort( { buyer_star: -1, updatedAt: -1 } ).exec(function(err, buyers_list) {
     if (err) {
       console.log("error dude");
       return next(err);

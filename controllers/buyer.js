@@ -4,6 +4,7 @@
 const Buyer = require("../models/Buyer");
 const Dropdowns = require("../models/admin/Dropdowns");
 const Documents = require("../models/admin/Documents");
+const AuditLog = require("../models/admin/Auditlog");
 
 const statesArray = [
   {
@@ -228,7 +229,8 @@ const defaultBuyer = new Buyer({
   buyer_salestype: null,
   buyer_contractdate: null,
   buyer_closingdate: null,
-  buyer_notifications: false
+  buyer_notifications: false,
+  buyer_star: false
 });
 
 /**
@@ -242,12 +244,14 @@ exports.getBuyer = (req, res) => {
       Dropdowns.find({ dropdownname: 'TITLECOMP' }).sort({ "optionvalue": 1 }),
       Dropdowns.find({ dropdownname: 'MORTGLEND' }).sort({ "optionvalue": 1 }),
       Dropdowns.find({ dropdownname: 'LISEAGENT' }).sort({ "optionvalue": 1 }),
-      Dropdowns.find({ dropdownname: 'SALESTYPE' }).sort({ "optionvalue": 1 }),
-      Documents.find({ doctype: 'BUYERPENDI' }).sort({ "docname": 1 }),
-      Documents.find({ doctype: 'BUYERTITLE' }).sort({ "docname": 1 }),
-      Documents.find({ doctype: 'BUYERMISCE' }).sort({ "docname": 1 })
+      Dropdowns.find({ dropdownname: 'SALESTYPE' }).sort({ "optionvalue": 1 })
       //, Documents.find({ dropdownname: 'SALESTYPE' }).sort({ "optionvalue": 1 })
-    ]).then( ([ qrybuyer, qrytitlecomps, qrymortglends, qryliseagents, qrysalestypes, qrydocspending, qrydocstitlecompany, qrydocsmisc ]) => {
+    ]).then( ([ qrybuyer, qrytitlecomps, qrymortglends, qryliseagents, qrysalestypes ]) => {
+
+      // set session for audit logging
+      req.session.buyer = qrybuyer;
+      console.log(req.session.buyer);
+      
       res.render("buyer", {
         title: "Update Buyer Offer",
         method: "PUT",
@@ -257,10 +261,7 @@ exports.getBuyer = (req, res) => {
         titlecompanies: qrytitlecomps,
         mortgagelenders: qrymortglends,
         listingagents: qryliseagents,
-        salestypes: qrysalestypes,
-        docspending: qrydocspending,
-        docstitlecompany: qrydocstitlecompany,
-        docsmisc: qrydocsmisc
+        salestypes: qrysalestypes
       });
     });
 
@@ -270,11 +271,8 @@ exports.getBuyer = (req, res) => {
       Dropdowns.find({ dropdownname: 'TITLECOMP' }).sort({ "optionvalue": 1 }),
       Dropdowns.find({ dropdownname: 'MORTGLEND' }).sort({ "optionvalue": 1 }),
       Dropdowns.find({ dropdownname: 'LISEAGENT' }).sort({ "optionvalue": 1 }),
-      Dropdowns.find({ dropdownname: 'SALESTYPE' }).sort({ "optionvalue": 1 }),
-      Documents.find({ doctype: 'BUYERPENDI' }).sort({ "docname": 1 }),
-      Documents.find({ doctype: 'BUYERTITLE' }).sort({ "docname": 1 }),
-      Documents.find({ doctype: 'BUYERMISCE' }).sort({ "docname": 1 })
-    ]).then( ([ qrytitlecomps, qrymortglends, qryliseagents, qrysalestypes, qrydocspending, qrydocstitlecompany, qrydocsmisc ]) => {
+      Dropdowns.find({ dropdownname: 'SALESTYPE' }).sort({ "optionvalue": 1 })
+    ]).then( ([ qrytitlecomps, qrymortglends, qryliseagents, qrysalestypes ]) => {
       res.render("buyer", {
         title: "Add Buyer Offer",
         method: "POST",
@@ -283,13 +281,35 @@ exports.getBuyer = (req, res) => {
         titlecompanies: qrytitlecomps,
         mortgagelenders: qrymortglends,
         listingagents: qryliseagents,
-        salestypes: qrysalestypes,
+        salestypes: qrysalestypes
+      });
+    });
+
+  }
+};
+
+/**
+ * GET /
+ * Buyer Documents.
+ */
+exports.getBuyerDocs = (req, res) => {
+  if (req.params.buyer) {
+    Promise.all([
+      Buyer.findOne({ _id: req.params.buyer }),
+      Documents.find({ doctype: 'BUYERPENDI' }).sort({ "docname": 1 }),
+      Documents.find({ doctype: 'BUYERTITLE' }).sort({ "docname": 1 }),
+      Documents.find({ doctype: 'BUYERMISCE' }).sort({ "docname": 1 })
+    ]).then( ([ qrybuyer, qrydocspending, qrydocstitlecompany, qrydocsmisc ]) => {      
+      res.render("buyerDocs", {
+        title: "Buyer Documents",
+        buyer: qrybuyer,
         docspending: qrydocspending,
         docstitlecompany: qrydocstitlecompany,
         docsmisc: qrydocsmisc
       });
     });
-
+  } else {
+    // return res.redirect("buyers");
   }
 };
 
@@ -326,13 +346,17 @@ exports.postBuyer = (req, res) => {
     buyer_salestype: req.body.buyer_salestype,
     buyer_contractdate: req.body.buyer_contractdate,
     buyer_closingdate: req.body.buyer_closingdate,
-    buyer_notifications: req.body.buyer_notifications ? true : false
+    buyer_notifications: req.body.buyer_notifications ? true : false,
+    buyer_star: false
   });
   
+
   insertBuyer.save(err => {
     if (err) {
       console.log(err);
     }
+
+    console.log('insertBuyer');
 
     req.flash("success", { msg: "Buyer information has been added." });
     res.redirect("/buyers");
@@ -353,6 +377,7 @@ exports.putBuyer = (req, res) => {
   //   req.flash("errors", errors);
   //   return res.redirect("/buyer");
   // }
+
 
   Buyer.findById(req.params.buyer, (err, updateBuyer) => {
     if (err) {
@@ -376,6 +401,54 @@ exports.putBuyer = (req, res) => {
     updateBuyer.buyer_closingdate = req.body.buyer_closingdate,
     updateBuyer.buyer_notifications = req.body.buyer_notifications ? true : false;
 
+    // Pulling Audit Log Details and poop
+    var valOrig = req.session.buyer;
+    var valNew = updateBuyer;
+    var keys = Object.keys(valOrig);
+    var changes = [];
+    // var obj = {};
+    for (var i = 0; i < keys.length; i++) {
+      var key = keys[i];
+      if (key != '__v' && key != 'createdAt' && key != 'updatedAt') {
+        // Is this a date input, then handle it.
+        if ( valNew[key] instanceof Date && !isNaN(valNew[key].valueOf()) ) {
+          valNewInput = valNew[key].toISOString();
+        } else {
+          valNewInput = valNew[key];
+        }
+
+        if ( valOrig[key] != valNewInput ) {
+          var obj = { 
+            name: key, 
+            valueOrig: valOrig[key], 
+            valueNew: valNewInput 
+          };
+          changes.push( obj );
+        }
+      }
+    }
+    
+    if ( Object.getOwnPropertyNames(changes).length > 1 ) {
+      console.log(changes);
+      
+      const insertAuditlog = new AuditLog({
+        url: req.url,
+        description: req.body.buyer_address + ', ' + req.body.buyer_city + ' ' + req.body.buyer_state,
+        user: req.session.name,
+        changes: changes
+      });
+
+      insertAuditlog.save(err => {
+        if (err) {
+          console.log(err);
+        }
+    
+    
+        // req.flash("success", { msg: "Buyer information has been added." });
+        // res.redirect("/buyers");
+      });
+    }  
+
     updateBuyer.save(err => {
       // if (err) {
       //   if (err.code === 11000) {
@@ -384,6 +457,7 @@ exports.putBuyer = (req, res) => {
       //   }
       //   return next(err);
       // }
+
       req.flash("success", { msg: "Buyer information has been updated." });
       res.redirect("/buyers");
     });

@@ -1,0 +1,150 @@
+extends layout
+
+block content
+
+  style.
+    /* style.css */
+    label.glyphicon.glyphicon-upload {
+      font-size: 21px;
+      cursor: pointer;
+    }
+    label:hover {
+      opacity: 0.6;
+    }
+
+  .page-header.text-left
+    h2= buyer.buyer_address + ', ' + buyer.buyer_city + ', ' + buyer.buyer_state + ' ' + buyer.buyer_zip + ' - ' + title
+
+  //- .col-sm-1
+  .col-md-12
+    //- .row
+    .board
+      .board-inner
+        ul#tabgroup2.nav.nav-tabs
+          .liner
+          li.active
+            a(href='#doctab1', data-toggle='tab', title='doctab1')
+              span.round-tabs.two
+                | Pending 
+                //- span.label.label-primary 25%
+          li
+            a(href='#doctab2', data-toggle='tab', title='doctab2')
+              span.round-tabs.three
+                | Title Company 
+                //- span.label.label-primary 65%
+          li
+            a(href='#doctab3', data-toggle='tab', title='doctab3')
+              span.round-tabs.four
+                | Misc. 
+                //- span.label.label-info 73%
+
+      .tab-content
+
+        #doctab1.tab-pane.fade.active.in
+          table#docspendingTable.table.table-striped.table-no-bordered(
+            data-toggle='table', 
+            data-pagination='true', 
+            data-search='true', 
+            data-show-refresh='false', 
+            data-show-toggle='true', 
+            data-show-columns='true', 
+            data-page-size="50", 
+            data-page-list='[50, 75, 100, 200, 300, 500]'
+          )
+            thead
+              tr 
+                th(data-field='Documents', data-sortable='true') Documents
+                th(data-field='UploadedOn', data-sortable='false') Uploaded On
+                th(data-field='Attachments', data-sortable='false') Attachments
+                th.text-center(data-field='Action', data-sortable='false') Upload
+            tbody
+              each doc in docspending
+                tr.small
+                  td= doc.docname
+                  td 10/15/2017
+                  td 
+                    img(src='https://www.santacruzpl.org/media/img/site/icons/sm_pdf.png')
+                    img(src='https://www.santacruzpl.org/media/img/site/icons/sm_pdf.png')
+                  td
+                    form(enctype='multipart/form-data')
+                      input(type='hidden', name='token', id='token', value='RWsH3v07wC8AAAAAAAABvVZCWzK18WLGP-Tx6_QwkuQCOdIH7R0nlqrjplLEy3K3')
+                      input(type='hidden', name='folder', id='folder', value=buyer.buyer_zip + '_' + buyer.buyer_address)
+                      input(type='hidden', name='filename', id='filename', value='BuyerPending_' + doc.docname)
+                      label.glyphicon.glyphicon-upload.text-success
+                        input(type='file', name='file', id='file', onchange='doDropbox( this.form ); return false;', style='display: none;')
+
+        #doctab2.tab-pane.fade
+          table#docstitlecompanyTable.table.table-striped.table-no-bordered(
+            data-toggle='table', 
+            data-pagination='true', 
+            data-search='true', 
+            data-show-refresh='false', 
+            data-show-toggle='true', 
+            data-show-columns='true', 
+            data-page-size="50", 
+            data-page-list='[50, 75, 100, 200, 300, 500]'
+          )
+            thead
+              tr 
+                th(data-field='Documents', data-sortable='true') Documents
+                th(data-field='UploadedOn', data-sortable='false') Uploaded On
+                th(data-field='Attachments', data-sortable='false') Attachments
+                th.text-center(data-field='Action', data-sortable='false') Action
+            tbody
+              each doc in docstitlecompany
+                tr.small
+                  td= doc.docname
+                  td 10/15/2017
+                  td 
+                    img(src='https://www.santacruzpl.org/media/img/site/icons/sm_pdf.png')
+                    img(src='https://www.santacruzpl.org/media/img/site/icons/sm_pdf.png')
+                  td
+                    form(enctype='multipart/form-data')
+                      input(type='hidden', name='token', id='token', value='RWsH3v07wC8AAAAAAAABvVZCWzK18WLGP-Tx6_QwkuQCOdIH7R0nlqrjplLEy3K3')
+                      input(type='hidden', name='folder', id='folder', value=buyer.buyer_zip + '_' + buyer.buyer_address)
+                      input(type='hidden', name='filename', id='filename', value='BuyerTitleCompany_' + doc.docname)
+                      label.glyphicon.glyphicon-upload.text-success
+                        input(type='file', name='file', id='file', onchange='doDropbox( this.form ); return false;', style='display: none;')
+
+        #doctab3.tab-pane.fade
+          table#docsmiscTable.table.table-striped.table-no-bordered(
+            data-toggle='table', 
+            data-pagination='true', 
+            data-search='true', 
+            data-show-refresh='false', 
+            data-show-toggle='true', 
+            data-show-columns='true', 
+            data-page-size="50", 
+            data-page-list='[50, 75, 100, 200, 300, 500]'
+          )
+            thead
+              tr
+                th(data-field='Documents', data-sortable='true') Documents
+                th(data-field='UploadedOn', data-sortable='false') Uploaded On
+                th(data-field='Attachments', data-sortable='false') Attachments
+                th.text-center(data-field='Action', data-sortable='false') Action
+            tbody
+              
+              each doc in docsmisc
+                tr.small
+                  td= doc.docname
+                  td 10/15/2017
+                  td 
+                    img(src='https://www.santacruzpl.org/media/img/site/icons/sm_pdf.png')
+                    img(src='https://www.santacruzpl.org/media/img/site/icons/sm_pdf.png')
+                  td
+                    form(enctype='multipart/form-data')
+                      input(type='hidden', name='token', id='token', value='RWsH3v07wC8AAAAAAAABvVZCWzK18WLGP-Tx6_QwkuQCOdIH7R0nlqrjplLEy3K3')
+                      input(type='hidden', name='folder', id='folder', value=buyer.buyer_zip + '_' + buyer.buyer_address)
+                      input(type='hidden', name='filename', id='filename', value='BuyerMisc_' + doc.docname)
+                      label.glyphicon.glyphicon-upload.text-success
+                        input(type='file', name='file', id='file', onchange='doDropbox( this.form ); return false;', style='display: none;')
+                    //- code.formattedDebug= JSON.stringify(buyer)
+  //- .col-sm-1
+
+  //- https://dropbox.github.io/dropbox-sdk-js/tutorial-Getting%20started.html
+  //- script(type='text/javascript', src='/lib/dropbox_sdk/Dropbox-sdk.js')
+  script(type='text/javascript', src='/lib/dropbox_sdk/Dropbox-sdk.min.js')
+  //- script(type='text/javascript', src='/lib/dropbox_sdk/DropboxTeam-sdk.js')
+  script(type='text/javascript', src='/lib/dropbox_sdk/DropboxTeam-sdk.min.js')
+  script(type='text/javascript', src='/js/dropbox.js')
