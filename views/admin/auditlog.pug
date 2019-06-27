@@ -1,0 +1,57 @@
+extends ../layout
+
+block content
+  .page-header
+    h2= title
+
+    div(class='container')
+    table#auditlogTable.table.table-striped.table-no-bordered(
+      data-toggle='table', 
+      data-pagination='true', 
+      data-search='true', 
+      data-show-refresh='false', 
+      data-show-toggle='true', 
+      data-show-columns='true', 
+      data-page-size="50", 
+      data-page-list='[50, 75, 100, 200, 300, 500]',
+      data-sort-name='createdAt',
+      data-sort-order='desc'
+    )
+      thead
+        tr 
+          th(data-field='createdAt', data-sortable='true') Created on
+          th(data-field='user', data-sortable='false') User
+          //- th(data-field='description', data-sortable='true') Description
+          th(data-field='Changes', data-sortable='false') Changes
+
+      tbody
+        each row in auditlog
+          //- if buyer.buyer_notifications == true
+            //- tr.success
+          //- else
+
+          tr.small
+            td= moment(row.createdAt).format('DD MMM YYYY hh:mm:ss A')
+            td= row.user
+            //- td= row.description
+            td
+              a(href='..' + row.url)= row.description
+              table#changesTable.table.table-condensed(
+                data-toggle='table', 
+                data-pagination='false', 
+                data-search='false', 
+                data-show-refresh='false', 
+                data-show-toggle='true', 
+                data-show-columns='true'
+              )
+                thead
+                  tr
+                    th(data-field='name') Input
+                    th(data-field='valueOrig') Original
+                    th(data-field='valueNew') New
+                tbody
+                  each subrow in row.changes
+                    tr
+                      td.col-md-4= subrow.name
+                      td.col-md-4= subrow.valueOrig
+                      td.col-md-4= subrow.valueNew

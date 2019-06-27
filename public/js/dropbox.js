@@ -1,19 +1,41 @@
 // upload to dropbox
-$('#dropbox-btn').click(function(){
-    var ACCESS_TOKEN = $('#token').val();
-    console.log(ACCESS_TOKEN);
-    var dbx = new Dropbox.Dropbox({ accessToken: ACCESS_TOKEN });
-    var file = $('#file')[0].files[0];
-    dbx.filesUpload({ path: '/dropbox/' + file.name, contents: file }).then(function (response) {
+function doDropbox( objForm ) {
+
+    // No real reason for this, could just include token in buyer.pug form
+    // $.ajax({
+    //     type: "GET",
+    //     url: '/token',
+    //     success: function (data) {
+    //         dbxToken = data.trim();
+    //     }, 
+    //     async: false // <- this turns it into synchronous
+    // });
+
+    var dbxToken = $(objForm.token).val().trim(); // drobbox API Token
+    var dbxFolder = $(objForm.folder).val().replace(/[^a-z0-9\s]/gi, '').replace(/[_\s]/g, '-').trim(); // zip + address cleanup
+    var dbxFile = $(objForm.file)[0].files[0];
+    var dbxFilename = $(objForm.filename).val().replace(/[^a-z0-9\s]/gi, '').replace(/[_\s]/g, '-').trim();
+    var dbxAPI = new Dropbox.Dropbox({ accessToken: dbxToken });
+
+    // Do not use this to upload a file larger than 150 MB
+    // https://dropbox.github.io/dropbox-sdk-js/Dropbox.html#filesUpload -- , mode: 'add', autorename: true
+    dbxAPI.filesUpload({ path: '/otterdocs/'+dbxFolder+'/'+dbxFilename+'_'+dbxFile.name, contents: dbxFile, mute: true }).then(function (response) {
+        console.log('Successfully uploaded!');
+
         console.log(response);
-        console.log(file.name);
-        alert('Successfully uploaded! xxx');
-        
-        // getSrc(db.id);
-        
+
+        // POST results to mongo
+        $.ajax({
+            type: "POST",
+            url: '/token',
+            success: function (data) {
+                console.log('POSTed File Object');
+            }, 
+            async: false // <- this turns it into synchronous
+        });
+
     }).catch(function (error) {
-        alert(error);
+        console.log('Upload failed!');
         console.error(error);
     });
-    return false;
-});
+}

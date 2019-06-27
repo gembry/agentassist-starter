@@ -66,7 +66,6 @@ $(document).ready(function() {
     }
   ];
 
-
   // Full Calendar configurations
   $("#calendar").fullCalendar({
     header: {
@@ -122,13 +121,35 @@ $(document).ready(function() {
   // Enable popovers everywhere
   $('[data-toggle="popover"]').popover()
 
-  $("#upload_link").on('click', function(e){
-    e.preventDefault();
-    $("#upload:hidden").trigger('click');
+
+  // *** --------- ***
+  // *** LISTENERS ***
+  // *** --------- ***
+
+  // $("#upload_link").on('click', function(e){
+  //   e.preventDefault();
+  //   $("#upload:hidden").trigger('click');
+  // });
+
+  // If buyer info exists, then user can hit upload file icons
+  $('input#buyer_address, input#buyer_zip').change(function() {
+    var buyer_address = $('input#buyer_address').val();
+    var buyer_zip = $('input#buyer_zip').val();
+
+    if ( buyer_address.length && buyer_zip.length ) {
+      $('form input#folder').val( buyer_zip + '_' + buyer_address);
+    }
   });
 
-});
+  // Used for AuditLogging
+  // var map = {};
+  // $("#buyerform").find(':input').on("change paste", function() {
+  //   // console.log( $(this).attr('id') + " - "+ $(this).val() );
+  //   map[$(this).attr("name")] = $(this).val();
+  // });
 
+
+});
 
 // LOOK INTO THIS -- ADDED TO Package.json
 // function cleanStackTrace(reason) {
@@ -146,8 +167,83 @@ $(document).ready(function() {
 //alert('hello');
 //});
 
+
 var client_address_complete = document.getElementById("wrapper");
 $(client_address_complete).on("change", "input", function(event) {
   // Does some stuff and logs the event to the console
   //alert("hello");
 });
+
+
+// *** --------- ***
+// *** FUNCTIONS ***
+// *** --------- ***
+
+// Determine if upload button is available.
+function canUpload() {
+  if ( $("#buyerform input#buyer_address").val().length == 0 ||  $("#buyerform input#buyer_zip").val().length == 0) {
+    event.preventDefault();
+  };
+}
+
+// function isDate( dateVal ) {
+//   var d = new Date(dateVal);
+//   return d.toString() === 'Invalid Date' ? false: true;
+// }
+
+// $('#buyerform').find(':input').each(function() {
+//   var huh = $(this).data('formValues', $(this).val());
+//   console.log(huh);
+// });
+
+
+// $("#myTextBox").bind("change paste keyup", function() {
+//   alert($(this).val()); 
+// });
+
+function toggleStar(x) {
+
+  var starValues = x.getAttribute("value").split(",");
+  var collection = starValues[0];
+  var _id = starValues[1];
+  var state = true;
+
+  if ( x.classList.contains("fa-star") ) {
+    state = false;
+    x.classList.replace( "fa-star", "fa-star-o" );
+  } else {
+    x.classList.replace( "fa-star-o", "fa-star" );
+  }
+  
+  $.ajax({
+    type: 'GET',
+    url: '/star',
+    data: {
+      collection: collection,
+      _id: _id,
+      state: state
+    },
+    contentType: 'application/json; charset=utf-8',
+    dataType: 'json',
+    success: function (data) {
+      console.log(data);
+      // whatever you wanna do, go nuts!            
+    },
+    error: function(xhr) {
+      console.log('fail');
+      // $('nav').next().prepend(`<div class="alert alert-dismissable alert-danger"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button> Error ${xhr.statusCode().status}: ${xhr.statusCode().statusText} ${xhr.responseText} </div>`)
+    }
+  })
+
+    // No real reason for this, could just include token in buyer.pug form
+    // $.ajax({
+    //     type: "GET",
+    //     url: '/token',
+    //     success: function (data) {
+    //         dbxToken = data.trim();
+    //     }, 
+    //     async: false // <- this turns it into synchronous
+    // });
+
+
+}

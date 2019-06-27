@@ -6,15 +6,15 @@ var mongoose = require('mongoose');
 // mongoose.connect('mongodb://localhost/photolist');
 mongoose.connect('mongodb://otterdocme:z4DJETEohwKJi4rMAE9G@ds043477.mlab.com:43477/agentassist');
 
-var storage = multer.diskStorage({
-    destination: function(req, file, callback){
-        callback(null, './public/upload');
-    },
-    filename: function(req, file, callback){
-        var filename = file.fieldname + '-' + Date.now() + path.extname(file.originalname);
-        callback(null, filename);
-    }
-});
+// var storage = multer.diskStorage({
+//     destination: function(req, file, callback){
+//         callback(null, './public/upload');
+//     },
+//     filename: function(req, file, callback){
+//         var filename = file.fieldname + '-' + Date.now() + path.extname(file.originalname);
+//         callback(null, filename);
+//     }
+// });
 
 // var data = [{caption: 'Photo', src: '/upload/file-1524515555196.png'},
 //             {caption: 'Photo', src: '/upload/file-1524515567531.png'},
@@ -36,6 +36,8 @@ module.exports.fileUploadMulter = function(req, res, next){
     var upload = multer({
         storage: storage
     }).single('file')
+
+    console.log('here................');
 
     upload(req, res, function(err){
         if(err){

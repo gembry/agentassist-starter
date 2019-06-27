@@ -41,6 +41,10 @@ exports.postLogin = (req, res, next) => {
     }
     req.logIn(user, (err) => {
       if (err) { return next(err); }
+
+      // Using for Audit Trail - set when login occurs.
+      req.session.name = user.profile.name;
+
       req.flash('success', { msg: 'Success! You are logged in.' });
       res.redirect(req.session.returnTo || '/');
     });
@@ -141,6 +145,7 @@ exports.postUpdateProfile = (req, res, next) => {
     user.profile.gender = req.body.gender || '';
     user.profile.location = req.body.location || '';
     user.profile.website = req.body.website || '';
+
     user.save((err) => {
       if (err) {
         if (err.code === 11000) {
@@ -149,6 +154,10 @@ exports.postUpdateProfile = (req, res, next) => {
         }
         return next(err);
       }
+
+      // Using for Audit Trail - if changed, it's updated here
+      req.session.name = user.profile.name;
+
       req.flash('success', { msg: 'Profile information has been updated.' });
       res.redirect('/account');
     });
