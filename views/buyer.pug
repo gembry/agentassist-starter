@@ -2,16 +2,6 @@ extends layout
 
 block content
 
-  style.
-    /* style.css */
-    label.glyphicon.glyphicon-upload {
-      font-size: 21px;
-      cursor: pointer;
-    }
-    label:hover {
-      opacity: 0.6;
-    }
-
   .page-header
     h2= title
 
@@ -46,10 +36,11 @@ block content
           input#buyer_closingdate.form-control(name='buyer_closingdate', type='date', value=moment(buyer.buyer_closingdate).tz("UTC").format('YYYY-MM-DD'))
         .form-row.col-sm-12.required
           label.asterisk(for='buyer_clientIDs') Clients [search by first/last name or city]
-          input#buyer_clientIDs.flexdatalist(type='text', 
+          input#buyer_clientIDs.flexdatalist(
+            type='text', 
             name='buyer_clientIDs',
             placeholder="add...",
-            value=buyer.buyer_clientIDs,
+            value=buyer.buyer_clientIDs.join(","),
             multiple='true', 
             data-data='/clients.json', 
             data-search-in='["client_firstname","client_lastname", "client_city"]', 
@@ -59,8 +50,9 @@ block content
             data-text-property='{client_firstname} {client_lastname} - {client_city}', 
             data-min-length='2', 
             data-remove-on-backspace='false',
-            data-focus-first-result='true')
-            //- style='width: 100%; border: 0px !important;'
+            data-focus-first-result='true'
+          )
+          //- style='width: 100%; border: 0px !important;'
 
       .col-md-5
         .form-row.col-sm-12
@@ -115,5 +107,8 @@ block content
         |  Send deadline notifications to me. (agent only)
         br
         br
-        button.btn.btn-danger(name='buyer_submit', type='submit') Submit Buyer Information
+        button.btn.btn-success(name='buyer_submit', type='submit')
+          i.fa.fa-pencil
+          | Submit Buyer Information
+        
         //- button.btn.btn-danger.btn-cons(type='button') Terminate Current Contract
