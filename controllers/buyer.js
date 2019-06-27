@@ -219,7 +219,7 @@ const defaultBuyer = new Buyer({
   buyer_city: null,
   buyer_state: null,
   buyer_zip: null,
-  buyer_clientIDs: null,
+  buyer_clientIDs: [{}],
   buyer_purchaseprice: null,
   buyer_earnestprice: null,
   buyer_concession: null,
@@ -250,7 +250,7 @@ exports.getBuyer = (req, res) => {
 
       // set session for audit logging
       req.session.buyer = qrybuyer;
-      console.log(req.session.buyer);
+      // console.log(req.session.buyer);
       
       res.render("buyer", {
         title: "Update Buyer Offer",
@@ -331,12 +331,14 @@ exports.postBuyer = (req, res) => {
   // smaller data will compare faster than larger data
   // Use ids (numeric) for drop-downs ???
 
+  console.log(req.body);
+
   const insertBuyer = new Buyer({
     buyer_address: req.body.buyer_address,
     buyer_city: req.body.buyer_city,
     buyer_state: req.body.buyer_state,
     buyer_zip: req.body.buyer_zip,
-    buyer_clientIDs: req.body.buyer_clientIDs,
+    buyer_clientIDs: req.body.buyer_clientIDs.split(","),
     buyer_purchaseprice: req.body.buyer_purchaseprice.split(",").join(""),
     buyer_earnestprice: req.body.buyer_earnestprice.split(",").join(""),
     buyer_concession: req.body.buyer_concession.split(",").join(""),
@@ -385,11 +387,13 @@ exports.putBuyer = (req, res) => {
       //return next(err);
     }
 
+    console.log(req.body);
+
     updateBuyer.buyer_address = req.body.buyer_address,
     updateBuyer.buyer_city = req.body.buyer_city,
     updateBuyer.buyer_state = req.body.buyer_state,
     updateBuyer.buyer_zip = req.body.buyer_zip,
-    updateBuyer.buyer_clientIDs = req.body.buyer_clientIDs,
+    updateBuyer.buyer_clientIDs = req.body.buyer_clientIDs.split(","),
     updateBuyer.buyer_purchaseprice = req.body.buyer_purchaseprice.split(",").join(""),
     updateBuyer.buyer_earnestprice = req.body.buyer_earnestprice.split(",").join(""),
     updateBuyer.buyer_concession = req.body.buyer_concession.split(",").join(""),

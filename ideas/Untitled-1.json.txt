@@ -1,0 +1,47 @@
+db.getCollection('buyers').aggregate([
+	{
+	   $unwind: "$items"
+	},
+	{
+	 $lookup:
+		 {
+			 from: "clients",
+			 localField: "items.buyer_clientIDs",
+			 foreignField : "_id",
+			 as: "ordered_product"
+		 }
+	 }
+ ])
+
+
+
+db.buyers.aggregation([
+    {
+        $lookup:{
+            from: "buyer_clientIDs",
+            localField : "_id",
+            foreignField : "buyer_clientIDs",
+            as : "clients"
+        }
+    }
+])
+
+
+Precificacao.aggregate ([ 
+	{$ group: { 
+		_id: { 
+		  format: "$ format" 
+		  pricing "_id $" 
+		  name: "$ name" 
+		  value "$ value" 
+	   } 
+	}, 
+	{$ sort: {value: 1}}, 
+	{$ group: { 
+		_id "_id.formato $" 
+		pricing: {$ first "_id.nome $"}, 
+		valorMinimo: first {$ "$ value"}} 
+	} 
+  .]) exec ( ) .then (function (pricing) { 
+	// returning the query result in the form of promise 
+  });

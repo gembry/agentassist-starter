@@ -20,11 +20,12 @@ block content
       )
         thead
           tr
-            th.fit.text-center(data-field='buyer_star', data-sortable='false') Fave
+            th.fit.text-center(data-field='buyer_star', data-sortable='true') Fave
             th(data-field='buyer_address', data-sortable='true') Property Address
-            th(data-field='buyer_city', data-sortable='false') City
-            th.text-center(data-field='buyer_state', data-sortable='false') State/Province/Region
-            th.text-center(data-field='buyer_zip', data-sortable='false') ZIP/Postal Code
+            th(data-field='buyer_city', data-sortable='true') City
+            th.text-center(data-field='buyer_state', data-sortable='true') State/Province/Region
+            th.text-center(data-field='buyer_zip', data-sortable='true') ZIP/Postal Code
+            th.text-left(data-field='buyer_clientIDs', data-sortable='true') Client
             th.text-center(data-field='updatedAt', data-sortable='true') Updated On
             th.fit.text-center(data-field='Action', data-sortable='false') Buyer Actions
 
@@ -44,12 +45,19 @@ block content
               td= buyer.buyer_city
               td.text-center= buyer.buyer_state
               td.text-center= buyer.buyer_zip
+              td.text-left
+                each client in buyer.clients_assigned
+                  = client.client_firstname + ' ' + client.client_lastname
+                  br
+                  //- div
+                  //-   if process.env.DEBUG= true
+                  //-     code.formattedDebug= client.client_firstname
               td.text-center #{moment(buyer.updatedAt).format('MM/DD/YYYY')}
               td.fit.text-center
-                a.btn.btn-primary.btn-space(href='/buyer/' + buyer._id)
+                a.btn.btn-success.btn-space(href='/buyer/' + buyer._id)
                   i.fa.fa-pencil
                   | Edit
-                a.btn.btn-primary.btn-space(href='/buyer/docs/' + buyer._id)
+                a.btn.btn-success.btn-space(href='/buyer/docs/' + buyer._id)
                   i.fa.fa-file-text
                   | Docs
                 button.btn.btn-danger(type="button", data-href='/buyers/' + buyer._id, data-toggle='modal', data-target='#confirm-delete')

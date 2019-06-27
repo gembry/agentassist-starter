@@ -9,7 +9,20 @@ const Buyer = require("../models/Buyer");
  */
 exports.getBuyers = function(req, res) {
   // Note: sort - 1 for asc and -1 for desc
-  Buyer.find().sort( { buyer_star: -1, updatedAt: -1 } ).exec(function(err, buyers_list) {
+  Buyer
+    .aggregate([
+      { $lookup:
+        { from:         "clients",
+          localField:   "buyer_clientIDs",
+          foreignField: "_id",
+          as:           "clients_assigned"
+        }   
+      },
+      { $sort: { updatedAt: -1 } }
+    ])
+    .sort( { buyer_star: -1, updatedAt: -1 } )
+    .exec(function(err, buyers_list) 
+  {
     if (err) {
       console.log("error dude");
       return next(err);
