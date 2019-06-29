@@ -21,7 +21,6 @@ function doDropbox( objForm ) {
     // https://dropbox.github.io/dropbox-sdk-js/Dropbox.html#filesUpload -- , mode: 'add', autorename: true
     dbxAPI.filesUpload({ path: '/otterdocs/'+dbxFolder+'/'+dbxFilename+'_'+dbxFile.name, contents: dbxFile, mute: true }).then(function (response) {
         console.log('Successfully uploaded!');
-
         console.log(response);
 
         // POST results to mongo

@@ -2,6 +2,9 @@
   "name": "otterdocs",
   "version": "1.0.0",
   "description": "",
+  "engines": {
+    "node": "8.10.0"
+  },
   "repository": {
     "type": "git",
     "url": "https://www.otterdocs.com"
@@ -14,10 +17,6 @@
     "postinstall": "npm rebuild node-sass",
     "eslint": "eslint **/*.js"
   },
-  "keywords": [
-    "dropbox",
-    "fileupload"
-  ],
   "dependencies": {
     "angular-multiple-select": "^1.1.3",
     "bcrypt-nodejs": "^0.0.3",
@@ -80,7 +79,10 @@
     "twit": "^2.2.9",
     "uppy": "^0.23.3",
     "uppy-server": "^0.11.2",
-    "validator": "^8.0.0"
+    "validator": "^8.0.0",
+    "es6-promise": "^4.2.8",
+    "isomorphic-fetch": "^2.2.1",
+    "dropbox": "^4.0.27"
   },
   "devDependencies": {
     "callsite-record": "^4.1.1",
