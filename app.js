@@ -23,6 +23,9 @@ const sass = require( 'node-sass-middleware' );
 // const multer = require('multer');
 const csv = require( 'csv-express' );
 // const moment = require('moment');
+const fetch = require( 'isomorphic-fetch' );
+const Dropbox = require( 'dropbox' ).Dropbox;
+const DropboxTeam = require( 'dropbox' ).DropboxTeam;
 
 /**
  * Load environment variables from .env file, where API keys and passwords are configured.
@@ -220,8 +223,8 @@ app.get( '/admin/dropdowns', passportConfig.isAuthenticated, dropdownsController
 	.put( '/admin/dropdowns/:dropdown', passportConfig.isAuthenticated, dropdownsController.putDropdowns )
 	.get( '/admin/dropdown/:dropdown', passportConfig.isAuthenticated, dropdownsController.deleteDropdown );
 
-app.get( '/admin/auditlog', passportConfig.isAuthenticated, auditController.getAuditlog )
-	.post( '/admin/auditlog', passportConfig.isAuthenticated, auditController.postAuditlog );
+app.get( '/admin/auditlog', passportConfig.isAuthenticated, auditController.getAuditlog );
+// .post( '/admin/auditlog', passportConfig.isAuthenticated, auditController.postAuditlog );
 
 app.get( '/admin/export', passportConfig.isAuthenticated, exportController.getExport )
 	.get( '/admin/exportclients', passportConfig.isAuthenticated, exportController.getExportclients )

@@ -22,21 +22,21 @@ exports.getAuditlog = function(req, res) {
 /**
  * POST/INSERT form data
  */
-exports.postAuditlog = (req, res) => {
+// exports.postAuditlog = (req, res) => {
 
-    const insertAuditlog = new Auditlog({
-        url: 'hahaha',
-        description: 'what up dude',
-        user: req.user.name,
-        changes: []
-    });
+//     const insertAuditlog = new Auditlog({
+//         url: 'hahaha',
+//         description: 'what up dude',
+//         user: req.user.name,
+//         changes: []
+//     });
 
-    insertAuditlog.save(err => {
-    if (err) {
-        console.log(err);
-    }
+//     insertAuditlog.save(err => {
+//     if (err) {
+//         console.log(err);
+//     }
 
-    req.flash("success", { msg: "Auditlog information has been added." });
-    res.redirect("Auditlogs");
-    });
-};
+//     req.flash("success", { msg: "Auditlog information has been added." });
+//     res.redirect("Auditlogs");
+//     });
+// };

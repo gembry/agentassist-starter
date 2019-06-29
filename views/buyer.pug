@@ -1,9 +1,9 @@
 extends layout
 
 block content
-
   .page-header
     h2= title
+    br
 
   form.form-horizontal(method='post', id='buyerform', onkeypress='return event.keyCode != 13;')
     input(type='hidden', name='_csrf', value=_csrf)

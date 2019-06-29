@@ -410,7 +410,6 @@ exports.putBuyer = (req, res) => {
     var valNew = updateBuyer;
     var keys = Object.keys(valOrig);
     var changes = [];
-    // var obj = {};
     for (var i = 0; i < keys.length; i++) {
       var key = keys[i];
       if (key != '__v' && key != 'createdAt' && key != 'updatedAt') {
@@ -433,7 +432,7 @@ exports.putBuyer = (req, res) => {
     }
     
     if ( Object.getOwnPropertyNames(changes).length > 1 ) {
-      console.log(changes);
+      // console.log(changes);
       
       const insertAuditlog = new AuditLog({
         url: req.url,
@@ -446,8 +445,6 @@ exports.putBuyer = (req, res) => {
         if (err) {
           console.log(err);
         }
-    
-    
         // req.flash("success", { msg: "Buyer information has been added." });
         // res.redirect("/buyers");
       });
